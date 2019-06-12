@@ -5,20 +5,15 @@ import sys
 import os
 import numpy as np
 import cv2
-import base64
-
 import datetime
 import time
 import threading
 import queue
 import subprocess
-#import contextlib
-#with contextlib.redirect_stdout(None):
-#    import pygame.mixer
+import pygame
 import codecs
 import requests
 import json
-from requests import Request, Session
 
 from PIL import Image, ImageDraw, ImageFont
 
@@ -27,91 +22,13 @@ print(os.path.basename(__file__))
 print(sys.version_info)
 print(cv2.__version__)
 
-
-
-qLogNow=datetime.datetime.now()
-qLogFlie = 'temp/log/' + qLogNow.strftime('%Y%m%d-%H%M%S') + '_' + os.path.basename(__file__) + '.log'
-def qLogOutput(logText='', display=True, outfile=True):
-    if display == True:
-        print(str(logText))
-    if outfile == True:
-        w = codecs.open(qLogFlie, 'a', 'utf-8')
-        w.write(str(logText) + '\n')
-        w.close()
-        w = None
-
-qLogOutput(qLogFlie,True,True)
-
-
-
 FrameWidth = '?'
 FrameHight = '?'
 BaseEvent  = None
 BaseX      = None
 BaseY      = None
 
-# Azure
 AZURE_CV_KEY = 'xx'
-
-# Google
-#GOOGLE_VISION_KEY = 'xx'
-GOOGLE_VISION_KEY = 'xx'
-
-def google_vision(image_path):
-        global GOOGLE_VISION_KEY
-
-        bin_image = open(image_path, 'rb').read()
-
-        #enc_image = base64.b64encode(bin_image)
-        enc_image = base64.b64encode(bin_image).decode("utf-8")
-
-        str_url = "https://vision.googleapis.com/v1/images:annotate?key="
-
-        str_headers = {'Content-Type': 'application/json'}
-
-        str_json_data = {
-            'requests': [
-                {
-                    'image': {
-                        'content': enc_image
-                    },
-                    'features': [
-                        {
-                            'type': "LABEL_DETECTION",
-                            'maxResults': 10
-                        },
-                        {
-                            'type': "TEXT_DETECTION",
-                            'maxResults': 10
-                        }
-                    ]
-                }
-            ]
-        }
-
-        #print("begin request")
-        obj_session = Session()
-        obj_request = Request("POST",
-                              str_url + GOOGLE_VISION_KEY,
-                              data=json.dumps(str_json_data),
-                              headers=str_headers
-                              )
-        obj_prepped = obj_session.prepare_request(obj_request)
-        obj_response = obj_session.send(obj_prepped,
-                                        verify=True,
-                                        timeout=60
-                                        )
-        #print("end request")
-
-        if obj_response.status_code == 200:
-            #print (obj_response.text)
-            #with open('data.json', 'w') as outfile:
-            #    json.dump(obj_response.text, outfile)
-            return obj_response.text
-        else:
-            return "error"
-
-
 
 class fpsWithTick(object):
     def __init__(self):
@@ -137,10 +54,10 @@ def BaseMouseEvent(event, x, y, flags, param):
         BaseEvent = cv2.EVENT_LBUTTONUP
         BaseX     = x
         BaseY     = y
-        #qLogOutput('EVENT_LBUTTONUP')
+        #print('EVENT_LBUTTONUP')
     elif event == cv2.EVENT_RBUTTONDOWN:
         BaseEvent = cv2.EVENT_RBUTTONDOWN
-        #qLogOutput('EVENT_RBUTTONDOWN')
+        #print('EVENT_RBUTTONDOWN')
 
 
 
@@ -168,20 +85,17 @@ def qPlay(tempFile=None, sync=True):
                 tempFile = '_sound_shutter.mp3'
             if os.path.exists(tempFile):
                 cmd =  ['sox', tempFile, '-d', '-q']
-                #cmd = ['sox', '-v', '3', tempFile, '-d', '-q', 'gain', '-n']
-                #cmd = ['sox', '-v', '3', tempFile, '-b', '8', '-u', '-r', '8000', '-c', '1', '-d', '-q', 'gain', '-n']
-                #cmd = ['sox', '-v', '3', tempFile, '-r', '8000', '-c', '1', '-d', '-q', 'gain', '-n']
+                #cmd = ['sox', tempFile, '-b', '8', '-u', '-r', '8000', '-c', '1', '-d', '-q']
+                #cmd = ['sox', tempFile, '-r', '8000', '-c', '1', '-d', '-q']
                 p=subprocess.Popen(cmd)
                 if sync == True:
                     p.wait()
 
 
 
-input_beat = 0
 def sub_input(cn_r,cn_s):
-    global input_beat
     global FrameWidth,FrameHeight
-    qLogOutput('input___:init')
+    print('input___:init')
 
     camDev   = cn_r.get()
     camRotate= cn_r.get()
@@ -192,13 +106,13 @@ def sub_input(cn_r,cn_s):
     imgHeight= cn_r.get()
     cn_r.task_done()
 
-    qLogOutput('input___:device   =' + str(camDev   ))
-    qLogOutput('input___:camRotate=' + str(camRotate))
-    qLogOutput('input___:camWidth =' + str(camWidth ))
-    qLogOutput('input___:camHeight=' + str(camHeight))
-    qLogOutput('input___:camFps   =' + str(camFps   ))
-    qLogOutput('input___:imgWidth =' + str(imgWidth ))
-    qLogOutput('input___:imgHeight=' + str(imgHeight))
+    print('input___:device   =' + str(camDev   ))
+    print('input___:camRotate=' + str(camRotate))
+    print('input___:camWidth =' + str(camWidth ))
+    print('input___:camHeight=' + str(camHeight))
+    print('input___:camFps   =' + str(camFps   ))
+    print('input___:imgWidth =' + str(imgWidth ))
+    print('input___:imgHeight=' + str(imgHeight))
 
     capture = None
     if camdev.isdigit():
@@ -209,11 +123,9 @@ def sub_input(cn_r,cn_s):
     else:
         capture = cv2.VideoCapture(camDev)
 
-    qLogOutput('input___:start')
+    print('input___:start')
 
     while True:
-        input_beat = time.time()
-
         if cn_r.qsize() > 0:
             cn_r_get = cn_r.get()
             mode_get = cn_r_get[0]
@@ -221,11 +133,11 @@ def sub_input(cn_r,cn_s):
             cn_r.task_done()
 
             if mode_get is None:
-                qLogOutput('input___:None=break')
+                print('input___:None=break')
                 break
 
             if cn_r.qsize() != 0 or cn_s.qsize() > 2:
-                qLogOutput('input___: queue overflow warning!, ' + str(cn_r.qsize()) + ', ' + str(cn_s.qsize()))
+                print('input___: queue overflow warning!',cn_r.qsize(),cn_s.qsize())
 
             if mode_get != 'RUN':
                 cn_s.put(['PASS', ''])
@@ -234,7 +146,7 @@ def sub_input(cn_r,cn_s):
                 ret, frame = capture.read()
 
                 if ret == False:
-                    qLogOutput('input___:capture error')
+                    print('input___:capture error')
                     time.sleep(5.0)
                     cn_s.put(['END', ''])
                     break
@@ -269,30 +181,16 @@ def sub_input(cn_r,cn_s):
         if cn_r.qsize() == 0:
             time.sleep(0.05)
 
-    qLogOutput('input___:terminate')
+    print('input___:terminate')
 
-    try:
-        capture.release()
-    except:
-        pass
+    capture.release()
 
-    while cn_r.qsize() > 0:
-        try:
-            cn_r_get = cn_r.get()
-            mode_get = cn_r_get[0]
-            data_get = cn_r_get[1]
-            cn_r.task_done()
-        except:
-            pass
-
-    qLogOutput('input___:end')
+    print('input___:end')
 
 
 
-compute_beat = 0
 def sub_compute(cn_r,cn_s):
-    global compute_beat
-    qLogOutput('compute_:init')
+    print('compute_:init')
 
     proc_width  = 480
     proc_height = 320
@@ -304,7 +202,7 @@ def sub_compute(cn_r,cn_s):
 
     if casname1 != 'None':
         casnm1=casname1[0:len(casname1)-4]
-        qLogOutput('compute_:' + str(casname1))
+        print('compute_:' + str(casname1))
         cascade1 = cv2.CascadeClassifier(casname1)
         haar_scale1    = 1.1
         min_neighbors1 = 10
@@ -315,7 +213,7 @@ def sub_compute(cn_r,cn_s):
             min_size1      = ( 15, 15)
     if casname2 != 'None':
         casnm2=casname2[0:len(casname2)-4]
-        qLogOutput('compute_:' + str(casname2))
+        print('compute_:' + str(casname2))
         cascade2 = cv2.CascadeClassifier(casname2)
         haar_scale2    = 1.1
         min_neighbors2 = 15
@@ -325,16 +223,14 @@ def sub_compute(cn_r,cn_s):
             min_neighbors2 = 5
             min_size2      = ( 20, 20)
     if extpgm != 'None':
-        qLogOutput('compute_:extpgm=' + str(extpgm))
+        print('compute_:extpgm=' + str(extpgm))
 
     last_hit=datetime.datetime.now()
 
-    qLogOutput('compute_:start')
+    print('compute_:start')
 
     fps_class = fpsWithTick()
     while True:
-        compute_beat = time.time()
-
         if cn_r.qsize() > 0:
             cn_r_get = cn_r.get()
             mode_get = cn_r_get[0]
@@ -342,11 +238,11 @@ def sub_compute(cn_r,cn_s):
             cn_r.task_done()
 
             if mode_get is None:
-                qLogOutput('compute_:None=break')
+                print('compute_:None=break')
                 break
 
             if cn_r.qsize() != 0 or cn_s.qsize() > 2:
-                qLogOutput('compute_: queue overflow warning!, ' + str(cn_r.qsize()) + ', ' + str(cn_s.qsize()))
+                print('compute_: queue overflow warning!',cn_r.qsize(),cn_s.qsize())
 
             if mode_get != 'image':
                 cn_s.put([ 0 , 0 ])
@@ -425,7 +321,7 @@ def sub_compute(cn_r,cn_s):
                     f1 = 'temp/images/' + now.strftime('%Y%m%d-%H%M%S') + '_' + casnm1 + '.jpg'
                     if not os.path.exists(f1):
                         cv2.imwrite(f1, hit_img1)
-                        qLogOutput('compute_:' + f1)
+                        print('compute_:' + f1)
 
                     if now > last_hit + datetime.timedelta(seconds=5):
                         last_hit=now
@@ -439,7 +335,7 @@ def sub_compute(cn_r,cn_s):
                     f2 = 'temp/images/' + now.strftime('%Y%m%d-%H%M%S') + '_' + casnm2 + '.jpg'
                     if not os.path.exists(f2):
                         cv2.imwrite(f2, hit_img2)
-                        qLogOutput('compute_:' + f2)
+                        print('compute_:' + f2)
 
                 if (hit_count > 0):
                     fx = now.strftime('%Y%m%d-%H%M%S')
@@ -447,7 +343,7 @@ def sub_compute(cn_r,cn_s):
                     fx = 'temp/images/' + fx + '_photo.png'
                     if not os.path.exists(fx):
                         cv2.imwrite(fx, image_img)
-                        qLogOutput('compute_:' + fx)
+                        print('compute_:' + fx)
 
                 if hit_count > 0:
                     cn_s.put([hit_count, proc_img.copy()])
@@ -457,27 +353,14 @@ def sub_compute(cn_r,cn_s):
         if cn_r.qsize() == 0:
             time.sleep(0.5)
 
-    qLogOutput('compute_:terminate')
-
-    while cn_r.qsize() > 0:
-        try:
-            cn_r_get = cn_r.get()
-            mode_get = cn_r_get[0]
-            data_get = cn_r_get[1]
-            cn_r.task_done()
-        except:
-            pass
-
-    qLogOutput('compute_:end')
+    print('compute_:end')
 
 
 
-output_beat = 0
 def sub_output(cn_r,cn_s):
-    global output_beat
     global FrameWidth,FrameHeight
     global BaseEvent,BaseX,BaseY
-    qLogOutput('output__:init')
+    print('output__:init')
 
     camRotate = cn_r.get()
     baseWidth = cn_r.get()
@@ -486,11 +369,11 @@ def sub_output(cn_r,cn_s):
     liveHeight= cn_r.get()
     cn_r.task_done()
 
-    qLogOutput('output__:camRotate =' + str(camRotate ))
-    qLogOutput('output__:baseWidth =' + str(baseWidth ))
-    qLogOutput('output__:baseHeight=' + str(baseHeight))
-    qLogOutput('output__:liveWidth =' + str(liveWidth ))
-    qLogOutput('output__:liveHeight=' + str(liveHeight))
+    print('output__:camRotate =' + str(camRotate ))
+    print('output__:baseWidth =' + str(baseWidth ))
+    print('output__:baseHeight=' + str(baseHeight))
+    print('output__:liveWidth =' + str(liveWidth ))
+    print('output__:liveHeight=' + str(liveHeight))
 
     blue_img = np.zeros((240,320,3), np.uint8)
     cv2.rectangle(blue_img,(0,0),(320,240),(255,0,0),-1)
@@ -517,18 +400,13 @@ def sub_output(cn_r,cn_s):
 
     cv2.namedWindow('Base',  1)
     cv2.imshow(     'Base',  base_img)
-    if (baseWidth==1920 and baseHeight==1080):
-        cv2.moveWindow( 'Base',  -18,   -40)
-    else:
-        cv2.moveWindow( 'Base',  -18,   -40)
+    cv2.moveWindow( 'Base',  -15,   -55)
     cv2.setMouseCallback('Base', BaseMouseEvent)
 
-    qLogOutput('output__:start')
+    print('output__:start')
 
     fps_class = fpsWithTick()
     while True:
-        output_beat = time.time()
-
         if cn_r.qsize() > 0:
             cn_r_get = cn_r.get()
             mode_get = cn_r_get[0]
@@ -536,11 +414,11 @@ def sub_output(cn_r,cn_s):
             cn_r.task_done()
 
             if mode_get is None:
-                qLogOutput('output__:None=break')
+                print('output__:None=break')
                 break
 
             if cn_r.qsize() != 0 or cn_s.qsize() > 2:
-                qLogOutput('output__: queue overflow warning!, ' + str(cn_r.qsize()) + ', ' + str(cn_s.qsize()))
+                print('output__: queue overflow warning!',cn_r.qsize(),cn_s.qsize())
 
             if mode_get == 'image':
                 image_img    = data_get.copy()
@@ -560,10 +438,10 @@ def sub_output(cn_r,cn_s):
                     text_beat  = time.time()
 
                     # 文字列を描画する
-                    font24 = ImageFont.truetype('_font_meiryob.ttc', 24, encoding='unic')
-                    text_draw = Image.new('RGB', (int(baseWidth/2),40), (0xff, 0xff, 0xff))
+                    font = ImageFont.truetype('_font_meiryob.ttc', 25, encoding='unic')
+                    text_draw = Image.new('RGB', (int(baseWidth/2),50), (0xff, 0xff, 0xff))
                     draw = ImageDraw.Draw(text_draw)
-                    draw.text((10, 5), text_text, font=font24, fill=(0x00, 0x00, 0x00))
+                    draw.text((10, 10), text_text, font=font, fill=(0x00, 0x00, 0x00))
                     #text_draw.save('temp/temp_capture_text.jpg')
                     #text_img=cv2.imread('temp/temp_capture_text.jpg')
                     text_img=np.asarray(text_draw)
@@ -574,10 +452,10 @@ def sub_output(cn_r,cn_s):
                     tran_beat  = time.time()
 
                     # 文字列を描画する
-                    font24 = ImageFont.truetype('_font_meiryob.ttc', 24, encoding='unic')
-                    tran_draw = Image.new('RGB', (int(baseWidth/2),40), (0xff, 0xff, 0xff))
+                    font = ImageFont.truetype('_font_meiryob.ttc', 25, encoding='unic')
+                    tran_draw = Image.new('RGB', (int(baseWidth/2),50), (0xff, 0xff, 0xff))
                     draw = ImageDraw.Draw(tran_draw)
-                    draw.text((10, 5), tran_text, font=font24, fill=(0x00, 0x00, 0x00))
+                    draw.text((10, 10), tran_text, font=font, fill=(0x00, 0x00, 0x00))
                     #tran_draw.save('temp/temp_capture_tran.jpg')
                     #tran_img=cv2.imread('temp/temp_capture_tran.jpg')
                     tran_img=np.asarray(tran_draw)
@@ -622,50 +500,47 @@ def sub_output(cn_r,cn_s):
             sec = int(time.time() - text_beat)
             if sec < 60:
                 try:
-                    src_img=base_img[90:90+40, 50:50+int(base_width/2)]
+                    src_img=base_img[100:100+50, 50:50+int(base_width/2)]
                     alpha_img= cv2.addWeighted(src_img, 0.6, text_img, 0.4, 0.0)
-                    base_img[90:90+40, 50:50+int(base_width/2)] = alpha_img
+                    base_img[100:100+50, 50:50+int(base_width/2)] = alpha_img
                 except:
-                    qLogOutput('output__:text alpha blending error!')
+                    print('output__:text alpha blending error!')
                     text_beat = 0
 
             # tran alpha blending
             sec = int(time.time() - tran_beat)
             if sec < 60:
                 try:
-                    src_img=base_img[140:140+40, 50:50+int(base_width/2)]
+                    src_img=base_img[160:160+50, 50:50+int(base_width/2)]
                     alpha_img= cv2.addWeighted(src_img, 0.6, tran_img, 0.4, 0.0)
-                    base_img[140:140+40, 50:50+int(base_width/2)] = alpha_img
+                    base_img[160:160+50, 50:50+int(base_width/2)] = alpha_img
                 except:
-                    qLogOutput('output__:tran alpha blending error!')
+                    print('output__:tran alpha blending error!')
                     tran_beat = 0
 
             # testcv alpha blending
             sec = int(time.time() - testcv_beat)
             if sec < 10:
                 try:
-                    src_img=base_img[190:190+testcv_height, 50:50+testcv_width]
+                    src_img=base_img[250:250+testcv_height, 50:50+testcv_width]
                     alpha_img= cv2.addWeighted(src_img, 0.6, testcv_img, 0.4, 0.0)
-                    base_img[190:190+testcv_height, 50:50+testcv_width] = alpha_img
+                    base_img[250:250+testcv_height, 50:50+testcv_width] = alpha_img
                 except:
-                    qLogOutput('output__:testcv result alpha blending error!')
+                    print('output__:testcv result alpha blending error!')
                     testcv_beat = 0
 
             cv2.imshow('Base', base_img )
-            if (baseWidth==1920 and baseHeight==1080):
-                cv2.moveWindow( 'Base',  -18,   -40)
-            else:
-                cv2.moveWindow( 'Base',  -18,   -40)
+            cv2.moveWindow( 'Base',  -15,   -55)
             cv2.setMouseCallback('Base', BaseMouseEvent)
 
             if cv2.waitKey(10) >= 0:
-                qLogOutput('output__:KEYS')
+                print('output__:KEYS')
                 cn_s.put(['KEYPRESS', ''])
                 break
 
             if BaseEvent == cv2.EVENT_RBUTTONDOWN:
                 BaseEvent = None
-                qLogOutput('output__:R-CLICK')
+                print('output__:R-CLICK')
                 cn_s.put(['R-CLICK', ''])
                 break
 
@@ -682,7 +557,7 @@ def sub_output(cn_r,cn_s):
                             mode_get = 'enter'
 
             if mode_get == 'cancel':
-                qLogOutput('output__:CANCEL')
+                print('output__:CANCEL')
                 ft = 'temp/temp_camResult.txt'
                 wt = codecs.open(ft, 'w', 'utf-8')
                 wt.write('CANCEL')
@@ -692,7 +567,7 @@ def sub_output(cn_r,cn_s):
                 break
 
             if mode_get == 'enter':
-                qLogOutput('output__:ENTER')
+                print('output__:ENTER')
                 ft = 'temp/temp_camResult.txt'
                 wt = codecs.open(ft, 'w', 'utf-8')
                 wt.write('ENTER')
@@ -702,18 +577,16 @@ def sub_output(cn_r,cn_s):
                 break
 
             if mode_get == 'shutter':
-                capture_img  = image_img
-                white_img=cv2.resize(white_img, (image_width, image_height))
-                #capture_img  = base_img
-                #white_img=cv2.resize(white_img, (baseWidth, baseHeight))
-                alpha_img= cv2.addWeighted(capture_img, 0.5, white_img, 0.5, 0.0)
+                #cap_img  = image_img
+                #white_img=cv2.resize(white_img, (image_width, image_height))
+                cap_img  = base_img
+                white_img=cv2.resize(white_img, (baseWidth, baseHeight))
 
-                if image_width != baseWidth:
-                    alpha_img=cv2.resize(alpha_img, (baseWidth, baseHeight))
+                alpha_img= cv2.addWeighted(cap_img, 0.5, white_img, 0.5, 0.0)
                 cv2.imshow('Base', alpha_img )
 
                 if cv2.waitKey(10) >= 0:
-                    qLogOutput('output__:KEYS')
+                    print('output__:KEYS')
                     cn_s.put(['KEYPRESS', ''])
                     break
 
@@ -723,11 +596,11 @@ def sub_output(cn_r,cn_s):
                 # Image Save
                 now=datetime.datetime.now()
                 fx = 'temp/capture/' + now.strftime('%Y%m%d-%H%M%S') + '_image.jpg'
-                cv2.imwrite(fx, capture_img)
-                qLogOutput('output__:' + fx)
+                cv2.imwrite(fx, cap_img)
+                print('output__:' + fx)
                 fy = 'temp/temp_camCapture.jpg'
-                cv2.imwrite(fy, capture_img)
-                #qLogOutput('output__:' + fy)
+                cv2.imwrite(fy, cap_img)
+                #print('output__:' + fy)
 
                 speech_txt  = ''
                 speech_beat = 0
@@ -743,7 +616,7 @@ def sub_output(cn_r,cn_s):
                 #rect_img2[1:image_width-1, 1:image_height-1] = rect_r[1:image_width-1, image_width-image_height+1:image_width-1]
                 #rect_gray = cv2.cvtColor(rect_img2, cv2.COLOR_BGR2GRAY)
                 #cv2.imwrite(fx, rect_gray)
-                #qLogOutput('output__:' + fx)
+                #print('output__:' + fx)
 
             if capture_img is None:
                 cn_s.put(['OK', ''])
@@ -754,33 +627,20 @@ def sub_output(cn_r,cn_s):
         if cn_r.qsize() == 0:
             time.sleep(0.05)
 
-    qLogOutput('output__:terminate')
+    print('output__:terminate')
 
     cv2.destroyAllWindows()
 
-    while cn_r.qsize() > 0:
-        try:
-            cn_r_get = cn_r.get()
-            mode_get = cn_r_get[0]
-            data_get = cn_r_get[1]
-            cn_r.task_done()
-        except:
-            pass
-
-    qLogOutput('output__:end')
+    print('output__:end')
 
 
 
-speech_beat = 0
 def sub_speech(cn_r,cn_s):
-    global speech_beat
-    qLogOutput('speech__:init')
+    print('speech__:init')
 
-    qLogOutput('speech__:start')
+    print('speech__:start')
 
     while True:
-        speech_beat = time.time()
-
         if cn_r.qsize() > 0:
             cn_r_get = cn_r.get()
             mode_get = cn_r_get[0]
@@ -788,11 +648,11 @@ def sub_speech(cn_r,cn_s):
             cn_r.task_done()
 
             if mode_get is None:
-                qLogOutput('speech__:None=break')
+                print('speech__:None=break')
                 break
 
             if cn_r.qsize() != 0 or cn_s.qsize() > 2:
-                qLogOutput('speech__: queue overflow warning!, ' + str(cn_r.qsize()) + ', ' + str(cn_s.qsize()))
+                print('speech__: queue overflow warning!',cn_r.qsize(),cn_s.qsize())
 
             if mode_get != 'RUN':
                 cn_s.put(['PASS', ''])
@@ -905,47 +765,30 @@ def sub_speech(cn_r,cn_s):
         if cn_r.qsize() == 0:
             time.sleep(1.0)
 
-    qLogOutput('speech__:terminate')
+    print('speech__:terminate')
 
-    while cn_r.qsize() > 0:
-        try:
-            cn_r_get = cn_r.get()
-            mode_get = cn_r_get[0]
-            data_get = cn_r_get[1]
-            cn_r.task_done()
-        except:
-            pass
-
-    qLogOutput('speech__:end')
+    print('speech__:end')
 
 
 
-testcv_beat = 0
 def sub_testcv(cn_r,cn_s):
-    global testcv_beat
     global AZURE_CV_KEY
-    qLogOutput('testcv__:init')
+    print('testcv__:init')
 
     baseWidth = cn_r.get()
     baseHeight= cn_r.get()
-    pic_api   = cn_r.get()
-    ocr_api   = cn_r.get()
     cn_r.task_done()
 
-    qLogOutput('testcv__:baseWidth =' + str(baseWidth ))
-    qLogOutput('testcv__:baseHeight=' + str(baseHeight))
-    qLogOutput('testcv__:pic api   =' + str(pic_api   ))
-    qLogOutput('testcv__:ocr api   =' + str(ocr_api   ))
+    print('testcv__:baseWidth =' + str(baseWidth ))
+    print('testcv__:baseHeight=' + str(baseHeight))
 
     procWidth = 640
     drawWidth = int(baseWidth/2)
     lng = 'ja'
 
-    qLogOutput('testcv__:start')
+    print('testcv__:start')
 
     while True:
-        testcv_beat = time.time()
-
         if cn_r.qsize() > 0:
             cn_r_get = cn_r.get()
             mode_get = cn_r_get[0]
@@ -953,17 +796,16 @@ def sub_testcv(cn_r,cn_s):
             cn_r.task_done()
 
             if mode_get is None:
-                qLogOutput('testcode:None=break')
+                print('testcode:None=break')
                 break
 
             if cn_r.qsize() != 0 or cn_s.qsize() > 2:
-                qLogOutput('testcv__: queue overflow warning!, ' + str(cn_r.qsize()) + ', ' + str(cn_s.qsize()))
+                print('testcv__: queue overflow warning!',cn_r.qsize(),cn_s.qsize())
 
             if mode_get != 'image' and mode_get != 'capture':
                 cn_s.put(['PASS', ''])
 
             else:
-                qLogOutput('testcv__:processing start')
                 image_img = data_get.copy()
 
                 res_text = []
@@ -1004,30 +846,8 @@ def sub_testcv(cn_r,cn_s):
                 #    pass
 
                 # CV
-
-                if (ocr_api=='free') or (ocr_api=='google'):
-
-                    res_text.append('')
-                    res_text.append('[ LABEL_DETECTION ] (google)')
-
-                    res = google_vision(file_color)
-                    js = json.loads(res)
-                    data = js['responses']
-
-                    try:
-                        s  = ''
-                        for t in data:
-                            for d in t['labelAnnotations']:
-                                s += str(d['description']) + ', '
-                                if len(s) > int(drawWidth/11):
-                                    res_text.append('  ' + s)
-                                    s = ''
-                        if s != '':
-                            res_text.append('  ' + s)
-                    except:
-                        pass
-
-                if (pic_api=='azure'):
+                #try:
+                if 1==1:
 
                     #color_image=cv2.imread(file_color)
                     #cv2.imshow('Color', color_image)
@@ -1039,12 +859,12 @@ def sub_testcv(cn_r,cn_s):
                           headers = {'Content-Type': 'application/octet-stream',
                           'Ocp-Apim-Subscription-Key': AZURE_CV_KEY,},
                           params = {'visualFeatures': 'Categories,Description',
-                                    'language': lng,},
+                                    'language': 'en',},
                           data = img_color)
                     js = json.loads(res.text)
 
                     res_text.append('')
-                    res_text.append('[ categories ] (azure)')
+                    res_text.append('[ categories ]')
                     s  = ''
                     for names in js.get('categories'):
                         s  += str(names.get('name')).replace('_',' ') + ', '
@@ -1055,7 +875,7 @@ def sub_testcv(cn_r,cn_s):
                         res_text.append('  ' + s)
 
                     res_text.append('')
-                    res_text.append('[ captions ] (azure)')
+                    res_text.append('[ captions ]')
                     s  = ''
                     for texts in js.get('description').get('captions'):
                         s  = str(texts.get('text'))
@@ -1066,7 +886,7 @@ def sub_testcv(cn_r,cn_s):
                         res_text.append('  ' + s)
 
                     res_text.append('')
-                    res_text.append('[ description ] (azure)')
+                    res_text.append('[ description ]')
                     s  = ''
                     for tag in js.get('description').get('tags'):
                         s  += str(tag) + ', '
@@ -1077,30 +897,8 @@ def sub_testcv(cn_r,cn_s):
                         res_text.append('  ' + s)
 
                 # OCR
-
-                if (ocr_api=='free') or (ocr_api=='google'):
-
-                    res_text.append('')
-                    res_text.append('[ TEXT_DETECTION ] (google)')
-
-                    res = google_vision(file_gray)
-                    js = json.loads(res)
-                    data = js['responses']
-
-                    try:
-                        txt = ''
-                        for t in data:
-                            txt += str(t['fullTextAnnotation']['text']) + '\n'
-
-                        txt = txt.replace('\r', '')
-                        l = txt.split('\n')
-                        for s in l:
-                            res_text.append('  ' + s)
-
-                    except:
-                        pass
-
-                if (ocr_api=='azure'):
+                #try:
+                if 1==1:
 
                     #gray_image=cv2.imread(file_gray)
                     #cv2.imshow('Gray', gray_image)
@@ -1117,7 +915,7 @@ def sub_testcv(cn_r,cn_s):
                     js = json.loads(res.text)
 
                     res_text.append('')
-                    res_text.append('[ OCR ] (azure)')
+                    res_text.append('[ OCR ]')
                     for region in js.get('regions'):
                         for line in region.get('lines'):
                             s = ''
@@ -1126,22 +924,31 @@ def sub_testcv(cn_r,cn_s):
                             res_text.append(s)
                     res_text.append('')
 
+                #except:
+                #    pass
+
                 # 文字列出力
                 if mode_get == 'capture':
                     now=datetime.datetime.now()
                     stamp=now.strftime('%Y%m%d-%H%M%S')
                     recText = 'temp/capture/' + stamp + '_cvSJIS.txt'
                     w = codecs.open(recText, 'w', 'shift_jis')
-                    try:
-                        for i in range(0, len(res_text)):
-                            w.write(res_text[i] + '\r\n')
-                    except:
-                        pass
+                    for i in range(0, len(res_text)):
+                        w.write(res_text[i] + '\r\n')
                     w.close()
                     w = None
 
                 # 文字列を描画する
-                if baseWidth == 1920:
+                if baseWidth <= 1024:
+                    font12 = ImageFont.truetype('_font_meiryob.ttc', 12, encoding='unic')
+                    text_img = Image.new('RGB', (drawWidth,10+20*len(res_text)), (0xff, 0xff, 0xff))
+                    text_draw = ImageDraw.Draw(text_img)
+                    for i in range(0, len(res_text)):
+                        text_draw.text((5, 5+20*i), res_text[i], font=font12, fill=(0x00, 0x00, 0x00))
+                    #text_img.save('temp/temp_testcv_text.jpg')
+                    #res_image=cv2.imread('temp/temp_testcv_text.jpg')
+                    res_image=np.asarray(text_img)
+                else:
                     font18 = ImageFont.truetype('_font_meiryob.ttc', 18, encoding='unic')
                     text_img = Image.new('RGB', (drawWidth,10+30*len(res_text)), (0xff, 0xff, 0xff))
                     text_draw = ImageDraw.Draw(text_img)
@@ -1150,17 +957,6 @@ def sub_testcv(cn_r,cn_s):
                     #text_img.save('temp/temp_testcv_text.jpg')
                     #res_image=cv2.imread('temp/temp_testcv_text.jpg')
                     res_image=np.asarray(text_img)
-                else:
-                    font09 = ImageFont.truetype('_font_meiryob.ttc',  9, encoding='unic')
-                    text_img = Image.new('RGB', (drawWidth,10+15*len(res_text)), (0xff, 0xff, 0xff))
-                    text_draw = ImageDraw.Draw(text_img)
-                    for i in range(0, len(res_text)):
-                        text_draw.text((5, 5+15*i), res_text[i], font=font09, fill=(0x00, 0x00, 0x00))
-                    #text_img.save('temp/temp_testcv_text.jpg')
-                    #res_image=cv2.imread('temp/temp_testcv_text.jpg')
-                    res_image=np.asarray(text_img)
-
-                qLogOutput('testcv__:processing complete')
 
                 cn_s.put(['OK', res_image.copy()])
                 image_img = None
@@ -1168,31 +964,15 @@ def sub_testcv(cn_r,cn_s):
         if cn_r.qsize() == 0:
             time.sleep(1.0)
 
-    qLogOutput('testcv__:terminate')
+    print('testcv__:terminate')
 
-    while cn_r.qsize() > 0:
-        try:
-            cn_r_get = cn_r.get()
-            mode_get = cn_r_get[0]
-            data_get = cn_r_get[1]
-            cn_r.task_done()
-        except:
-            pass
-
-    qLogOutput('testcv__:end')
+    print('testcv__:end')
 
 
 
-main_beat = 0
 if __name__ == '__main__':
-    #global output_beat
-    #global compute_beat
-    #global input_beat
-    #global speech_beat
-    #global testcv_beat
-
-    qLogOutput('__main__:init')
-    qLogOutput('__main__:exsample.py device, rotate, cascade1, cascade2, extprogram, testsec,')
+    print('__main__:init')
+    print('__main__:exsample.py device, rotate, cascade1, cascade2, extprogram, testsec,')
 
     camResult ='temp/temp_camResult.txt'
     camCapture='temp/temp_camCapture.jpg'
@@ -1208,8 +988,6 @@ if __name__ == '__main__':
     #rote   = 180  #back
     #rote   = 360  #Mirror
     camres  = 640
-    pic_api = 'azure'
-    ocr_api = 'azure'
     cas1    = 'face.xml'
     cas2    = 'fullbody.xml'
     extpgm  = 'None'
@@ -1222,59 +1000,51 @@ if __name__ == '__main__':
     if len(sys.argv)>=4:
         camres  = sys.argv[3]
     if len(sys.argv)>=5:
-        pic_api = sys.argv[4]
+        cas1    = sys.argv[4]
     if len(sys.argv)>=6:
-        ocr_api = sys.argv[5]
+        cas2    = sys.argv[5]
     if len(sys.argv)>=7:
-        cas1    = sys.argv[6]
+        extpgm  = sys.argv[6]
     if len(sys.argv)>=8:
-        cas2    = sys.argv[7]
-    if len(sys.argv)>=9:
-        extpgm  = sys.argv[8]
-    if len(sys.argv)>=10:
-        testsec = sys.argv[9]
+        testsec = sys.argv[7]
 
-    qLogOutput('')
-    qLogOutput('__main__:device  =' + str(camdev ))
-    qLogOutput('__main__:rotate  =' + str(rote   ))
-    qLogOutput('__main__:camres  =' + str(camres ))
-    qLogOutput('__main__:pic_api =' + str(pic_api))
-    qLogOutput('__main__:ocr_api =' + str(ocr_api))
-    qLogOutput('__main__:cascade1=' + str(cas1   ))
-    qLogOutput('__main__:cascade2=' + str(cas2   ))
-    qLogOutput('__main__:program =' + str(extpgm ))
-    qLogOutput('__main__:testing =' + str(testsec))
+    print('')
+    print('__main__:device  =' + str(camdev ))
+    print('__main__:rotate  =' + str(rote   ))
+    print('__main__:camres  =' + str(camres ))
+    print('__main__:cascade1=' + str(cas1   ))
+    print('__main__:cascade2=' + str(cas2   ))
+    print('__main__:program =' + str(extpgm ))
+    print('__main__:testing =' + str(testsec))
 
     cam_width    = int(camres)
-    if int(camres) == 1920:
+    if int(camres) != 1920:
+        cam_height   = 480
+        cam_fps      = 15
+    else:
         cam_height   = 1080
         cam_fps      = 15
-    else:
-        #cam_height   = 480
-        cam_height   = int(int(camres) / 1.6)
-        cam_fps      = 15
 
-    if int(camres) >= 1280:
-        image_width  = 960
-        image_height = int(image_width * cam_height / cam_width)
-    else:
+    if int(camres) <= 1024:
         image_width  = 640
         image_height = int(image_width * cam_height / cam_width)
+    else:
+        image_width  = 960
+        image_height = int(image_width * cam_height / cam_width)
 
-    if int(camres) == 1920:
-        base_width   = 1920
+    if int(camres) != 1920:
+        base_width   = 1024
         base_height  = int(base_width * cam_height / cam_width)
     else:
-        base_width   = 960
+        base_width   = 1920
         base_height  = int(base_width * cam_height / cam_width)
 
     live_width   = int(base_width / 3)
     live_height  = int(live_width * cam_height / cam_width)
 
-    qLogOutput('')
-    qLogOutput('__main__:start')
+    print('')
+    print('__main__:start')
     main_start   = time.time()
-    main_beat    = 0
 
     output_s     = queue.Queue()
     output_r     = queue.Queue()
@@ -1304,18 +1074,16 @@ if __name__ == '__main__':
     testcv_beat  = 0
     testcv_last  = 0
     testcv_img   = None
-
     while True:
-        main_beat = time.time()
 
         # Thread timeout check
 
-        if (input_beat != 0):
+        if (input_r.qsize() == 0) and (input_beat != 0):
             sec = int(time.time() - input_beat)
             if sec > 60:
-                qLogOutput('__main__:input_proc 60s')
+                print('__main__:input_proc 60s')
                 #input_beat = time.time()
-                qLogOutput('__main__:input_proc break')
+                print('__main__:input_proc break')
                 input_s.put([None, None])
                 time.sleep(3.0)
                 input_proc = None
@@ -1323,36 +1091,36 @@ if __name__ == '__main__':
                 input_img1 = None
                 input_img2 = None
 
-        if (compute_beat != 0):
+        if (compute_r.qsize() == 0) and (compute_beat != 0):
             sec = int(time.time() - compute_beat)
             if sec > 60:
-                qLogOutput('__main__:compute_proc 60s')
+                print('__main__:compute_proc 60s')
                 #compute_beat = time.time()
-                qLogOutput('__main__:compute_proc break')
+                print('__main__:compute_proc break')
                 compute_s.put([None, None])
                 time.sleep(3.0)
                 compute_proc = None
                 compute_beat = 0
                 compute_img  = None
 
-        if (output_beat != 0):
+        if (output_r.qsize() == 0) and (output_beat != 0):
             sec = int(time.time() - output_beat)
             if sec > 60:
-                qLogOutput('__main__:output_proc 60s')
+                print('__main__:output_proc 60s')
                 #output_beat = time.time()
-                qLogOutput('__main__:output_proc break')
+                print('__main__:output_proc break')
                 output_s.put([None, None])
                 time.sleep(3.0)
                 output_proc = None
                 output_beat = 0
                 capture_img = None
 
-        if (speech_beat != 0):
+        if (speech_r.qsize() == 0) and (speech_beat != 0):
             sec = int(time.time() - speech_beat)
             if sec > 60:
-                qLogOutput('__main__:speech_proc 60s')
+                print('__main__:speech_proc 60s')
                 #speech_beat = time.time()
-                qLogOutput('__main__:speech_proc break')
+                print('__main__:speech_proc break')
                 speech_s.put([None, None])
                 time.sleep(3.0)
                 speech_proc = None
@@ -1360,12 +1128,12 @@ if __name__ == '__main__':
                 speech_text = ''
                 speech_tran = ''
 
-        if (testcv_beat != 0):
+        if (testcv_r.qsize() == 0) and (testcv_beat != 0):
             sec = int(time.time() - testcv_beat)
             if sec > 60:
-                qLogOutput('__main__:testcv_proc 60s')
+                print('__main__:testcv_proc 60s')
                 #testcv_beat = time.time()
-                qLogOutput('__main__:testcv_proc break')
+                print('__main__:testcv_proc break')
                 testcv_s.put([None, None])
                 time.sleep(3.0)
                 testcv_proc = None
@@ -1391,7 +1159,7 @@ if __name__ == '__main__':
             time.sleep(1.0)
 
             output_s.put(['START', ''])
-            output_beat = 0
+            output_beat = time.time()
 
         if compute_proc is None:
             while compute_s.qsize() > 0:
@@ -1407,7 +1175,7 @@ if __name__ == '__main__':
             time.sleep(1.0)
 
             compute_s.put(['START', ''])
-            compute_beat = 0
+            compute_beat = time.time()
 
         if input_proc is None:
             while input_s.qsize() > 0:
@@ -1427,7 +1195,7 @@ if __name__ == '__main__':
             time.sleep(1.0)
 
             input_s.put(['START', ''])
-            input_beat = 0
+            input_beat = time.time()
 
         if speech_proc is None:
             while speech_s.qsize() > 0:
@@ -1440,7 +1208,7 @@ if __name__ == '__main__':
             time.sleep(1.0)
 
             speech_s.put(['START', ''])
-            speech_beat = 0
+            speech_beat = time.time()
 
         if testcv_proc is None:
             while testcv_s.qsize() > 0:
@@ -1451,13 +1219,11 @@ if __name__ == '__main__':
             testcv_proc.daemon = True
             testcv_s.put(base_width)
             testcv_s.put(base_height)
-            testcv_s.put(pic_api)
-            testcv_s.put(ocr_api)
             testcv_proc.start()
             time.sleep(1.0)
 
             testcv_s.put(['START', ''])
-            testcv_beat = 0
+            testcv_beat = time.time()
 
         # processing
 
@@ -1476,6 +1242,7 @@ if __name__ == '__main__':
                     speech_tran = speech_t
         if speech_r.qsize() == 0 and speech_s.qsize() == 0:
             speech_s.put(['RUN', ''])
+            speech_beat = time.time()
 
         if input_r.qsize() > 0:
             input_get = input_r.get()
@@ -1483,6 +1250,7 @@ if __name__ == '__main__':
             input_dat = input_get[1]
             input_r.task_done()
             input_s.put(['RUN', ''])
+            input_beat = time.time()
             if input_res == 'END':
                 break
             if input_res == 'OK':
@@ -1495,6 +1263,7 @@ if __name__ == '__main__':
             compute_dat = compute_get[1]
             compute_r.task_done()
             compute_s.put(['image', input_img2.copy()])
+            compute_beat = time.time()
             if int(compute_res) != 0:
                 compute_img = compute_dat.copy()
 
@@ -1519,45 +1288,54 @@ if __name__ == '__main__':
             if speech_text != '':
                 if speech_text == 'shutter':
                     output_s.put(['shutter', ''])
+                    output_beat = time.time()
                     speech_text = ''
                     output_res = 'NG'
                 elif speech_text == 'enter':
                     output_s.put(['enter', ''])
+                    output_beat = time.time()
                     speech_text = ''
                     output_res = 'NG'
                 elif speech_text == 'cancel':
                     output_s.put(['cancel', ''])
+                    output_beat = time.time()
                     speech_text = ''
                     output_res = 'NG'
                 else:
                     output_s.put(['speech_text', speech_text])
+                    output_beat = time.time()
                     speech_text = ''
                     output_res = 'NG'
 
         if output_res != 'NG':
             if speech_tran != '':
                 output_s.put(['speech_tran', speech_tran])
+                output_beat = time.time()
                 speech_tran = ''
                 output_res = 'NG'
 
         if output_res != 'NG':
             if not testcv_img is None:
                 output_s.put(['testcv', testcv_img.copy()])
+                output_beat = time.time()
                 testcv_img = None
                 output_res = 'NG'
 
         if output_res != 'NG':
             if not compute_img is None:
                 output_s.put(['compute', compute_img.copy()])
+                output_beat = time.time()
                 compute_img = None
                 output_res = 'NG'
 
         if output_res != 'NG':
             if not input_img1 is None:
                 output_s.put(['image', input_img1.copy()])
+                output_beat = time.time()
                 input_img1 = None
             else:
                 output_s.put(['PASS', ''])
+                output_beat = time.time()
 
         if testcv_r.qsize() > 0 and not input_img2 is None:
             testcv_get = testcv_r.get()
@@ -1569,11 +1347,13 @@ if __name__ == '__main__':
 
             if int(testsec) == 0:
                 testcv_s.put(['PASS', ''])
+                testcv_beat = time.time()
             else:
                 testflag=False
                 if not capture_img is None:
                     testflag = True
                     testcv_s.put(['capture', capture_img.copy()])
+                    testcv_beat = time.time()
                     testcv_last = time.time()
                     capture_img = None
                 else:
@@ -1585,35 +1365,31 @@ if __name__ == '__main__':
                         testflag = True
                     if testflag == True:
                         testcv_s.put(['image', input_img2.copy()])
+                        testcv_beat = time.time()
                         testcv_last = time.time()
                     else:
                         testcv_s.put(['PASS', ''])
+                        testcv_beat = time.time()
 
         time.sleep(0.01)
 
 
 
-    qLogOutput('__main__:terminate')
+    print('__main__:terminate')
 
-    try:
-        input_s.put(  [None, None])
-        compute_s.put([None, None])
-        output_s.put( [None, None])
-        speech_s.put( [None, None])
-        testcv_s.put( [None, None])
-    except:
-        pass
+    input_s.put(  [None, None])
+    compute_s.put([None, None])
+    output_s.put( [None, None])
+    speech_s.put( [None, None])
+    testcv_s.put( [None, None])
 
-    try:
-        input_proc.join()
-        compute_proc.join()
-        output_proc.join()
-        speech_proc.join()
-        testcv_proc.join()
-    except:
-        pass
+    input_proc.join()
+    compute_proc.join()
+    output_proc.join()
+    speech_proc.join()
+    testcv_proc.join()
 
-    qLogOutput('__main__:Bye!')
+    print('__main__:Bye!')
 
 
 

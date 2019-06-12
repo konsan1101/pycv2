@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import sys
@@ -13,25 +13,6 @@ import codecs
 import requests as web
 import bs4
 import urllib.parse
-
-print(os.path.dirname(__file__))
-print(os.path.basename(__file__))
-print(sys.version_info)
-
-
-
-qLogNow=datetime.datetime.now()
-qLogFlie = 'temp/log/' + qLogNow.strftime('%Y%m%d-%H%M%S') + '_' + os.path.basename(__file__) + '.log'
-def qLogOutput(logText='', display=True, outfile=True):
-    if display == True:
-        print(str(logText))
-    if outfile == True:
-        w = codecs.open(qLogFlie, 'a', 'utf-8')
-        w.write(str(logText) + '\n')
-        w.close()
-        w = None
-
-qLogOutput(qLogFlie,True,True)
 
 
 
@@ -56,11 +37,11 @@ def v_output(txt):
         except:
             w2 = None
 
-    #qLogOutput('v_output__: ' + txt)
+    #print('v_output__: ' + txt)
 
 def v_micon():
     micON   ='temp/temp_micON.txt'
-    qLogOutput('v_micoff:microphone turn on')
+    print('v_micoff:microphone turn on')
     while not os.path.exists(micON):
         try:
             w = open(micON, 'w')
@@ -72,7 +53,7 @@ def v_micon():
 
 def v_micoff():
     micON   ='temp/temp_micON.txt'
-    qLogOutput('v_micon_:microphone turn off')
+    print('v_micon_:microphone turn off')
     if os.path.exists(micON):
         try:
             os.remove(micON)
@@ -81,34 +62,31 @@ def v_micoff():
 
 
 
-extpgm_beat = 0
 def sub_extpgm(cn_r,cn_s):
-    global extpgm_beat
-    qLogOutput('extpgm__:init')
+    print('extpgm__:init')
 
     runmode = cn_r.get()
     camdev  = cn_r.get()
     cn_r.task_done()
-    qLogOutput('extpgm__:runmode=' + str(runmode))
-    qLogOutput('extpgm__:camdev =' + str(camdev ))
+    print('extpgm__:runmode=' + str(runmode))
+    print('extpgm__:camdev =' + str(camdev ))
 
-    qLogOutput('extpgm__:start')
+    print('extpgm__:start')
 
     playlist = None
     browser  = None
     while True:
-        extpgm_beat = time.time()
         if cn_r.qsize() > 0:
             cn_r_get = cn_r.get()
             mode_get = cn_r_get[0]
             data_get = cn_r_get[1]
             cn_r.task_done()
             if mode_get is None:
-                qLogOutput('extpgm__:None=break')
+                print('extpgm__:None=break')
                 break
 
             if cn_r.qsize() != 0 or cn_s.qsize() > 2:
-                qLogOutput('extpgm__: queue overflow warning!, ' + str(cn_r.qsize()) + ', ' + str(cn_s.qsize()))
+                print('speech__: queue overflow warning!',cn_r.qsize(),cn_s.qsize())
 
             if mode_get != 'RUN':
                 cn_s.put(['PASS', ''])
@@ -182,7 +160,6 @@ def sub_extpgm(cn_r,cn_s):
                 if english != '':
 
                     if   english == 'playlist 00' or english == 'playlist 0' \
-                      or english == 'playlist zero' \
                       or english == 'bgm' or english == 'garageband':
                         play_cmd =  '_handfree_playlist_00.bat'
                     elif english == 'playlist 01' or english == 'playlist 1' \
@@ -207,10 +184,9 @@ def sub_extpgm(cn_r,cn_s):
                       or english == 'close playlist' or english == 'close bgm':
                         play_cmd =  '_close_'
 
-                    elif english == 'browser' or english == 'web browser':
+                    elif english == 'browser':
                         browser_cmd = '_open_'
-                    elif english == 'end browser' or english == 'exit web browser' \
-                      or english == 'close browser' \
+                    elif english == 'end browser' or english == 'close browser' \
                       or english == 'browser exit':
                         browser_cmd = '_close_'
 
@@ -277,9 +253,9 @@ def sub_extpgm(cn_r,cn_s):
                                 url   = urllib.parse.unquote(url)
                                 url   = urllib.parse.unquote(url)
 
-                                #qLogOutput(title)
-                                #qLogOutput(text)
-                                #qLogOutput(url)
+                                #print(title)
+                                #print(text)
+                                #print(url)
                             except:
                                 pass
 
@@ -289,7 +265,7 @@ def sub_extpgm(cn_r,cn_s):
                         #browser = None
 
                         if url != '':
-                            qLogOutput(url)
+                            print(url)
                             browser = subprocess.Popen(['_handfree_web_open.bat', url])
                         else:
                             browser = subprocess.Popen(['_handfree_web_open.bat', japanese])
@@ -306,81 +282,68 @@ def sub_extpgm(cn_r,cn_s):
         if cn_r.qsize() == 0:
             time.sleep(0.03)
 
-    qLogOutput('extpgm__:terminate')
+    print('extpgm__:terminate')
 
     playlist = subprocess.Popen(['_handfree_control_kill.bat'])
     playlist.wait(2000)
     if not playlist is None:
-        try:
-            playlist.terminate()
-            playlist = None
-        except:
-            pass
+        playlist.terminate()
+        playlist = None
 
     browser = subprocess.Popen(['_handfree_web_kill.bat'])
     browser.wait(2000)
     if not browser is None:
-        try:
-            browser.terminate()
-            browser = None
-        except:
-            pass
+        browser.terminate()
+        browser = None
 
-    qLogOutput('extpgm__:end')
+    print('extpgm__:end')
 
 
 
-vision_beat = 0
 def sub_vision(cn_r,cn_s):
-    global vision_beat
-    qLogOutput('vision__:init')
+    print('vision__:init')
 
     runmode = cn_r.get()
     camdev  = cn_r.get()
     camrote = cn_r.get()
-    camres  = cn_r.get()
-    camapi  = cn_r.get()
     cn_r.task_done()
-    qLogOutput('vision__:runmode=' + str(runmode))
-    qLogOutput('vision__:camdev =' + str(camdev ))
-    qLogOutput('vision__:camrote=' + str(camrote))
-    qLogOutput('vision__:camres =' + str(camres ))
-    qLogOutput('vision__:camapi =' + str(camapi ))
+    print('vision__:runmode=' + str(runmode))
+    print('vision__:camdev =' + str(camdev ))
+    print('vision__:camrote=' + str(camrote))
 
-    qLogOutput('vision__:start')
+    print('vision__:start')
 
     vision = None
     while True:
-        vision_beat = time.time()
         if cn_r.qsize() > 0:
             cn_r_get = cn_r.get()
             mode_get = cn_r_get[0]
             data_get = cn_r_get[1]
             cn_r.task_done()
             if mode_get is None:
-                qLogOutput('vision__:None=break')
+                print('vision__:None=break')
                 break
 
             if cn_r.qsize() != 0 or cn_s.qsize() > 2:
-                qLogOutput('vision__: queue overflow warning!, ' + str(cn_r.qsize()) + ', ' + str(cn_s.qsize()))
+                print('vision__: queue overflow warning!',cn_r.qsize(),cn_s.qsize())
 
             if vision is None:
                 if camdev != 'None':
                     if runmode == 'translator':
                         vision = subprocess.Popen(['python', '_vision_capture.py', camdev, camrote, \
-                                                   camres, camapi, camapi, 'cars.xml', 'fullbody.xml', 'None', '600'])
+                                                   '1920', 'cars.xml', 'fullbody.xml', 'None', '3600'])
                     elif runmode == 'learning':
                         vision = subprocess.Popen(['python', '_vision_capture.py', camdev, camrote, \
-                                                   camres, camapi, camapi, 'cars.xml', 'fullbody.xml', 'None', '600'])
+                                                   '1920', 'cars.xml', 'fullbody.xml', 'None', '3600'])
                     elif runmode == 'reception':
                         vision = subprocess.Popen(['python', '_vision_capture.py', camdev, camrote, \
-                                                   camres, camapi, camapi, 'face.xml', 'fullbody.xml', 'azure_capture_face.bat', '120'])
+                                                   '640', 'face.xml', 'fullbody.xml', 'azure_capture_face.bat', '120'])
                     elif runmode == 'camera':
                         vision = subprocess.Popen(['python', '_vision_capture.py', camdev, camrote, \
-                                                   camres, camapi, camapi, 'None', 'None', 'None', '120'])
+                                                   '1920', 'None', 'None', 'None', '120'])
                     else:
                         vision = subprocess.Popen(['python', '_vision_capture.py', camdev, camrote, \
-                                                   camres, camapi, camapi, 'None', 'None', 'None', '0'])
+                                                   '640', 'None', 'None', 'None', '0'])
 
             if not vision is None:
                 try:
@@ -408,76 +371,69 @@ def sub_vision(cn_r,cn_s):
         if cn_r.qsize() == 0:
             time.sleep(0.03)
 
-    qLogOutput('vision__:terminate')
-
+    print('vision__:terminate')
     if not vision is None:
-        try:
-            vision.terminate()
-            vision = None
-        except:
-            pass
+        vision.terminate()
+        vision = None
 
-    qLogOutput('vision__:end')
+    print('vision__:end')
 
 
 
-speech_beat = 0
 def sub_speech(cn_r,cn_s):
-    global speech_beat
-    qLogOutput('speech__:init')
+    print('speech__:init')
 
     runmode = cn_r.get()
     micdev  = cn_r.get()
     mictype = cn_r.get()
     miclevel= cn_r.get()
     micguide= cn_r.get()
-    micapi  = cn_r.get()
+    api     = cn_r.get()
     cn_r.task_done()
-    qLogOutput('speech__:runmode =' + str(runmode ))
-    qLogOutput('speech__:micdev  =' + str(micdev  ))
-    qLogOutput('speech__:mictype =' + str(mictype ))
-    qLogOutput('speech__:miclevel=' + str(miclevel))
-    qLogOutput('speech__:micguide=' + str(micguide))
-    qLogOutput('speech__:micapi  =' + str(micapi  ))
+    print('speech__:runmode =' + str(runmode ))
+    print('speech__:micdev  =' + str(micdev  ))
+    print('speech__:mictype =' + str(mictype ))
+    print('speech__:miclevel=' + str(miclevel))
+    print('speech__:micguide=' + str(micguide))
+    print('speech__:api     =' + str(api     ))
 
-    qLogOutput('speech__:start')
+    print('speech__:start')
 
     speech = None
     while True:
-        speech_beat = time.time()
         if cn_r.qsize() > 0:
             cn_r_get = cn_r.get()
             mode_get = cn_r_get[0]
             data_get = cn_r_get[1]
             cn_r.task_done()
             if mode_get is None:
-                qLogOutput('speech__:None=break')
+                print('speech__:None=break')
                 break
 
             if cn_r.qsize() != 0 or cn_s.qsize() > 2:
-                qLogOutput('speech__: queue overflow warning!, ' + str(cn_r.qsize()) + ', ' + str(cn_s.qsize()))
+                print('speech__: queue overflow warning!',cn_r.qsize(),cn_s.qsize())
 
             if speech is None:
                 if micdev != 'None':
                     if runmode == 'translator':
                         speech = subprocess.Popen(['python', '_speech_allinone.py', micdev, mictype, miclevel, micguide, \
-                                                   micapi, 'ja', 'en', 'ja', runmode, \
+                                                   api, 'ja', 'en', 'ja', runmode, \
                                                    'temp/temp_micON.txt', 'Default', 'None'])
                     elif runmode == 'learning':
                         speech = subprocess.Popen(['python', '_speech_allinone.py', micdev, mictype, miclevel, micguide, \
-                                                   micapi, 'ja', 'en', 'ja', runmode, \
+                                                   api, 'ja', 'en', 'ja', runmode, \
                                                    'temp/temp_micON.txt', 'Default', 'None'])
                     elif runmode == 'reception':
                         speech = subprocess.Popen(['python', '_speech_allinone.py', micdev, mictype, miclevel, micguide, \
-                                                   micapi, 'ja', 'ja', 'ja', 'speech', \
+                                                   api, 'ja', 'ja', 'ja', 'speech', \
                                                    'temp/temp_micON.txt', 'Default', 'azure_speech_id.bat'])
                     elif runmode == 'camera':
                         speech = subprocess.Popen(['python', '_speech_allinone.py', micdev, mictype, miclevel, micguide, \
-                                                   micapi, 'ja', 'ja', 'ja', 'speech', \
+                                                   api, 'ja', 'ja', 'ja', 'speech', \
                                                    'None', 'Default', 'None'])
                     else:
                         speech = subprocess.Popen(['python', '_speech_allinone.py', micdev, mictype, miclevel, micguide, \
-                                                   micapi, 'ja', 'en', 'ja', 'translator', \
+                                                   api, 'ja', 'en', 'ja', 'translator', \
                                                    'None', 'Default', 'None'])
 
             if not speech is None:
@@ -492,77 +448,58 @@ def sub_speech(cn_r,cn_s):
         if cn_r.qsize() == 0:
             time.sleep(0.03)
 
-    qLogOutput('speech__:terminate')
-
+    print('speech__:terminate')
     if not speech is None:
-        try:
-            speech.terminate()
-            speech = None
-        except:
-            pass
-
-    qLogOutput('speech__:end')
+        speech.terminate()
+        speech = None
+    print('speech__:end')
 
 
 
-main_beat = 0
 if __name__ == '__main__':
-    #global main_beat
-    #global vision_beat
-    #global speech_beat
-    #global extpgm_beat
-
-    qLogOutput('handfree:init')
-    qLogOutput('handfree:exsample.py runmode, camdev, camrote, micdev, micapi, camapi')
+    print('handfree:init')
+    print('handfree:exsample.py runmode, camdev, camrote, micdev, api,')
 
     runmode = 'translator'
     camdev  = '0'
     camrote = '0'
     micdev  = '0'
     mictype = 'bluetooth'
-    miclevel= '777'
+    miclevel= '1555'
     micguide= 'on'
-    micapi  = 'free'
-    camapi  = 'azure'
+    api     = 'free'
     if len(sys.argv)>=2:
-        runmode = str(sys.argv[1]).lower()
+        runmode = sys.argv[1]
     if len(sys.argv)>=3:
         camdev  = sys.argv[2]
     if len(sys.argv)>=4:
         camrote = sys.argv[3]
     if len(sys.argv)>=5:
-        camres  = sys.argv[4]
+        micdev  = sys.argv[4]
     if len(sys.argv)>=6:
-        micdev  = sys.argv[5]
+        mictype = sys.argv[5]
     if len(sys.argv)>=7:
-        mictype = str(sys.argv[6]).lower()
+        miclevel= sys.argv[6]
     if len(sys.argv)>=8:
-        miclevel= sys.argv[7]
+        micguide= sys.argv[7]
     if len(sys.argv)>=9:
-        micguide= str(sys.argv[8]).lower()
-    if len(sys.argv)>=10:
-        micapi  = str(sys.argv[9]).lower()
-    if len(sys.argv)>=11:
-        camapi  = str(sys.argv[10]).lower()
+        api     = sys.argv[8]
 
-    qLogOutput('')
-    qLogOutput('handfree:runmode =' + str(runmode ))
-    qLogOutput('handfree:camdev  =' + str(camdev  ))
-    qLogOutput('handfree:camrote =' + str(camrote ))
-    qLogOutput('handfree:camres  =' + str(camres  ))
-    qLogOutput('handfree:micdev  =' + str(micdev  ))
-    qLogOutput('handfree:mictype =' + str(mictype ))
-    qLogOutput('handfree:miclevel=' + str(miclevel))
-    qLogOutput('handfree:micguide=' + str(micguide))
-    qLogOutput('handfree:micapi  =' + str(micapi  ))
-    qLogOutput('handfree:camapi  =' + str(camapi  ))
+    print('')
+    print('handfree:runmode =' + str(runmode ))
+    print('handfree:camdev  =' + str(camdev  ))
+    print('handfree:camrote =' + str(camrote ))
+    print('handfree:micdev  =' + str(micdev  ))
+    print('handfree:mictype =' + str(mictype ))
+    print('handfree:miclevel=' + str(miclevel))
+    print('handfree:micguide=' + str(micguide))
+    print('handfree:api     =' + str(api     ))
 
     v_micoff()
 
-    qLogOutput('')
-    qLogOutput('handfree:start')
+    print('')
+    print('handfree:start')
     main_start   = time.time()
-    main_beat    = 0
 
     vision_s     = queue.Queue()
     vision_r     = queue.Queue()
@@ -580,42 +517,40 @@ if __name__ == '__main__':
     extpgm_beat  = 0
     extpgm_skip  = 0
     onece = True
-
     while True:
-        main_beat = time.time()
 
         # Thread timeout check
 
-        if (vision_beat != 0):
+        if (vision_r.qsize() == 0) and (vision_beat != 0):
             sec = int(time.time() - vision_beat)
             if sec > 60:
-                qLogOutput('handsfree_:vision_proc 60s')
+                print('handsfree_:vision_proc 60s')
                 #vision_beat = time.time()
-                qLogOutput('handfree:vision_proc break')
+                print('handfree:vision_proc break')
                 vision_s.put([None, None])
                 time.sleep(3.0)
                 vision_proc = None
                 vision_beat = 0
                 vision_skip = 0
 
-        if (speech_beat != 0):
+        if (speech_r.qsize() == 0) and (speech_beat != 0):
             sec = int(time.time() - speech_beat)
             if sec > 60:
-                qLogOutput('handfree:speech_proc 60s')
+                print('handfree:speech_proc 60s')
                 #speech_beat = time.time()
-                qLogOutput('handfree:speech_proc break')
+                print('handfree:speech_proc break')
                 speech_s.put([None, None])
                 time.sleep(3.0)
                 speech_proc = None
                 speech_beat = 0
                 speech_skip = 0
 
-        if (extpgm_beat != 0):
+        if (extpgm_r.qsize() == 0) and (extpgm_beat != 0):
             sec = int(time.time() - extpgm_beat)
             if sec > 60:
-                qLogOutput('handfree:extpgm_proc 60s')
+                print('handfree:extpgm_proc 60s')
                 #extpgm_beat = time.time()
-                qLogOutput('handfree:extpgm_proc break')
+                print('handfree:extpgm_proc break')
                 extpgm_s.put([None, None])
                 time.sleep(3.0)
                 extpgm_proc = None
@@ -631,16 +566,14 @@ if __name__ == '__main__':
                 dummy = vision_r.get()
             vision_proc = threading.Thread(target=sub_vision, args=(vision_s,vision_r,))
             vision_proc.daemon = True
-            vision_s.put(runmode )
-            vision_s.put(camdev  )
-            vision_s.put(camrote )
-            vision_s.put(camres  )
-            vision_s.put(camapi  )
+            vision_s.put(runmode)
+            vision_s.put(camdev )
+            vision_s.put(camrote)
             vision_proc.start()
             time.sleep(5.0)
 
             vision_s.put(['START', ''])
-            vision_beat = 0
+            vision_beat = time.time()
             vision_skip = 0
 
         if speech_proc is None:
@@ -655,12 +588,12 @@ if __name__ == '__main__':
             speech_s.put(mictype )
             speech_s.put(miclevel)
             speech_s.put(micguide)
-            speech_s.put(micapi  )
+            speech_s.put(api     )
             speech_proc.start()
             time.sleep(5.0)
 
             speech_s.put(['START', ''])
-            speech_beat = 0
+            speech_beat = time.time()
             speech_skip = 0
 
         if extpgm_proc is None:
@@ -676,7 +609,7 @@ if __name__ == '__main__':
             time.sleep(5.0)
 
             extpgm_s.put(['START', ''])
-            extpgm_beat = 0
+            extpgm_beat = time.time()
             extpgm_skip = 0
 
         # processing
@@ -694,6 +627,7 @@ if __name__ == '__main__':
             vision_skip = 0
         if vision_skip > 50:
             vision_s.put(['RUN', ''])
+            vision_beat = time.time()
             vision_skip = 0
 
         if speech_r.qsize() > 0:
@@ -709,6 +643,7 @@ if __name__ == '__main__':
             speech_skip = 0
         if speech_skip > 50:
             speech_s.put(['RUN', ''])
+            speech_beat = time.time()
             speech_skip = 0
 
         if extpgm_r.qsize() > 0:
@@ -724,6 +659,7 @@ if __name__ == '__main__':
             extpgm_skip = 0
         if extpgm_skip > 50:
             extpgm_s.put(['RUN', ''])
+            extpgm_beat = time.time()
             extpgm_skip = 0
 
         if onece == True:
@@ -749,25 +685,19 @@ if __name__ == '__main__':
 
 
 
-    qLogOutput('')
-    qLogOutput('handfree:terminate')
+    print('')
+    print('handfree:terminate')
 
-    try:
-        vision_s.put([None, None])
-        speech_s.put([None, None])
-        extpgm_s.put([None, None])
-    except:
-        pass
+    vision_s.put([None, None])
+    speech_s.put([None, None])
+    extpgm_s.put([None, None])
 
-    try:
-        vision_proc.join()
-        speech_proc.join()
-        extpgm_proc.join()
-    except:
-        pass
+    vision_proc.join()
+    speech_proc.join()
+    extpgm_proc.join()
 
-    qLogOutput('')
-    qLogOutput('handfree:bye!')
+    print('')
+    print('handfree:bye!')
 
 
 

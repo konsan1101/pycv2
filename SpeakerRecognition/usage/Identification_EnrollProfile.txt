@@ -1,5 +1,0 @@
-Usage: python EnrollProfile.py <subscription_key> <profile_id> <enrollment_file_path>
-	<subscription_key> is the subscription key for the service
-	<profile_id> is the profile ID of the profile to enroll
-	<enrollment_file_path> is the enrollment audio file path
-	<force_short_audio> True/False waives the recommended minimum audio limit needed for enrollment

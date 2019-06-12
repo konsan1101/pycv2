@@ -1,4 +1,0 @@
-Usage: python EnrollProfile.py <subscription_key> <profile_id> <enrollment_file_path>
-	<subscription_key> is the subscription key for the service
-	<profile_id> is the profile ID of the profile to enroll
-	<enrollment_file_path> is the enrollment audio file path

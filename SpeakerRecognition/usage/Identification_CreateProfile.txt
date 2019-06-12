@@ -1,2 +1,0 @@
-Usage: python CreateProfile.py <subscription_key>
-	<subscription_key> is the subscription key for the service

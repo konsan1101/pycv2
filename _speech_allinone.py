@@ -13,43 +13,25 @@ import codecs
 import pyaudio
 import speech_recognition as sr
 import wave
-#import contextlib
-#with contextlib.redirect_stdout(None):
-#    import pygame.mixer
-import ctypes
-
+import pygame.mixer
 import json
-import requests
-import uuid
-import http.client
-import xml.etree.ElementTree
 
 from googletrans import Translator
-#import goslate
 from gtts import gTTS
 from os.path import join, dirname
 from watson_developer_cloud import SpeechToTextV1
-from watson_developer_cloud import LanguageTranslatorV3
+from watson_developer_cloud import LanguageTranslatorV2
 from watson_developer_cloud import TextToSpeechV1
+import requests
+import io
+import uuid
+import types
+import xml.etree.ElementTree as ET
+import ctypes
 
 print(os.path.dirname(__file__))
 print(os.path.basename(__file__))
 print(sys.version_info)
-
-
-
-qLogNow=datetime.datetime.now()
-qLogFlie = 'temp/log/' + qLogNow.strftime('%Y%m%d-%H%M%S') + '_' + os.path.basename(__file__) + '.log'
-def qLogOutput(logText='', display=True, outfile=True):
-    if display == True:
-        print(str(logText))
-    if outfile == True:
-        w = codecs.open(qLogFlie, 'a', 'utf-8')
-        w.write(str(logText) + '\n')
-        w.close()
-        w = None
-
-qLogOutput(qLogFlie,True,True)
 
 
 
@@ -59,13 +41,8 @@ srr2 = sr.Recognizer()
 # Azure
 AZURE_SPEECH_KEY = 'xx'
 
-# win32
-import win32com.client as wincl
-import win32api
-
-# Google Cloud
+# Google
 google_translator = Translator()
-#google_translator = goslate.Goslate(service_urls=['https://translate.google.com'])
 GOOGLE_CLOUD_SPEECH_CREDENTIALS = r"""
 {
 }
@@ -77,18 +54,16 @@ watson_TTS = None
 watson_translator = None
 try:
     watson_STT = SpeechToTextV1(
-            url='https://stream.watsonplatform.net/speech-to-text/api',
             username='xx',
-            password='XX')
-    watson_translator = LanguageTranslatorV3(
-            version='2018-05-01',
-            url='https://gateway.watsonplatform.net/language-translator/api',
-            username='xx',
-            password='XX')
-    watson_TTS = TextToSpeechV1(
-            url='https://stream.watsonplatform.net/text-to-speech/api',
+            password='xx',
+            x_watson_learning_opt_out=False)
+    watson_translator = LanguageTranslatorV2(
             username='xx',
             password='xx')
+    watson_TTS = TextToSpeechV1(
+            username='xx',
+            password='xx',
+            x_watson_learning_opt_out=True)
 except:
     watson_STT = None
     watson_TTS = None
@@ -134,83 +109,28 @@ class BingSpeechAPI:
         }
 
     def authenticate(self):
-        accessTokenHost = 'api.cognitive.microsoft.com'
-        path = '/sts/v1.0/issueToken'
-        params  = ''
-        headers = {'Ocp-Apim-Subscription-Key': self.key}
+            credential_url = 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken'
+            headers = {'Ocp-Apim-Subscription-Key': self.key}
 
-        # Connect to server
-        #print ('Connect to server')
-        conn = http.client.HTTPSConnection(accessTokenHost)
-        conn.request('POST', path, params, headers)
-        response = conn.getresponse()
-        #print('Response', response.status, response.reason)
-        data = response.read()
-        #print(data)
-        conn.close()
+            response = requests.post(credential_url, headers=headers)
 
-        self.access_token = data.decode('UTF-8')
-        #print ("Access Token: " + self.access_token)
+            if response.status_code != 200:
+                raise RequestError('http request error with status code {}'.format(response.status_code))
 
-    def synthesize(self, text, language='ja-JP', gender='Female'):
-        self.authenticate()
-
-        if language not in self.locales.keys():
-            raise ValueError('language is not supported.')
-        lang = self.locales.get(language)
-        if len(lang) == 1:
-            gender       = lang.keys()[0]
-            #service_name = lang.keys()[0][0]
-        service_name = lang[gender]
-        if gender in ['Female','Femal2']:
-            gender = 'Female'
-
-        synthesizeHost = 'speech.platform.bing.com'
-        path = '/synthesize'
-
-        body = xml.etree.ElementTree.Element('speak', version='1.0')
-        body.set('{http://www.w3.org/XML/1998/namespace}lang', 'en-US')
-        voice = xml.etree.ElementTree.SubElement(body, 'voice')
-        voice.set('{http://www.w3.org/XML/1998/namespace}lang', language)
-        voice.set('{http://www.w3.org/XML/1998/namespace}gender', gender)
-        voice.set('name', service_name)
-        voice.text = text
-
-        #SSML prosody Element exsample
-        #https://www.w3.org/TR/2009/REC-speech-synthesis-20090303/#edef_prosody
-        #<prosody pitch='x-low', 'low', 'medium', 'high', 'x-high', or 'default'>
-        #<prosody range='x-low', 'low', 'medium', 'high', 'x-high', or 'default'>
-        #<prosody rate='+10%', 'x-slow', 'slow', 'medium', 'fast', 'x-fast', or 'default'>
-        #<prosody volume='0.0'-'100.0', 'silent', 'x-soft', 'soft', 'medium', 'loud', 'x-loud', or 'default'>
-
-        headers = {"Content-type": "application/ssml+xml", 
-			"X-Microsoft-OutputFormat": "riff-16khz-16bit-mono-pcm",
-			"Authorization": "Bearer " + self.access_token, 
-			"X-Search-AppId": "xx", 
-			"X-Search-ClientID": "xx", 
-			"User-Agent": "TTSForPython"}
-
-        # Connect to server
-        #print ('Connect to server')
-        conn = http.client.HTTPSConnection(synthesizeHost)
-        conn.request('POST', path, xml.etree.ElementTree.tostring(body), headers)
-        response = conn.getresponse()
-        
-        #print('Response', response.status, response.reason)
-
-        data = response.read()
-        
-        #print(data)
-
-        conn.close()
-
-        #print("The synthesized wave length: %d" %(len(data)))
-        return data
+            self.access_token = response.content
 
     def recognize(self, audio_data, language='ja-JP'):
         self.authenticate()
+        if isinstance(audio_data, types.GeneratorType):
+            def generate(audio):
+                yield self.get_wav_header()
+                for a in audio:
+                    yield a
+        
+            datas = generate(audio_data)
+        else:
+            datas = self.to_wav(audio_data)
 
-        recognizeUrl = 'https://speech.platform.bing.com/recognize/query'
         params = {
             'version': '3.0',
             'requestid': uuid.uuid4(),
@@ -221,19 +141,93 @@ class BingSpeechAPI:
             'scenarios': 'ulm',
             'instanceid': uuid.uuid4(),
         }
+
         headers = {
-            'Authorization': 'Bearer ' + self.access_token,
+            'Authorization': 'Bearer ' + self.access_token.decode(encoding='utf-8'),
             'Content-Type': 'audio/wav; samplerate=16000',
         }
 
-        # Request to server
-        response = requests.post(recognizeUrl, params=params, headers=headers, data=audio_data)
-        #qLogOutput('Response, ' + response + ', ' + status_code)
+        url = 'https://speech.platform.bing.com/recognize/query'
+        response = requests.post(url, params=params, headers=headers, data=datas)
+
+        if response.status_code != 200:
+            raise RequestError('http request error with status code {}'.format(response.status_code))
+
+        #response.encoding='UTF-8'
         result = response.json()
 
         if 'header' not in result or 'lexical' not in result['header']:
             raise ValueError('Unexpected response: {}'.format(result))
         return result['header']['lexical']
+
+    def synthesize(self, text, language='ja-JP', gender='Female'):
+        self.authenticate()
+
+        if language not in self.locales.keys():
+            raise ValueError('language is not supported.')
+        lang = self.locales.get(language)
+        #if len(lang.keys()) == 1:
+        #    gender       = lang.keys()[0]
+        #    #service_name = lang.keys()[0][0]
+        service_name = lang[gender]
+        if gender in ['Female','Femal2']:
+            gender = 'Female'
+
+        body  = "<speak version='1.0' xml:lang='en-US'>"
+        body += "<voice xml:lang='%s' xml:gender='%s' name='%s'>" % (language, gender, service_name)
+        #if language!='ja-JP':
+        #    body += "<prosody rate='slow'>"
+        #    body += text
+        #    body += '</prosody>'
+        #else:
+        body += text
+        body += '</voice></speak>'
+        datas = body.encode('UTF-8')
+
+        headers = {
+            'Content-type': 'application/ssml+xml; charset=utf8',
+            'X-Microsoft-OutputFormat': 'raw-16khz-16bit-mono-pcm',
+            'Authorization': 'Bearer ' + self.access_token.decode(encoding='utf-8'),
+            'X-Search-AppId': 'xx',
+            'X-Search-ClientID': str(uuid.uuid1()).replace('-', ''),
+            'User-Agent': 'TTSForPython',
+        }
+
+        url = 'https://speech.platform.bing.com/synthesize'
+        response = requests.post(url, headers=headers, data=datas, stream=None)
+        data = response.content
+
+        return data
+
+    @staticmethod
+    def to_wav(raw_data):
+        # generate the WAV file contents
+        with io.BytesIO() as wav_file:
+            wav_writer = wave.open(wav_file, 'wb')
+            try:  # note that we can't use context manager, since that was only added in Python 3.4
+                wav_writer.setframerate(16000)
+                wav_writer.setsampwidth(2)
+                wav_writer.setnchannels(1)
+                wav_writer.writeframes(raw_data)
+                wav_data = wav_file.getvalue()
+            finally:  # make sure resources are cleaned up
+                wav_writer.close()
+        return wav_data
+
+    @staticmethod
+    def get_wav_header():
+        # generate the WAV header
+        with io.BytesIO() as f:
+            w = wave.open(f, 'wb')
+            try:
+                w.setframerate(16000)
+                w.setsampwidth(2)
+                w.setnchannels(1)
+                w.writeframes('')
+                header = f.getvalue()
+            finally:
+                w.close()
+        return header
 
 
 
@@ -275,11 +269,10 @@ def qVoiceInput(useApi, inpLang='ja', waveFile=None, outputQ=None, ):
             api='free'
 
     if api=='watson':
-        res   =''
         try:
             rb=open(waveFile, 'rb')
-            res = watson_STT.recognize(audio=rb, content_type='audio/wav', model=mdl,
-               timestamps=True, word_confidence=True).get_result()
+            res = watson_STT.recognize(rb, model=mdl, content_type='audio/wav',
+               timestamps=True, word_confidence=True)
             rb.close()
             rb=None
 
@@ -288,9 +281,7 @@ def qVoiceInput(useApi, inpLang='ja', waveFile=None, outputQ=None, ):
                  result = str(result).replace(' ', '')
             result = str(result).strip()
         except:
-            qLogOutput(res)
-        if result == '':
-            api='free'
+            print(res)
 
     if api=='azure':
         rs = wave.open(waveFile, 'rb')
@@ -303,13 +294,11 @@ def qVoiceInput(useApi, inpLang='ja', waveFile=None, outputQ=None, ):
         try:
             bing = BingSpeechAPI()
             result = bing.recognize(rawdata, language=lng)
-            #result = srr2.recognize_bing(audio, key='d3c0cb2b3617405c96041af5bc890b79', language=lng)
+            #result = srr2.recognize_bing(audio, key='xx', language=lng)
             if result.lower() == 'x':
                 result = ''
         except:
             pass
-        if result == '':
-            api='free'
 
     if api=='google' or api=='free':
         with sr.AudioFile(waveFile) as source:
@@ -432,33 +421,33 @@ def qTranslator(useApi, inpLang='ja', outLang='en', transText=u'こんにちわ'
 
         if api=='watson':
             res  = ''
-            res1 = ''
-            res2 = ''
             try:
                 if inp=='en-US' or out=='en-US':
-                    res = watson_translator.translate(text=trntxt, source=inp, target=out).get_result()
+                    data = watson_translator.translate(text=trntxt, source=inp, target=out)
                     try:
-                        result = res['translations'][0]['translation']
-                        result = str(result).strip()
+                        res = data['translations'][0]['translation']
+                        res = str(res).strip()
                     except:
-                        qLogOutput(res)
+                        print(data)
                 else:
-                    res1 = watson_translator.translate(text=trntxt, source=inp, target='en-US').get_result()
+                    data1 = watson_translator.translate(text=trntxt, source=inp, target='en-US')
                     try:
-                        result1 = res1['translations'][0]['translation']
-                        result1 = str(result1).strip()
-                        res2 = watson_translator.translate(text=res1, source='en-US', target=out).get_result()
+                        res1 = data1['translations'][0]['translation']
+                        res1 = str(res1).strip()
+                        data2 = watson_translator.translate(text=res1, source='en-US', target=out)
                         try:
-                            result2 = res2['translations'][0]['translation']
-                            result2 = str(result2).strip()
-                            result  = result2
+                            res2 = data2['translations'][0]['translation']
+                            res2 = str(res2).strip()
+                            res  = res2
                         except:
-                            qLogOutput(res2)
+                            print(data2)
                     except:
-                        qLogOutput(res1)
+                        print(data1)
             except:
                 pass
-            if result == '':
+            if res != '':
+                result=res
+            else:
                 api='free'
 
         if api=='azure':
@@ -475,22 +464,19 @@ def qTranslator(useApi, inpLang='ja', outLang='en', transText=u'こんにちわ'
                             'to': out,
                             'category': 'general',})
                 resxml = res.text
-                result = xml.etree.ElementTree.fromstring(resxml).text
+                res = ET.fromstring(resxml).text
             except:
                 pass
-            if result == '':
-                api='free'
-            else:
+            if res != '':
+                result=res
                 if result.lower() == 'x':
                     result = ''
+            else:
+                api='free'
 
         if api=='google' or api=='free':
             res = ''
-
-            # googletrans
             txtary = google_translator.translate([trntxt], src=inpLang, dest=outLang)
-            # goslate
-            #txtary = google_translator.translate([trntxt], outLang, inpLang)
             for t in txtary:
                 res += t.text
             res = str(res).strip()
@@ -526,7 +512,7 @@ def qVoiceOutput(useApi, outLang='en', outText='Hallo', tempFile=None, outq=None
     api=useApi
     lng  =''
     voice=''
-    if api=='watson' or api=='azure' or api=='win32':
+    if api=='watson' or api=='azure':
         if outLang=='en' or outLang=='en-US':
             lng  ='en-US'
             voice='en-US_AllisonVoice'
@@ -571,7 +557,7 @@ def qVoiceOutput(useApi, outLang='en', outText='Hallo', tempFile=None, outq=None
     #stamp=now.strftime('%S')
     #stamp=now.strftime('%S.%f')
     stamp='{0:02d}'.format(qVoiceOutput_count % 100)
-    if (api != 'azure') and (api != 'win32'):
+    if api != 'azure':
         cacheFile='temp/cache/' + t + '_' + outLang + '_' + api + '.mp3'
         tempFilex='temp/temp_voice_' + stamp + '.mp3'
     else:
@@ -606,61 +592,32 @@ def qVoiceOutput(useApi, outLang='en', outText='Hallo', tempFile=None, outq=None
             tempFile=tempFilex
 
         if api=='watson':
-            try:
-                audio=watson_TTS.synthesize(text=outtxt, accept='audio/mp3', voice=voice).get_result().content
-                wb = open(tempFile, 'wb')
-                wb.write(audio)
-                wb.close()
-                wb = None
-            except:
-                api='free'
+            audio=watson_TTS.synthesize(outtxt, accept='audio/mp3', voice=voice)
+            wb = open(tempFile, 'wb')
+            wb.write(audio)
+            wb.close()
+            wb = None
 
         if api=='azure':
-            try:
-                bing = BingSpeechAPI()
-                if lng=='ja-JP':
-                    audio = bing.synthesize(outtxt, language=lng, gender='Femal2')
-                    #audio = bing.synthesize(outtxt, language=lng, gender='Female')
+            bing = BingSpeechAPI()
+            if lng=='ja-JP':
+                audio = bing.synthesize(outtxt, language=lng, gender='Femal2')
+                #audio = bing.synthesize(outtxt, language=lng, gender='Female')
+            else:
+                if lng != 'it-IT' and lng != 'pt-BR':
+                    audio = bing.synthesize(outtxt, language=lng, gender='Female')
                 else:
-                    if lng != 'it-IT' and lng != 'pt-BR':
-                        audio = bing.synthesize(outtxt, language=lng, gender='Female')
-                    else:
-                        audio = bing.synthesize(outtxt, language=lng, gender='Male')
-
-                wb = open(tempFile, 'wb')
-                wb.write(audio)
-                wb.close()
-                wb = None
-            except:
-                api='free'
-
-        if api=='win32':
-            try:
-                engine = wincl.Dispatch('SAPI.SpVoice')
-                #engine.Speak(t)
-
-                t  = '<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">'
-                t += '<voice xml:lang="' + lng + '" gender="female">'
-                t += outtxt.encode('shift-jis')
-                t += '</voice></speak>'
-
-                stream = wincl.Dispatch("SAPI.SpFileStream")
-                stream.open(tmpFile, 3, False)
-                engine.AudioOutputStream = stream
-                engine.Speak(t)
-                stream.close()
-
-            except:
-                api='free'
+                    audio = bing.synthesize(outtxt, language=lng, gender='Male')
+            wb = open(tempFile, 'wb')
+            wb.write(bing.to_wav(audio))
+            wb.close()
+            wb = None
 
         if api=='google' or api=='free':
-            try:
-                tts = gTTS(text=outtxt, lang=outLang, slow=False)
-                tts.save(tempFile)
-                if useApi != 'google' and useApi != 'free':
-                    outtxt = '!Google, ' + outtxt
-            except:
-                pass
+            tts = gTTS(text=outtxt, lang=outLang, slow=False)
+            tts.save(tempFile)
+            if useApi != 'google' and useApi != 'free':
+                outtxt = '!Google, ' + outtxt
 
     if apirun == True:
         try:
@@ -677,8 +634,7 @@ def qVoiceOutput(useApi, outLang='en', outText='Hallo', tempFile=None, outq=None
             rb = None
             wb = None
 
-    if os.path.exists(tempFile):
-        qPlay(tempFile, outputQ=outputQ)
+    qPlay(tempFile, outputQ=outputQ)
 
     return outtxt
 
@@ -760,9 +716,11 @@ def qPlay(tempFile=None, outputQ=None, sync=True):
 
         if not tempFile is None:
 
+            playBusy = False
+
             if (outputQ is None) and (sync == True):
                 if inpBusy != False:
-                    qLogOutput('qPlay___:' + str(inpBusy) + '...wait')
+                    print('qPlay___:' + str(inpBusy) + '...wait')
                     chktime = time.time()
                     while (inpBusy != False) and (int(time.time() - chktime) < 5):
                         time.sleep(0.1)
@@ -774,6 +732,18 @@ def qPlay(tempFile=None, outputQ=None, sync=True):
                 #        time.sleep(0.1)
                 #        inpSec = int(time.time() - inpLast)
 
+            playBusy = 'Playing'
+            playLast = time.time()
+
+            #if os.name != 'nt':
+            #    pygame.mixer.init()
+            #    pygame.mixer.music.load(tempFile)
+            #    pygame.mixer.music.play()
+            #    if sync == True:
+            #        while pygame.mixer.music.get_busy():
+            #            time.sleep(0.3)
+            #        pygame.mixer.music.stop()
+            #else:
             if tempFile == '_ready':
                 tempFile = '_sound_ready.mp3'
             if tempFile == '_accept':
@@ -785,26 +755,21 @@ def qPlay(tempFile=None, outputQ=None, sync=True):
             if tempFile == '_shutter':
                 tempFile = '_sound_shutter.mp3'
             if os.path.exists(tempFile):
-
-                playBusy = 'Playing'
-                playLast = time.time()
-
                 cmd =  ['sox', tempFile, '-d', '-q']
-                #cmd = ['sox', '-v', '3', tempFile, '-d', '-q', 'gain', '-n']
-                #cmd = ['sox', '-v', '3', tempFile, '-b', '8', '-u', '-r', '8000', '-c', '1', '-d', '-q', 'gain', '-n']
-                #cmd = ['sox', '-v', '3', tempFile, '-r', '8000', '-c', '1', '-d', '-q', 'gain', '-n']
+                #cmd = ['sox', tempFile, '-b', '8', '-u', '-r', '8000', '-c', '1', '-d', '-q']
+                #cmd = ['sox', tempFile, '-r', '8000', '-c', '1', '-d', '-q']
                 p=subprocess.Popen(cmd)
                 if sync == True:
                     p.wait()
 
-                playBusy = False
-                playLast = time.time()
+            playBusy = False
+            playLast = time.time()
 
     playBusy = False
 
 
 
-def sub_input_wait(runmode, micdev, mictype, julius_adingui, julius_beatgui, outputQ, outputQ2, playtextQ, playtextQ2,):
+def sub_input_wait(mictype, julius_adingui, julius_beatgui, outputQ, outputQ2, playtextQ, playtextQ2,):
     global inpBusy
     global inpLast
     global compBusy
@@ -834,19 +799,16 @@ def sub_input_wait(runmode, micdev, mictype, julius_adingui, julius_beatgui, out
     textSec = int(time.time() - textLast)
     outSec  = int(time.time() - outLast)
     playSec = int(time.time() - playLast)
-    allchktime = time.time()
-    while  ((runmode != 'speech') or str(micdev).lower() == 'file') \
-       and ((playtextQ.qsize() > 0 or playtextQ2.qsize() > 0) \
-        or  (outputQ.qsize() > 0   or outputQ2.qsize() > 0)   \
-        or  (compBusy != False and compWait > 0) \
-        or  (compSec  < compWait) \
-        or  (textBusy != False and textWait > 0) \
-        or  (textSec  < textWait) \
-        or  (outBusy  != False  and outWait > 0) \
-        or  (outSec   < outWait ) \
-        or  (playBusy != False and playWait > 0) \
-        or  (playSec  < playWait)) \
-       and (int(time.time() - allchktime) < 30):
+    while (playtextQ.qsize() > 0 or playtextQ2.qsize() > 0) \
+       or (outputQ.qsize() > 0   or outputQ2.qsize() > 0)   \
+       or (compBusy != False and compWait > 0) \
+       or (compSec  < compWait) \
+       or (textBusy != False and textWait > 0) \
+       or (textSec  < textWait) \
+       or (outBusy  != False  and outWait > 0) \
+       or (outSec   < outWait ) \
+       or (playBusy != False and playWait > 0) \
+       or (playSec  < playWait) :
 
         if not julius_adingui is None and os.name == 'nt':
             if int(time.time() - julius_beatgui) >= 1:
@@ -858,14 +820,14 @@ def sub_input_wait(runmode, micdev, mictype, julius_adingui, julius_beatgui, out
                     pass
 
         if (playtextQ.qsize() > 0 or playtextQ2.qsize() > 0):
-            qLogOutput('input___:playtextQ...wait')
+            print('input___:playtextQ...wait')
             chktime = time.time()
             while (playtextQ.qsize() > 0 or playtextQ2.qsize() > 0) \
               and (int(time.time() - chktime) < 5):
                 time.sleep(0.1)
 
         if (outputQ.qsize() > 0 or outputQ2.qsize() > 0):
-            qLogOutput('input___:outputQ...wait')
+            print('input___:outputQ...wait')
             chktime = time.time()
             while (outputQ.qsize() > 0 or outputQ2.qsize() > 0) \
               and (int(time.time() - chktime) < 5):
@@ -873,7 +835,7 @@ def sub_input_wait(runmode, micdev, mictype, julius_adingui, julius_beatgui, out
 
         compSec = int(time.time() - compLast)
         if (compBusy != False and compWait > 0) or (compSec < compWait):
-            qLogOutput('input___:compBusy ' + str(compBusy) + '...wait')
+            print('input___:compBusy ' + str(compBusy) + '...wait')
             chktime = time.time()
             while (compBusy != False and compWait > 0) and (int(time.time() - chktime) < 5):
                 time.sleep(0.1)
@@ -884,7 +846,7 @@ def sub_input_wait(runmode, micdev, mictype, julius_adingui, julius_beatgui, out
 
         textSec = int(time.time() - textLast)
         if (textBusy != False and textWait > 0) or (textSec < textWait):
-            qLogOutput('input___:textBusy ' + str(textBusy) + '...wait')
+            print('input___:textBusy ' + str(textBusy) + '...wait')
             chktime = time.time()
             while (textBusy != False and textWait > 0) and (int(time.time() - chktime) < 5):
                 time.sleep(0.1)
@@ -895,7 +857,7 @@ def sub_input_wait(runmode, micdev, mictype, julius_adingui, julius_beatgui, out
 
         outSec = int(time.time() - outLast)
         if (outBusy != False and outWait > 0) or (outSec < outWait):
-            qLogOutput('input___:outBusy ' + str(outBusy) + '...wait')
+            print('input___:outBusy ' + str(outBusy) + '...wait')
             chktime = time.time()
             while (outBusy != False and outWait > 0) and (int(time.time() - chktime) < 5):
                 time.sleep(0.1)
@@ -906,7 +868,7 @@ def sub_input_wait(runmode, micdev, mictype, julius_adingui, julius_beatgui, out
 
         playSec = int(time.time() - playLast)
         if (playBusy != False and playWait > 0) or (playLast < playWait):
-            qLogOutput('input___:playBusy ' + str(playBusy) + '...wait')
+            print('input___:playBusy ' + str(playBusy) + '...wait')
             chktime = time.time()
             while (playBusy != False and playWait > 0) and (int(time.time() - chktime) < 5):
                 time.sleep(0.1)
@@ -917,14 +879,7 @@ def sub_input_wait(runmode, micdev, mictype, julius_adingui, julius_beatgui, out
 
 
 
-input_beat=0
-julius_adintool = None
-julius_adingui  = None
 def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
-    global input_beat
-    global julius_adintool
-    global julius_adingui
-
     global inpApi
     global trnApi
     global outApi
@@ -937,7 +892,7 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
     global inpBusy
     global inpLast
 
-    qLogOutput('input___:init')
+    print('input___:init')
 
     runmode  = cn_r.get()
     micdev   = cn_r.get()
@@ -947,20 +902,19 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
     recSJISf = cn_r.get()
     cn_r.task_done()
 
-    qLogOutput('input___:runmode =' + str(runmode ))
-    qLogOutput('input___:micdev  =' + str(micdev  ))
-    qLogOutput('input___:mictype =' + str(mictype ))
-    qLogOutput('input___:micguide=' + str(micguide))
-    qLogOutput('input___:micON   =' + str(micON   ))
-    qLogOutput('input___:recSJISf=' + str(recSJISf))
+    print('input___:runmode =' + str(runmode ))
+    print('input___:micdev  =' + str(micdev  ))
+    print('input___:mictype =' + str(mictype ))
+    print('input___:micguide=' + str(micguide))
+    print('input___:micON   =' + str(micON   ))
+    print('input___:recSJISf=' + str(recSJISf))
 
-    qLogOutput('input___:start')
+    print('input___:start')
 
     listner = 'sr'
 
-    julius_rewind   = '1111'
-    julius_headmg   = '444'
-    julius_tailmg   = '666'
+    julius_adintool = None
+    julius_adingui  = None
     julius_count    = 0
     julius_beattool = time.time()
     julius_beatgui  = time.time()
@@ -973,8 +927,6 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
 
     onece = True
     while True:
-        input_beat = time.time()
-
         if cn_r.qsize() > 0:
             cn_r_get = cn_r.get()
             mode_get = cn_r_get[0]
@@ -982,11 +934,11 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
             cn_r.task_done()
 
             if mode_get is None:
-                qLogOutput('input___:None=break')
+                print('input___:None=break')
                 break
 
             if cn_r.qsize() != 0 or cn_s.qsize() > 2:
-                qLogOutput('input___: queue overflow warning!, ' + str(cn_r.qsize()) + ', ' + str(cn_s.qsize()))
+                print('input___: queue overflow warning!',cn_r.qsize(),cn_s.qsize())
 
             if mode_get == 'START':
                 cn_s.put(['INIT', ''])
@@ -995,20 +947,6 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
                 cn_s.put(['PASS', ''])
 
             elif str(micdev).lower() == 'file':
-                if micON != 'None':
-                    if not os.path.exists(micON):
-                        qLogOutput('input___:Synchronize(' + micON + ')...wait')
-                        while not os.path.exists(micON):
-                            time.sleep(0.3)
-                if recSJISf != 'Default' and micON != 'None':
-                    if os.path.exists(recSJISf):
-                        qLogOutput('input___:Synchronize(' + recSJISf + ')...wait')
-                        while os.path.exists(recSJISf):
-                            time.sleep(0.3)
-
-                inpBusy = False
-                #####sub_input_wait(runmode, micdev, mictype, julius_adingui, julius_beatgui, outputQ, outputQ2, playtextQ, playtextQ2,)
-
                 micWave='temp/temp_micWave.wav'
                 bakWave='temp/temp_bakWave.wav'
 
@@ -1020,9 +958,6 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
                 voicef = 'temp/voices/' + stamp + '_voice.wav'
 
                 if os.path.exists(micWave):
-                    inpBusy = 'Reading'
-                    inpLast = time.time()
-
                     if os.path.exists(bakWave):
                         os.remove(bakWave)
 
@@ -1032,13 +967,11 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
                             os.rename(micWave, bakWave)
 
                             if runmode != 'number':
-                                #sox = subprocess.Popen(['sox', bakWave, '-r', '16000', '-b', '16', '-c', '1', voicef, '-q', \
-                                #                        'equalizer', '800', '1.0q', '7', ])
-                                sox = subprocess.Popen(['sox', bakWave, '-r', '16000', '-b', '16', '-c', '1', voicef, '-q', ])
+                                sox = subprocess.Popen(['sox', bakWave, '-r', '16000', '-b', '16', '-c', '1', voicef, \
+                                                        'equalizer', '800', '1.0q', '7', 'gain', '-n', ])
                             else:
-                                #sox = subprocess.Popen(['sox', bakWave, '-r', '16000', '-b', '16', '-c', '1', voicef, '-q', \
-                                #                        'equalizer', '800', '1.0q', '7', 'tempo', '0.9', ])
-                                sox = subprocess.Popen(['sox', bakWave, '-r', '16000', '-b', '16', '-c', '1', voicef, '-q', ])
+                                sox = subprocess.Popen(['sox', bakWave, '-r', '16000', '-b', '16', '-c', '1', voicef, \
+                                                        'equalizer', '800', '1.0q', '7', 'gain', '-n', 'tempo', '0.9' ])
                             sox.wait()
                             sox.terminate()
                             sox = None
@@ -1054,7 +987,7 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
                     time.sleep(0.5)
 
                 else:
-                    #qLogOutput('input___:file=' + micWave + ' to ' + voicef)
+                    #print('input___:file=' + micWave + ' to ' + voicef)
                     inpBusy = False
                     inpLast = time.time()
                     cn_s.put(['stamp',  stamp])
@@ -1064,12 +997,12 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
             else:
                 if micON != 'None':
                     if not os.path.exists(micON):
-                        qLogOutput('input___:Synchronize(' + micON + ')...wait')
+                        print('input___:Synchronize(' + micON + ')...wait')
                         while not os.path.exists(micON):
                             time.sleep(0.3)
                 if recSJISf != 'Default' and micON != 'None':
                     if os.path.exists(recSJISf):
-                        qLogOutput('input___:Synchronize(' + recSJISf + ')...wait')
+                        print('input___:Synchronize(' + recSJISf + ')...wait')
                         while os.path.exists(recSJISf):
                             time.sleep(0.3)
 
@@ -1087,9 +1020,8 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
                             while int(time.time() - julius_beatgui) < 2:
                                 time.sleep(0.1)
                             julius_adintool = subprocess.Popen([adintool_exe, '-in', 'mic', \
-                                              '-rewind', julius_rewind, '-headmargin', julius_headmg, '-tailmargin', julius_tailmg, \
-                                              '-lv', str(micLevel), '-zmean', \
-                                              '-out', 'file', '-filename', 'temp/voices/julius', '-startid', '1', ], \
+                                              '-rewind', '2000', '-headmargin', '500', '-tailmargin', '500', '-lv', str(micLevel), \
+                                              '-out', 'file', '-filename', 'temp/voices/julius', '-startid', '1'], \
                                               stdout=subprocess.PIPE, stderr=subprocess.PIPE, )
                             julius_count    = 0
                             julius_beattool = time.time()
@@ -1101,14 +1033,13 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
                             #startup.dwFlags |= subprocess.STARTF_USESHOWWINDOW
                             #startup.wShowWindow = subprocess.SW_HIDE
                             julius_adingui  = subprocess.Popen([adintool_gui, '-in', 'mic', \
-                                              '-rewind', julius_rewind, '-headmargin', julius_headmg, '-tailmargin', julius_tailmg, \
-                                              '-lv', str(micLevel), '-zmean', ], \
+                                              '-rewind', '2000', '-headmargin', '500', '-tailmargin', '500', '-lv', str(micLevel),], \
                                               stdout=subprocess.PIPE, stderr=subprocess.PIPE, )
                                               #stdout=subprocess.PIPE, stderr=subprocess.PIPE, startupinfo=startup)
                             julius_beatgui  = time.time()
 
                 inpBusy = False
-                sub_input_wait(runmode, micdev, mictype, julius_adingui, julius_beatgui, outputQ, outputQ2, playtextQ, playtextQ2,)
+                sub_input_wait(mictype, julius_adingui, julius_beatgui, outputQ, outputQ2, playtextQ, playtextQ2,)
 
                 if micguide != 'off':
                     qPlay('_ready', outputQ=None)
@@ -1127,8 +1058,7 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
                             while int(time.time() - julius_beatgui) < 2:
                                 time.sleep(0.1)
                             julius_adintool = subprocess.Popen([adintool_exe, '-in', 'mic', \
-                                              '-rewind', julius_rewind, '-headmargin', julius_headmg, '-tailmargin', julius_tailmg, \
-                                              '-lv', str(micLevel), '-zmean', \
+                                              '-rewind', '2000', '-headmargin', '500', '-tailmargin', '500', '-lv', str(micLevel), \
                                               '-out', 'file', '-filename', 'temp/voices/julius', '-startid', '1'], \
                                               stdout=subprocess.PIPE, stderr=subprocess.PIPE, )
                             julius_count    = 0
@@ -1146,12 +1076,11 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
                         except:
                             break
 
-                    qLogOutput('input___:☆Waitting[lv=' + str(micLevel) + ']...(' + julius_file + ')')
+                    print('input___:☆Waitting...(' + julius_file + ')')
                     wait_start=time.time()
 
                     julius_sec = int(time.time() - wait_start)
-                    #while julius_sec <= 10:
-                    while julius_sec <= 5:
+                    while julius_sec <= 10:
 
                         if julius_adingui is None:
                             while int(time.time() - julius_beattool) < 2:
@@ -1160,8 +1089,7 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
                             #startup.dwFlags |= subprocess.STARTF_USESHOWWINDOW
                             #startup.wShowWindow = subprocess.SW_HIDE
                             julius_adingui  = subprocess.Popen([adintool_gui, '-in', 'mic', \
-                                              '-rewind', julius_rewind, '-headmargin', julius_headmg, '-tailmargin', julius_tailmg, \
-                                              '-lv', str(micLevel), '-zmean', ], \
+                                              '-rewind', '2000', '-headmargin', '500', '-tailmargin', '500', '-lv', str(micLevel),], \
                                               stdout=subprocess.PIPE, stderr=subprocess.PIPE, )
                                               #stdout=subprocess.PIPE, stderr=subprocess.PIPE, startupinfo=startup)
                             julius_beatgui  = time.time()
@@ -1221,12 +1149,11 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
                         julius_sec = int(time.time() - wait_start)
 
                 if listner == 'sr':
-                    qLogOutput('input___:☆Listning...(' + inpLang + ')')
+                    print('input___:☆Listning...(' + inpLang + ')')
                     try:
                         with sr.Microphone(int(micdev)) as source:
                             try:
-                                #speech = srr.listen(source, timeout=5, phrase_time_limit=10)
-                                speech = srr.listen(source, timeout=5, phrase_time_limit=5)
+                                speech = srr.listen(source, timeout=5, phrase_time_limit=10)
                                 data    =speech.get_wav_data(16000,2)
 
                                 now=datetime.datetime.now()
@@ -1249,50 +1176,39 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
 
                 if listner == 'julius':
                     if voicef == '':
-                        m = int(micLevel)
-                        if julius_hit_sec <= 3 and m < 4444:
-                            m = int(m * 1.3)
-                            if m > 4444:
-                                m = 4444
-                            if m != int(micLevel):
-                                qLogOutput('input___:micLevel changed ' + str(micLevel) + ' → ' + str(m))
-                                micLevel = m
+                        if julius_hit_sec <= 3 and int(micLevel) < 8888:
+                            micLevel = int(int(micLevel) / 0.70)
+                            if int(micLevel) > 8888:
+                                micLevel = 8888
+                            print('input___:micLevel=' + str(micLevel))
 
                 if voicef != '':
                     rb = open(voicef, 'rb')
                     datasize = sys.getsizeof(rb.read())
                     rb.close
                     rb = None
-                    qLogOutput('input___: ' + str(datasize) + ' byte')
+                    print('input___:', datasize, 'byte')
                     if datasize<30000 or datasize>500000:
-                        if listner != 'julius':
-                            os.remove(voicef)
-                            #stamp  = ''
-                            voicef = ''
+                        os.remove(voicef)
+                        #stamp  = ''
+                        voicef = ''
                         if listner == 'julius':
-                            m = int(micLevel)
-                            if datasize<30000 and m >= 500:
-                                if m == 500:
-                                    m = 2000
-                                m = int(m * 0.90)
-                                if m < 500:
-                                    m = 500
-                                if m != int(micLevel):
-                                    qLogOutput('input___:micLevel changed ' + str(micLevel) + ' → ' + str(m))
-                                    micLevel = m
-                            if datasize>500000 and m <= 4444:
-                                if m == 4444:
-                                    m = 1000
-                                m = int(m * 1.3)
-                                if m > 4444:
-                                    m = 4444
-                                if m != int(micLevel):
-                                    qLogOutput('input___:micLevel changed ' + str(micLevel) + ' → ' + str(m))
-                                    micLevel = m
+                            if datasize<30000 and int(micLevel) >= 1000:
+                                if int(micLevel) == 1000:
+                                    micLevel = 3000
+                                micLevel = int(int(micLevel) * 0.90)
+                                if int(micLevel) < 1000:
+                                    micLevel = 1000
+                                print('input___:micLevel=' + str(micLevel))
+                            if datasize>500000 and int(micLevel) < 8888:
+                                micLevel = int(int(micLevel) / 0.70)
+                                if int(micLevel) > 8888:
+                                    micLevel = 8888
+                                print('input___:micLevel=' + str(micLevel))
 
                 if voicef != '':
                     if micON != 'None' and not os.path.exists(micON):
-                        qLogOutput('input___:Synchronize(' + micON + ')...pass')
+                        print('input___:Synchronize(' + micON + ')...pass')
                         os.remove(voicef)
                         #stamp  = ''
                         voicef = ''
@@ -1301,13 +1217,11 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
                     voicef2 = 'temp/voices/' + stamp + '_voice2.wav'
                     try:
                         if runmode != 'number':
-                            #sox = subprocess.Popen(['sox', voicef, '-r', '16000', '-b', '16', '-c', '1', voicef2, '-q', \
-                            #                        'equalizer', '800', '1.0q', '7', ])
-                            sox = subprocess.Popen(['sox', voicef, '-r', '16000', '-b', '16', '-c', '1', voicef2, '-q', ])
+                            sox = subprocess.Popen(['sox', voicef, '-r', '16000', '-b', '16', '-c', '1', voicef2, \
+                                                    'equalizer', '800', '1.0q', '7', 'gain', '-n', ])
                         else:
-                            #sox = subprocess.Popen(['sox', voicef, '-r', '16000', '-b', '16', '-c', '1', voicef2, '-q', \
-                            #                        'equalizer', '800', '1.0q', '7', 'tempo', '0.9', ])
-                            sox = subprocess.Popen(['sox', voicef, '-r', '16000', '-b', '16', '-c', '1', voicef2, '-q', ])
+                            sox = subprocess.Popen(['sox', voicef, '-r', '16000', '-b', '16', '-c', '1', voicef2, \
+                                                    'equalizer', '800', '1.0q', '7', 'gain', '-n', 'tempo', '0.9' ])
                         sox.wait()
                         sox.terminate()
                         sox = None
@@ -1325,7 +1239,7 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
                         qPlay('_ng', outputQ=None)
 
                 else:
-                    qLogOutput('input___:accepting...')
+                    print('input___:accepting...')
                     inpBusy = False
                     inpLast = time.time()
 
@@ -1367,38 +1281,20 @@ def sub_input(cn_r, cn_s, outputQ, outputQ2, playtextQ, playtextQ2,):
         if cn_r.qsize() == 0:
             time.sleep(0.03)
 
-    qLogOutput('input___:terminate')
-
+    print('input___:terminate')
     if not julius_adintool is None:
-        try:
-            julius_adintool.terminate()
-            julius_adintool = None
-        except:
-            pass
+        julius_adintool.terminate()
+        julius_adintool = None
     if not julius_adingui is None:
-        try:
-            julius_adingui.terminate()
-            julius_adingui = None
-        except:
-            pass
+        julius_adingui.terminate()
+        julius_adingui = None
 
-    while cn_r.qsize() > 0:
-        try:
-            cn_r_get = cn_r.get()
-            mode_get = cn_r_get[0]
-            data_get = cn_r_get[1]
-            cn_r.task_done()
-        except:
-            pass
-
-    qLogOutput('input___:end')
+    print('input___:end')
 
 
 
-compute_beat=0
 julius=None
 def sub_compute(cn_r, cn_s, outputQ=None, ):
-    global compute_beat
     global julius
 
     global inpApi
@@ -1413,28 +1309,25 @@ def sub_compute(cn_r, cn_s, outputQ=None, ):
     global compBusy
     global compLast
 
-    qLogOutput('compute_:init')
+    print('compute_:init')
 
     runmode  = cn_r.get()
-    micdev   = cn_r.get()
     mictype  = cn_r.get()
     micguide = cn_r.get()
     recSJISf = cn_r.get()
     extpgm   = cn_r.get()
     cn_r.task_done()
 
-    qLogOutput('compute_:runmode =' + str(runmode ))
-    qLogOutput('compute_:micdev  =' + str(micdev  ))
-    qLogOutput('compute_:mictype =' + str(mictype ))
-    qLogOutput('compute_:micguide=' + str(micguide))
-    qLogOutput('compute_:recSJISf=' + str(recSJISf))
-    qLogOutput('compute_:extpgm  =' + str(extpgm  ))
+    print('compute_:runmode =' + str(runmode ))
+    print('compute_:mictype =' + str(mictype ))
+    print('compute_:micguide=' + str(micguide))
+    print('compute_:recSJISf=' + str(recSJISf))
+    print('compute_:extpgm  =' + str(extpgm  ))
 
     feedback  = False
     miss_beat = 0
 
-    if (julius is None) and ((inpApi == 'julius') or (str(micdev).lower() != 'file')):
-    #if (julius is None):
+    if julius == None:
         if runmode == 'number':
             julius=subprocess.Popen(['julius/julius.exe', '-input', 'adinnet', '-adport', '5538', \
                                      '-C', 'julius/_jconf_20180313dnn999.jconf', '-dnnconf', 'julius/julius.dnnconf', \
@@ -1451,8 +1344,7 @@ def sub_compute(cn_r, cn_s, outputQ=None, ):
                 t = julius.stdout.readline()
                 t = t.replace('\r', '')
                 t = t.replace('\n', '')
-                qLogOutput('julius:' + str(t), False)
-                #qLogOutput('julius:' + str(t))
+                #print(t)
                 if t != '':
                     chkhit = t
                 else:
@@ -1461,11 +1353,9 @@ def sub_compute(cn_r, cn_s, outputQ=None, ):
                 time.sleep(0.01)
                 chktime = time.time()
 
-    qLogOutput('compute_:start')
+    print('compute_:start')
 
     while True:
-        compute_beat = time.time()
-
         if cn_r.qsize() > 0:
             cn_r_get = cn_r.get()
             mode_get = cn_r_get[0]
@@ -1473,7 +1363,7 @@ def sub_compute(cn_r, cn_s, outputQ=None, ):
             cn_r.task_done()
 
             if mode_get is None:
-                qLogOutput('compute_:None=break')
+                print('compute_:None=break')
                 break
 
             if mode_get == 'stamp':
@@ -1484,7 +1374,7 @@ def sub_compute(cn_r, cn_s, outputQ=None, ):
                 cn_r.task_done()
 
             if cn_r.qsize() != 0 or cn_s.qsize() > 2:
-                qLogOutput('compute_: queue overflow warning!, ' + str(cn_r.qsize()) + ', ' + str(cn_s.qsize()))
+                print('compute_: queue overflow warning!',cn_r.qsize(),cn_s.qsize())
 
             if mode_get != 'stamp':
                 cn_s.put(['PASS', ''])
@@ -1494,7 +1384,7 @@ def sub_compute(cn_r, cn_s, outputQ=None, ):
                 compLast = time.time()
 
                 if feedback == True:
-                    qLogOutput('compute_:feedback playing...')
+                    print('compute_:feedback playing...')
                     qPlay(recVoice, outputQ=outputQ)
 
                 compBusy = 'recognition (1)'
@@ -1502,14 +1392,8 @@ def sub_compute(cn_r, cn_s, outputQ=None, ):
 
                 jultxt=''
                 inptxt=''
-                if julius is None:
-                    if inpApi != 'free':
-                        jultxt = qVoiceInput(useApi='free', inpLang=inpLang, \
-                                             waveFile=recVoice, outputQ=outputQ)
-                        if jultxt != '':
-                            qLogOutput(stamp + ' Recognition  [' + jultxt + '] (free)')
-                    else:
-                        jultxt = '!'
+                if julius == None:
+                    jultxt = '!'
                 else:
                     tempList = 'temp/temp_juliuslist.txt'
                     tl = codecs.open(tempList, 'w', 'utf-8')
@@ -1531,11 +1415,8 @@ def sub_compute(cn_r, cn_s, outputQ=None, ):
                         t = julius.stdout.readline()
                         t = t.replace('\r', '')
                         t = t.replace('\n', '')
-                        qLogOutput('julius:' + str(t), False)
-                        #qLogOutput('julius:' + str(t))
+                        #print(t)
                         if t != '':
-                            if t[:15]=='<search failed>':
-                                jultxt = ' '
                             if t[:10]=='sentence1:':
                                 jultxt = t[10:]
                         else:
@@ -1552,32 +1433,30 @@ def sub_compute(cn_r, cn_s, outputQ=None, ):
                             jultxt = jultxt[0:len(jultxt)-1]
 
                     if jultxt != '':
-                        qLogOutput(stamp + ' Recognition  [' + jultxt + '] (julius)')
+                        print(stamp + ' Recognition  [' + jultxt + '] (julius)')
 
                 if jultxt != '':
                     compBusy = 'recognition (2)'
                     compLast = time.time()
 
                     if inpApi == 'julius':
-                        if jultxt != '!':
-                            inptxt = jultxt
+                        inptxt = jultxt
                     else:
                         inptxt=qVoiceInput(useApi=inpApi, inpLang=inpLang, \
                                            waveFile=recVoice, outputQ=outputQ)
 
                         if inptxt != '':
                             if inptxt[0:9] != '!Google, ':
-                                qLogOutput(stamp + ' Recognition  [' + inptxt + '] (' + inpApi + ')')
+                                print(stamp + ' Recognition  [' + inptxt + '] (' + inpApi + ')')
                             else:
                                 inptxt = inptxt[9:]
-                                qLogOutput(stamp + ' Recognition  [' + inptxt + '] (!Google)')
+                                print(stamp + ' Recognition  [' + inptxt + '] (!Google)')
                         else:
-                            if jultxt != '!':
-                                inptxt = jultxt
+                            inptxt = jultxt
 
                 if inptxt == '':
                     os.remove(recVoice)
-                    qLogOutput(stamp + ' ! ')
+                    print(stamp + ' ! ')
                     if micguide != 'off':
                         qPlay('_ng', outputQ=outputQ)
 
@@ -1617,23 +1496,20 @@ def sub_compute(cn_r, cn_s, outputQ=None, ):
                         else:
                             txt = txt.replace('0',   'ゼロ')
 
-                    if runmode == 'speech':
-                            trntxt = txt
-
                     if trntxt == '':
                         trntxt=qTranslator(useApi=trnApi, inpLang=inpLang, outLang=trnLang,
                                            transText=txt, outputQ=outputQ)
                         if trntxt != '':
                             if trntxt[0:9] != '!Google, ':
-                                qLogOutput(stamp + ' Translation  [' + trntxt + '] (' + trnApi + ')')
+                                print(stamp + ' Translation  [' + trntxt + '] (' + trnApi + ')')
                             else:
                                 trntxt = trntxt[9:]
-                                qLogOutput(stamp + ' Translation  [' + trntxt + '] (!Google)')
+                                print(stamp + ' Translation  [' + trntxt + '] (!Google)')
                             #qPlay('_ok', outputQ=outputQ)
 
                     if trntxt == '':
                         os.remove(recVoice)
-                        qLogOutput(stamp + ' ! ')
+                        print(stamp + ' ! ')
                         if micguide != 'off':
                             qPlay('_ng', outputQ=outputQ)
 
@@ -1652,25 +1528,18 @@ def sub_compute(cn_r, cn_s, outputQ=None, ):
                         sec = int(time.time() - miss_beat)
                         miss_beat = time.time()
                         if int(micLevel) != 0:
-                            m = int(micLevel)
-                            if sec>120 and m >= 500:
-                                    if m == 500:
-                                        m = 2000
-                                    m = int(m * 0.90)
-                                    if m < 500:
-                                        m = 500
-                                    if m != int(micLevel):
-                                        qLogOutput('compute_:micLevel changed ' + str(micLevel) + ' → ' + str(m))
-                                        micLevel = m
-                            if sec<120 and m <= 4444:
-                                    if m == 4444:
-                                        m = 1000
-                                    m = int(m * 1.3)
-                                    if m > 4444:
-                                        m = 4444
-                                    if m != int(micLevel):
-                                        qLogOutput('compute_:micLevel changed ' + str(micLevel) + ' → ' + str(m))
-                                        micLevel = m
+                            if sec>120 and int(micLevel) >= 1000:
+                                    if int(micLevel) == 1000:
+                                        micLevel = 3000
+                                    micLevel = int(int(micLevel) * 0.90)
+                                    if int(micLevel) < 1000:
+                                        micLevel = 1000
+                                    print('compute_:micLevel=' + str(micLevel))
+                            if sec<120 and int(micLevel) < 8888:
+                                    micLevel = int(int(micLevel) / 0.70)
+                                    if int(micLevel) > 8888:
+                                        micLevel = 8888
+                                    print('compute_:micLevel=' + str(micLevel))
 
                 if trntxt != '':
                     if runmode == 'number' or runmode == 'numeric':
@@ -1694,7 +1563,7 @@ def sub_compute(cn_r, cn_s, outputQ=None, ):
                         num = num.replace(',', '')
 
                         if num != '' and num != trntxt and num.isdigit():
-                            qLogOutput(stamp + ' ' + trntxt + ' -> ' + str(num))
+                            print(stamp + ' ' + trntxt + ' -> ' + str(num))
                             trntxt = str(num)
 
                 if trntxt != '':
@@ -1882,27 +1751,14 @@ def sub_compute(cn_r, cn_s, outputQ=None, ):
         if cn_r.qsize() == 0:
             time.sleep(0.03)
 
-    qLogOutput('compute_:terminate')
+    print('compute_:terminate')
 
-    if not julius is None:
-        try:
-            #julius.wait()
-            julius.terminate()
-            stdout, stderr = julius.communicate()
-            julius = None
-        except:
-            pass
+    #julius.wait()
+    julius.terminate()
+    stdout, stderr = julius.communicate()
+    julius = None
 
-    while cn_r.qsize() > 0:
-        try:
-            cn_r_get = cn_r.get()
-            mode_get = cn_r_get[0]
-            data_get = cn_r_get[1]
-            cn_r.task_done()
-        except:
-            pass
-
-    qLogOutput('compute_:end')
+    print('compute_:end')
 
 
 
@@ -1944,55 +1800,55 @@ def sub_compute_translator(runmode, stamp, inptxt, trntxt, outputQ=None,):
         if inptxt == u'日本語':
             trnLang = 'ja'
             outLang = trnLang
-            qLogOutput('compute_:outLang=' + str(outLang))
+            print('compute_:outLang=' + str(outLang))
         if inptxt == u'英語':
             trnLang = 'en'
             outLang = trnLang
-            qLogOutput('compute_:outLang=' + str(outLang))
+            print('compute_:outLang=' + str(outLang))
         if inptxt == u'アラビア語' or inptxt == u'アラビア 語':
             trnLang = 'ar'
             outLang = trnLang
-            qLogOutput('compute_:outLang=' + str(outLang))
+            print('compute_:outLang=' + str(outLang))
         if inptxt == u'スペイン語' or inptxt == u'スペイン 語':
             trnLang = 'es'
             outLang = trnLang
-            qLogOutput('compute_:outLang=' + str(outLang))
+            print('compute_:outLang=' + str(outLang))
         if inptxt == u'ドイツ語' or inptxt == u'ドイツ 語':
             trnLang = 'de'
             outLang = trnLang
-            qLogOutput('compute_:outLang=' + str(outLang))
+            print('compute_:outLang=' + str(outLang))
         if inptxt == u'フランス語' or inptxt == u'フランス 語':
             trnLang = 'fr'
             outLang = trnLang
-            qLogOutput('compute_:outLang=' + str(outLang))
+            print('compute_:outLang=' + str(outLang))
         if inptxt == u'イタリア語' or inptxt == u'イタリア 語':
             trnLang = 'it'
             outLang = trnLang
-            qLogOutput('compute_:outLang=' + str(outLang))
+            print('compute_:outLang=' + str(outLang))
         if inptxt == u'ポルトガル語' or inptxt == u'ポルトガル 語':
             trnLang = 'pt'
             outLang = trnLang
-            qLogOutput('compute_:outLang=' + str(outLang))
+            print('compute_:outLang=' + str(outLang))
         if inptxt == u'ロシア語' or inptxt == u'ロシア 語':
             trnLang = 'ru'
             outLang = trnLang
-            qLogOutput('compute_:outLang=' + str(outLang))
+            print('compute_:outLang=' + str(outLang))
         if inptxt == u'トルコ語' or inptxt == u'トルコ 語':
             trnLang = 'tr'
             outLang = trnLang
-            qLogOutput('compute_:outLang=' + str(outLang))
+            print('compute_:outLang=' + str(outLang))
         if inptxt == u'ウクライナ語' or inptxt == u'ウクライナ 語':
             trnLang = 'uk'
             outLang = trnLang
-            qLogOutput('compute_:outLang=' + str(outLang))
+            print('compute_:outLang=' + str(outLang))
         if inptxt == u'中国語'or inptxt == u'中国 語':
             trnLang = 'zh-CN'
             outLang = trnLang
-            qLogOutput('compute_:outLang=' + str(outLang))
+            print('compute_:outLang=' + str(outLang))
         if inptxt == u'韓国語' or inptxt == u'韓国 語':
             trnLang = 'ko'
             outLang = trnLang
-            qLogOutput('compute_:outLang=' + str(outLang))
+            print('compute_:outLang=' + str(outLang))
 
         if txt != inptxt or lng != trnLang:
             trntxt=qTranslator(useApi=trnApi, inpLang=inpLang, outLang=trnLang,
@@ -2001,33 +1857,30 @@ def sub_compute_translator(runmode, stamp, inptxt, trntxt, outputQ=None,):
     if trntxt != '':
         outtxt = trntxt
 
-        qLogOutput(stamp + ' Vocalization [' + outtxt + '] (' + outApi + ')')
+        print(stamp + ' Vocalization [' + outtxt + '] (' + outApi + ')')
         outVoice = 'temp/voices/' + stamp + '_voice_' + outLang + '.mp3'
 
         res = qVoiceOutput(useApi=outApi, outLang=outLang, outText=outtxt,
                            tempFile=outVoice, outputQ=outputQ)
         if res[0:9] == '!Google, ':
-            qLogOutput(stamp + ' Vocalization [' + outtxt + '] (!Google)')
+            print(stamp + ' Vocalization [' + outtxt + '] (!Google)')
 
     if trntxt != '' and runmode == 'learning':
 
-        qLogOutput(stamp + ' Vocalization [' + inptxt + '] (' + outApi + ')')
+        print(stamp + ' Vocalization [' + inptxt + '] (' + outApi + ')')
         outVoice = 'temp/voices/' + stamp + '_voice_' + inpLang + '.mp3'
 
         res = qVoiceOutput(useApi=outApi, outLang=inpLang, outText=inptxt,
                            tempFile=outVoice, outputQ=outputQ)
         if res[0:9] == '!Google, ':
-            qLogOutput(stamp + ' Vocalization [' + inptxt + '] (!Google)')
+            print(stamp + ' Vocalization [' + inptxt + '] (!Google)')
 
     if inptxt == u'リセット' or inptxt == 'reset':
         qVoiceApiInfo(inpApi=inpApi, trnApi=trnApi, outApi=outApi, outputQ=outputQ)
 
 
 
-output_beat=0
 def sub_output(cn_r,cn_s):
-    global output_beat
-
     global inpApi
     global trnApi
     global outApi
@@ -2039,24 +1892,20 @@ def sub_output(cn_r,cn_s):
     global outBusy
     global outLast
 
-    qLogOutput('output__:init')
+    print('output__:init')
 
     runmode = cn_r.get()
-    micdev  = cn_r.get()
     mictype = cn_r.get()
     micguide= cn_r.get()
     cn_r.task_done()
 
-    qLogOutput('output__:runmode =' + str(runmode ))
-    qLogOutput('output__:micdev  =' + str(micdev  ))
-    qLogOutput('output__:mictype =' + str(mictype ))
-    qLogOutput('output__:micguide=' + str(micguide))
+    print('output__:runmode =' + str(runmode ))
+    print('output__:mictype =' + str(mictype ))
+    print('output__:micguide=' + str(micguide))
 
-    qLogOutput('output__:start')
+    print('output__:start')
 
     while True:
-        output_beat = time.time()
-
         if cn_r.qsize() > 0:
             cn_s.put(['BUSY', ''])
 
@@ -2066,11 +1915,11 @@ def sub_output(cn_r,cn_s):
             cn_r.task_done()
 
             if mode_get is None:
-                qLogOutput('output__:None=break')
+                print('output__:None=break')
                 break
 
             if cn_r.qsize() > 2 or cn_s.qsize() > 4:
-                qLogOutput('output__: queue overflow warning!, ' + str(cn_r.qsize()) + ', ' + str(cn_s.qsize()))
+                print('output__: queue overflow warning!',cn_r.qsize(),cn_s.qsize())
 
             file = ''
             if mode_get == 'file':
@@ -2078,7 +1927,7 @@ def sub_output(cn_r,cn_s):
                 outLast = time.time()
 
                 file = data_get
-                #qLogOutput('output__:' + file)
+                #print('output__:' + file)
                 qPlay(file, outputQ=None, sync=True)
 
                 outBusy = False
@@ -2091,33 +1940,11 @@ def sub_output(cn_r,cn_s):
         if cn_r.qsize() == 0:
             time.sleep(0.03)
 
-    qLogOutput('output__:terminate')
-
-    while cn_r.qsize() > 0:
-        try:
-            cn_r_get = cn_r.get()
-            mode_get = cn_r_get[0]
-            data_get = cn_r_get[1]
-            cn_r.task_done()
-        except:
-            pass
-    while cn_s.qsize() > 0:
-        try:
-            cn_s_get = cn_s.get()
-            mode_get = cn_s_get[0]
-            data_get = cn_s_get[1]
-            cn_s.task_done()
-        except:
-            pass
-
-    qLogOutput('output__:end')
+    print('output__:end')
 
 
 
-playtext_beat=0
 def sub_playtext(cn_r,cn_s,outputQ=None):
-    global playtext_beat
-
     global inpApi
     global trnApi
     global outApi
@@ -2129,24 +1956,20 @@ def sub_playtext(cn_r,cn_s,outputQ=None):
     global playBusy
     global playLast
 
-    qLogOutput('playtext:init')
+    print('playtext:init')
 
     runmode = cn_r.get()
-    micdev  = cn_r.get()
     mictype = cn_r.get()
     micguide= cn_r.get()
     cn_r.task_done()
 
-    qLogOutput('playtext:runmode =' + str(runmode ))
-    qLogOutput('playtext:micdev  =' + str(micdev  ))
-    qLogOutput('playtext:mictype =' + str(mictype ))
-    qLogOutput('playtext:micguide=' + str(micguide))
+    print('playtext:runmode =' + str(runmode ))
+    print('playtext:mictype =' + str(mictype ))
+    print('playtext:micguide=' + str(micguide))
 
-    qLogOutput('playtext:start')
+    print('playtext:start')
 
     while True:
-        playtext_beat = time.time()
-
         if cn_r.qsize() > 0:
             cn_s.put(['BUSY', ''])
 
@@ -2156,11 +1979,11 @@ def sub_playtext(cn_r,cn_s,outputQ=None):
             cn_r.task_done()
 
             if mode_get is None:
-                qLogOutput('playtext:None=break')
+                print('playtext:None=break')
                 break
 
             if cn_r.qsize() != 0 or cn_s.qsize() > 4:
-                qLogOutput('playtext: queue overflow warning!, ' + str(cn_r.qsize()) + ', ' + str(cn_s.qsize()))
+                print('playtext: queue overflow warning!',cn_r.qsize(),cn_s.qsize())
 
             if mode_get != 'PASS':
 
@@ -2169,7 +1992,7 @@ def sub_playtext(cn_r,cn_s,outputQ=None):
                 playFile1='temp/temp_playSJIS.txt'
                 playFile2='temp/@temp_playSJIS.txt'
                 if os.path.exists(playFile1):
-                    #qLogOutput('playtext:' + playFile1)
+                    #print('playtext:' + playFile1)
                     if os.path.exists(playFile2):
                         try:
                             os.remove(playFile2)
@@ -2199,7 +2022,7 @@ def sub_playtext(cn_r,cn_s,outputQ=None):
 
                                     outputQ.put(['file', txt])
                                     outputQ.put(['file', '_!playing'])
-                                    qLogOutput('playtext:BGM=' + txt)
+                                    print('playtext:BGM=' + txt)
 
                                     textBusy = False
                                     textLast = time.time()
@@ -2212,13 +2035,13 @@ def sub_playtext(cn_r,cn_s,outputQ=None):
 
                                         outtxt=qTranslator(useApi=trnApi, inpLang=txtLang, outLang=outLang,
                                                            transText=txt, outputQ=outputQ)
-                                        qLogOutput('playtext: Translation  [' + txt + '] (' + trnApi + ')')
+                                        print('playtext: Translation  [' + txt + '] (' + trnApi + ')')
 
                                     textBusy = 'Text Vocalization'
                                     textLast = time.time()
 
                                     qVoiceOutput(useApi=outApi, outLang=outLang, outText=outtxt, outputQ=outputQ)
-                                    qLogOutput('playtext: Vocalization [' + outtxt + '] (' + outApi + ')')
+                                    print('playtext: Vocalization [' + outtxt + '] (' + outApi + ')')
 
                                     textBusy = False
                                     textLast = time.time()
@@ -2239,39 +2062,18 @@ def sub_playtext(cn_r,cn_s,outputQ=None):
         if cn_r.qsize() == 0:
             time.sleep(0.5)
 
-    qLogOutput('playtext:terminate')
-
-    while cn_r.qsize() > 0:
-        try:
-            cn_r_get = cn_r.get()
-            mode_get = cn_r_get[0]
-            data_get = cn_r_get[1]
-            cn_r.task_done()
-        except:
-            pass
-    while cn_s.qsize() > 0:
-        try:
-            cn_s_get = cn_s.get()
-            mode_get = cn_s_get[0]
-            data_get = cn_s_get[1]
-            cn_s.task_done()
-        except:
-            pass
-
-    qLogOutput('playtext:end')
+    print('playtext:end')
 
 
 
 inpApi   = 'free'
 trnApi   = 'free'
 outApi   = 'free'
-if os.name == 'nt':
-    outApi   = 'win32'
 inpLang  = 'ja'
 trnLang  = 'en'
 outLang  = 'en'
 txtLang  = 'ja'
-micLevel = '777'
+micLevel = '1555'
 
 inpBusy  = False
 inpLast  = 0
@@ -2284,14 +2086,7 @@ outLast  = 0
 playBusy = False
 playLast = 0
 
-main_beat=0
 if __name__ == '__main__':
-    #global main_beat
-    #global output_beat
-    #global compute_beat
-    #global input_beat
-    #global playtext_beat
-
     #global inpApi
     #global trnApi
     #global outApi
@@ -2312,9 +2107,8 @@ if __name__ == '__main__':
     #global playBusy
     #global playLast
 
-    qLogOutput('__main__:init')
-    qLogOutput('__main__:exsample.py micdev, mictype, micLevel, micguide, api, input-lang, output-lang, textif-lang, runmode, mic-syncf, recSJISf, extpgm,')
-    #runmode translator,learning,speech,number
+    print('__main__:init')
+    print('__main__:exsample.py micdev, mictype, micLevel, micguide, api, input-lang, output-lang, textif-lang, runmode, mic-syncf, recSJISf, extpgm,')
 
     recSJIS ='temp/temp_recSJIS.txt'
     recUTF8 ='temp/temp_recUTF8.txt'
@@ -2342,11 +2136,12 @@ if __name__ == '__main__':
     if len(sys.argv)>=5:
         micguide = str(sys.argv[4]).lower()
     if len(sys.argv)>=6:
-        if str(sys.argv[5]).lower() != inpApi:
-            inpApi = str(sys.argv[5]).lower()
-            if inpApi != 'julius':
-                trnApi = inpApi
-                outApi = inpApi
+        if str(sys.argv[5]).lower() != 'julius':
+            inpApi   = str(sys.argv[5]).lower()
+            trnApi   = str(sys.argv[5]).lower()
+            outApi   = str(sys.argv[5]).lower()
+        else:
+            inpApi   = str(sys.argv[5]).lower()
     if len(sys.argv)>=7:
         inpLang  = sys.argv[6]
     if len(sys.argv)>=8:
@@ -2369,44 +2164,43 @@ if __name__ == '__main__':
         txtLang  = 'ja'
     if inpLang=='ja' and outLang=='ja':
         trnLang  = 'en'
-    if runmode == 'translator' or runmode == 'learning' or runmode == 'speech':
+    if runmode == 'translator' or runmode == 'learning':
         trnLang  = outLang
 
     if recSJISf != 'Default':
         if os.path.exists(recSJISf):
             os.remove(recSJISf)
 
-    qLogOutput('')
-    qLogOutput('__main__:micdev  =' + str(micdev  ))
-    qLogOutput('__main__:mictype =' + str(mictype ))
-    qLogOutput('__main__:micLevel=' + str(micLevel))
-    qLogOutput('__main__:micguide=' + str(micguide))
-    qLogOutput('__main__:input   =' + str(inpLang ))
-    qLogOutput('__main__:output  =' + str(outLang ))
-    qLogOutput('__main__:text    =' + str(txtLang ))
-    qLogOutput('__main__:mode    =' + str(runmode ))
-    qLogOutput('__main__:micON   =' + str(micON   ))
-    qLogOutput('__main__:recSJISf=' + str(recSJISf))
-    qLogOutput('__main__:extpgm  =' + str(extpgm  ))
+    print('')
+    print('__main__:micdev  =' + str(micdev  ))
+    print('__main__:mictype =' + str(mictype ))
+    print('__main__:micLevel=' + str(micLevel))
+    print('__main__:micguide=' + str(micguide))
+    print('__main__:input   =' + str(inpLang ))
+    print('__main__:output  =' + str(outLang ))
+    print('__main__:text    =' + str(txtLang ))
+    print('__main__:mode    =' + str(runmode ))
+    print('__main__:micON   =' + str(micON   ))
+    print('__main__:recSJISf=' + str(recSJISf))
+    print('__main__:extpgm  =' + str(extpgm  ))
 
-    qLogOutput('')
-    qLogOutput('__main__:infomation')
-    qLogOutput('[ keywords ]')
-    qLogOutput(u'システムシャットダウン,')
-    qLogOutput(u'今何時,フィードバック,')
-    qLogOutput(u'ワトソン,グーグル,マイクロソフト,')
+    print('')
+    print('__main__:infomation')
+    print('[ keywords ]')
+    print(u'システムシャットダウン,')
+    print(u'今何時,フィードバック,')
+    print(u'ワトソン,グーグル,マイクロソフト,')
     if runmode == 'translator' or runmode == 'learning':
-        qLogOutput('[ translator and learning ]')
-        qLogOutput(u'リセット,スワップ,')
-        qLogOutput(u'何語ですか,')
-        qLogOutput(u'日本語、英語、アラビア語、スペイン語、ドイツ語、フランス語、')
-        qLogOutput(u'イタリア語、ポルトガル語、ロシア語、トルコ語、ウクライナ語、')
-        qLogOutput(u'中国語ならびに韓国語')
+        print('[ translator and learning ]')
+        print(u'リセット,スワップ,')
+        print(u'何語ですか,')
+        print(u'日本語、英語、アラビア語、スペイン語、ドイツ語、フランス語、')
+        print(u'イタリア語、ポルトガル語、ロシア語、トルコ語、ウクライナ語、')
+        print(u'中国語ならびに韓国語')
 
-    qLogOutput('')
-    qLogOutput('__main__:start')
+    print('')
+    print('__main__:start')
     main_start   = time.time()
-    main_beat    = 0
 
     output_s     = queue.Queue()
     output_r     = queue.Queue()
@@ -2426,84 +2220,57 @@ if __name__ == '__main__':
     playtext_proc= None
     playtext_beat= 0
     playtext_skip= 0
-
     while True:
-        main_beat = time.time()
 
         # Thread timeout check
 
-        if (input_beat != 0):
+        if (input_r.qsize() == 0) and (input_beat != 0):
             sec = int(time.time() - input_beat)
             if sec > 60:
-                qLogOutput('__main__:input_proc 60s')
+                print('__main__:input_proc 60s')
                 #input_beat = time.time()
-                qLogOutput('__main__:input_proc break')
-
-                if str(micdev).lower() != 'file':
-                    try:
-                        dummy=subprocess.Popen(['taskkill', '/im', 'adintool-gui.exe', '/f',])
-                        time.sleep(1.0)
-                        dummy=subprocess.Popen(['taskkill', '/im', 'adintool.exe', '/f',])
-                        time.sleep(1.0)
-                    except:
-                        pass
-
+                print('__main__:input_proc break')
+                try:
+                    dummy=subprocess.Popen(['taskkill', '/im', 'adintool-gui.exe', '/f',])
+                    time.sleep(1.0)
+                    dummy=subprocess.Popen(['taskkill', '/im', 'adintool.exe', '/f',])
+                    time.sleep(1.0)
+                except:
+                    pass
                 input_s.put([None, None])
                 time.sleep(3.0)
                 input_proc = None
                 input_beat = 0
 
-                if not julius_adintool is None:
-                    try:
-                        julius_adintool.terminate()
-                        julius_adintool = None
-                    except:
-                        pass
-                if not julius_adingui is None:
-                    try:
-                        julius_adingui.terminate()
-                        julius_adingui = None
-                    except:
-                        pass
-
-        if (compute_beat != 0):
+        if (compute_r.qsize() == 0) and (compute_beat != 0):
             sec = int(time.time() - compute_beat)
             if sec > 60:
-                qLogOutput('__main__:compute_proc 60s')
+                print('__main__:compute_proc 60s')
                 #compute_beat = time.time()
-                qLogOutput('__main__:compute_proc break')
+                print('__main__:compute_proc break')
                 compute_s.put([None, None])
                 time.sleep(3.0)
                 compute_proc = None
                 compute_beat = 0
 
-                if not julius is None:
-                    try:
-                        #julius.wait()
-                        julius.terminate()
-                        stdout, stderr = julius.communicate()
-                        julius = None
-                    except:
-                        pass
-
-        if (output_beat != 0):
+        if (output_r.qsize() == 0) and (output_beat != 0):
             sec = int(time.time() - output_beat)
             if sec > 60:
-                qLogOutput('__main__:output_proc 60s')
+                print('__main__:output_proc 60s')
                 #output_beat = time.time()
-                qLogOutput('__main__:output_proc break')
+                print('__main__:output_proc break')
                 output_s.put([None, None])
                 time.sleep(3.0)
                 output_proc = None
                 output_beat = 0
                 output_skip = 0
 
-        if (playtext_beat != 0):
+        if (playtext_r.qsize() == 0) and (playtext_beat != 0):
             sec = int(time.time() - playtext_beat)
             if sec > 60:
-                qLogOutput('__main__:playtext_proc 60s')
+                print('__main__:playtext_proc 60s')
                 #playtext_beat = time.time()
-                qLogOutput('__main__:playtext_proc break')
+                print('__main__:playtext_proc break')
                 playtext_s.put([None, None])
                 time.sleep(3.0)
                 playtext_proc = None
@@ -2520,14 +2287,13 @@ if __name__ == '__main__':
             output_proc = threading.Thread(target=sub_output, args=(output_s,output_r,))
             output_proc.daemon = True
             output_s.put(runmode )
-            output_s.put(micdev  )
-            output_s.put(mictype )
+            output_s.put(mictype)
             output_s.put(micguide)
             output_proc.start()
             time.sleep(1.0)
 
             output_s.put(['START', ''])
-            output_beat = 0
+            output_beat = time.time()
             output_skip = 0
 
         if compute_proc is None:
@@ -2538,7 +2304,6 @@ if __name__ == '__main__':
             compute_proc = threading.Thread(target=sub_compute, args=(compute_s,compute_r,output_s,))
             compute_proc.daemon = True
             compute_s.put(runmode )
-            compute_s.put(micdev  )
             compute_s.put(mictype )
             compute_s.put(micguide)
             compute_s.put(recSJISf)
@@ -2547,7 +2312,7 @@ if __name__ == '__main__':
             time.sleep(1.0)
 
             compute_s.put(['START', ''])
-            compute_beat = 0
+            compute_beat = time.time()
 
         if input_proc is None:
             while input_s.qsize() > 0:
@@ -2566,7 +2331,7 @@ if __name__ == '__main__':
             time.sleep(1.0)
 
             input_s.put(['START', ''])
-            input_beat = 0
+            input_beat = time.time()
 
         if playtext_proc is None:
             while playtext_s.qsize() > 0:
@@ -2576,14 +2341,13 @@ if __name__ == '__main__':
             playtext_proc = threading.Thread(target=sub_playtext, args=(playtext_s,playtext_r,output_s,))
             playtext_proc.daemon = True
             playtext_s.put(runmode )
-            playtext_s.put(micdev  )
             playtext_s.put(mictype )
             playtext_s.put(micguide)
             playtext_proc.start()
             time.sleep(1.0)
 
             playtext_s.put(['START', ''])
-            playtext_beat = 0
+            playtext_beat = time.time()
             playtext_skip = 0
 
         # processing
@@ -2599,6 +2363,7 @@ if __name__ == '__main__':
             output_skip = 0
         if output_skip > 50:
             output_s.put(['RUN', ''])
+            output_beat = time.time()
             output_skip = 0
 
         if input_r.qsize() > 0:
@@ -2608,10 +2373,13 @@ if __name__ == '__main__':
             input_r.task_done()
             if input_res == 'INIT':
                 input_s.put(['INIT', ''])
+                input_beat = time.time()
             elif input_res == 'PASS':
                 input_s.put(['READY', ''])
+                input_beat = time.time()
             elif input_res == 'NG':
                 input_s.put(['NEXT', ''])
+                input_beat = time.time()
             else:
                 stamp     = input_dat
                 input_get = input_r.get()
@@ -2621,6 +2389,7 @@ if __name__ == '__main__':
 
                 compute_s.put(['stamp',  stamp])
                 compute_s.put(['voicef', voicef])
+                compute_beat = time.time()
                 if recSJISf != 'Default' or micON != 'None':
                     if compute_r.qsize() == 0:
                         chktime = time.time()
@@ -2628,12 +2397,14 @@ if __name__ == '__main__':
                             time.sleep(0.1)
 
                 input_s.put(['READY', ''])
+                input_beat = time.time()
 
         if compute_r.qsize() > 0:
             compute_get = compute_r.get()
             compute_res = compute_get[0]
             compute_dat = compute_get[1]
             compute_r.task_done()
+            compute_beat = 0
 
             if compute_res == 'END':
                 break
@@ -2649,31 +2420,26 @@ if __name__ == '__main__':
             playtext_skip = 0
         if playtext_skip > 50:
             playtext_s.put(['RUN', ''])
+            playtext_beat = time.time()
             playtext_skip = 0
 
         time.sleep(0.01)
 
 
 
-    qLogOutput('__main__:terminate')
+    print('__main__:terminate')
 
-    try:
-        input_s.put(   [None, None])
-        compute_s.put( [None, None])
-        output_s.put(  [None, None])
-        playtext_s.put([None, None])
-    except:
-        pass
+    input_s.put(   [None, None])
+    compute_s.put( [None, None])
+    output_s.put(  [None, None])
+    playtext_s.put([None, None])
 
-    try:
-        input_proc.join()
-        compute_proc.join()
-        output_proc.join()
-        playtext_proc.join()
-    except:
-        pass
+    input_proc.join()
+    compute_proc.join()
+    output_proc.join()
+    playtext_proc.join()
 
-    qLogOutput('__main__:bye!')
+    print('__main__:bye!')
 
 
 
