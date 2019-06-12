@@ -1,0 +1,24 @@
+#20180311gmm
+
+## 単語・辞書
+-d model/lang_m/bccwj.60k.bingram             # 言語モデル
+-v model/lang_m/bccwj.60k.htkdic              # 発音辞書
+-h model/phone_m/jnas-tri-3k16-gid.binhmm     # 音響モデル(HMM; Hidden Markov Model)
+-hlist model/phone_m/logicalTri-3k16-gid.bin  # 音響モデル(Triphoneリスト)
+
+# 言語モデル重み・単語挿入ペナルティ
+-lmp  10 0
+-lmp2 10 0
+
+# 探索パラメータ
+-b 1500		# 第1パスのビーム幅（ノード数） triphone,PTM,engine=v2.1
+-b2 100		# 第2パスの仮説数ビームの幅（仮説数）
+-s 500		# 第2パスの最大スタック数 (仮説数)
+-m 10000	# 第2パスの仮説オーバフローのしきい値
+-n 10		# 第2パスで見つける文の数（文数）
+-output 1	# 第2パスで見つかった文のうち出力する数 （文数）
+
+# 音声入力ソース
+-zmeanframe		# フレーム単位のDC成分除去を行う (HTKと同処理)
+-rejectshort 500       # 検出した入力が閾値以下なら無視
+

@@ -1,0 +1,1103 @@
+<s>	[]	sp_S
+</s>	[。]	sp_S
+、+補助記号	[、]	sp_S
+００	[００]	z_B e_I r_I o_I z_I e_I r_I o_E
+０１	[０１]	z_B e_I r_I o_I i_I ch_I i_E
+０２	[０２]	z_B e_I r_I o_I n_I i_I i_E
+０３	[０３]	z_B e_I r_I o_I s_I a_I N_E
+０４	[０４]	z_B e_I r_I o_I y_I o_I N_E
+０５	[０５]	z_B e_I r_I o_I g_I o_I o_E
+０６	[０６]	z_B e_I r_I o_I r_I o_I k_I u_E
+０７	[０７]	z_B e_I r_I o_I n_I a_I n_I a_E
+０８	[０８]	z_B e_I r_I o_I h_I a_I ch_I i_E
+０９	[０９]	z_B e_I r_I o_I ky_I u:_E
+１０	[１０]	i_B ch_I i_I z_I e_I r_I o_E
+１１	[１１]	i_B ch_I i_I i_I ch_I i_E
+１２	[１２]	i_B ch_I i_I n_I i_I i_E
+１３	[１３]	i_B ch_I i_I s_I a_I N_E
+１４	[１４]	i_B ch_I i_I y_I o_I N_E
+１５	[１５]	i_B ch_I i_I g_I o_I o_E
+１６	[１６]	i_B ch_I i_I r_I o_I k_I u_E
+１７	[１７]	i_B ch_I i_I n_I a_I n_I a_E
+１８	[１８]	i_B ch_I i_I h_I a_I ch_I i_E
+１９	[１９]	i_B ch_I i_I ky_I u:_E
+２０	[２０]	n_B i_I i_I z_I e_I r_I o_E
+２１	[２１]	n_B i_I i_I i_I ch_I i_E
+２２	[２２]	n_B i_I i_I n_I i_I i_E
+２３	[２３]	n_B i_I i_I s_I a_I N_E
+２４	[２４]	n_B i_I i_I y_I o_I N_E
+２５	[２５]	n_B i_I i_I g_I o_I o_E
+２６	[２６]	n_B i_I i_I r_I o_I k_I u_E
+２７	[２７]	n_B i_I i_I n_I a_I n_I a_E
+２８	[２８]	n_B i_I i_I h_I a_I ch_I i_E
+２９	[２９]	n_B i_I i_I ky_I u:_E
+３０	[３０]	s_B a_I N_I z_I e_I r_I o_E
+３１	[３１]	s_B a_I N_I i_I ch_I i_E
+３２	[３２]	s_B a_I N_I n_I i_I i_E
+３３	[３３]	s_B a_I N_I s_I a_I N_E
+３４	[３４]	s_B a_I N_I y_I o_I N_E
+３５	[３５]	s_B a_I N_I g_I o_I o_E
+３６	[３６]	s_B a_I N_I r_I o_I k_I u_E
+３７	[３７]	s_B a_I N_I n_I a_I n_I a_E
+３８	[３８]	s_B a_I N_I h_I a_I ch_I i_E
+３９	[３９]	s_B a_I N_I ky_I u:_E
+４０	[４０]	y_B o_I N_I z_I e_I r_I o_E
+４１	[４１]	y_B o_I N_I i_I ch_I i_E
+４２	[４２]	y_B o_I N_I n_I i_I i_E
+４３	[４３]	y_B o_I N_I s_I a_I N_E
+４４	[４４]	y_B o_I N_I y_I o_I N_E
+４５	[４５]	y_B o_I N_I g_I o_I o_E
+４６	[４６]	y_B o_I N_I r_I o_I k_I u_E
+４７	[４７]	y_B o_I N_I n_I a_I n_I a_E
+４８	[４８]	y_B o_I N_I h_I a_I ch_I i_E
+４９	[４９]	y_B o_I N_I ky_I u:_E
+５０	[５０]	g_B o_I o_I z_I e_I r_I o_E
+５１	[５１]	g_B o_I o_I i_I ch_I i_E
+５２	[５２]	g_B o_I o_I n_I i_I i_E
+５３	[５３]	g_B o_I o_I s_I a_I N_E
+５４	[５４]	g_B o_I o_I y_I o_I N_E
+５５	[５５]	g_B o_I o_I g_I o_I o_E
+５６	[５６]	g_B o_I o_I r_I o_I k_I u_E
+５７	[５７]	g_B o_I o_I n_I a_I n_I a_E
+５８	[５８]	g_B o_I o_I h_I a_I ch_I i_E
+５９	[５９]	g_B o_I o_I ky_I u:_E
+６０	[６０]	r_B o_I k_I u_I z_I e_I r_I o_E
+６１	[６１]	r_B o_I k_I u_I i_I ch_I i_E
+６２	[６２]	r_B o_I k_I u_I n_I i_I i_E
+６３	[６３]	r_B o_I k_I u_I s_I a_I N_E
+６４	[６４]	r_B o_I k_I u_I y_I o_I N_E
+６５	[６５]	r_B o_I k_I u_I g_I o_I o_E
+６６	[６６]	r_B o_I k_I u_I r_I o_I k_I u_E
+６７	[６７]	r_B o_I k_I u_I n_I a_I n_I a_E
+６８	[６８]	r_B o_I k_I u_I h_I a_I ch_I i_E
+６９	[６９]	r_B o_I k_I u_I ky_I u:_E
+７０	[７０]	n_B a_I n_I a_I z_I e_I r_I o_E
+７１	[７１]	n_B a_I n_I a_I i_I ch_I i_E
+７２	[７２]	n_B a_I n_I a_I n_I i_I i_E
+７３	[７３]	n_B a_I n_I a_I s_I a_I N_E
+７４	[７４]	n_B a_I n_I a_I y_I o_I N_E
+７５	[７５]	n_B a_I n_I a_I g_I o_I o_E
+７６	[７６]	n_B a_I n_I a_I r_I o_I k_I u_E
+７７	[７７]	n_B a_I n_I a_I n_I a_I n_I a_E
+７８	[７８]	n_B a_I n_I a_I h_I a_I ch_I i_E
+７９	[７９]	n_B a_I n_I a_I ky_I u:_E
+８０	[８０]	h_B a_I ch_I i_I z_I e_I r_I o_E
+８１	[８１]	h_B a_I ch_I i_I i_I ch_I i_E
+８２	[８２]	h_B a_I ch_I i_I n_I i_I i_E
+８３	[８３]	h_B a_I ch_I i_I s_I a_I N_E
+８４	[８４]	h_B a_I ch_I i_I y_I o_I N_E
+８５	[８５]	h_B a_I ch_I i_I g_I o_I o_E
+８６	[８６]	h_B a_I ch_I i_I r_I o_I k_I u_E
+８７	[８７]	h_B a_I ch_I i_I n_I a_I n_I a_E
+８８	[８８]	h_B a_I ch_I i_I h_I a_I ch_I i_E
+８９	[８９]	h_B a_I ch_I i_I ky_I u:_E
+９０	[９０]	ky_B u:_I z_I e_I r_I o_E
+９１	[９１]	ky_B u:_I i_I ch_I i_E
+９２	[９２]	ky_B u:_I n_I i_I i_E
+９３	[９３]	ky_B u:_I s_I a_I N_E
+９４	[９４]	ky_B u:_I y_I o_I N_E
+９５	[９５]	ky_B u:_I g_I o_I o_E
+９６	[９６]	ky_B u:_I r_I o_I k_I u_E
+９７	[９７]	ky_B u:_I n_I a_I n_I a_E
+９８	[９８]	ky_B u:_I h_I a_I ch_I i_E
+９９	[９９]	ky_B u:_I ky_I u:_E
+０００	[０００]	z_B e_I r_I o_I z_I e_I r_I o_I z_I e_I r_I o_E
+００１	[００１]	z_B e_I r_I o_I z_I e_I r_I o_I i_I ch_I i_E
+００２	[００２]	z_B e_I r_I o_I z_I e_I r_I o_I n_I i_I i_E
+００３	[００３]	z_B e_I r_I o_I z_I e_I r_I o_I s_I a_I N_E
+００４	[００４]	z_B e_I r_I o_I z_I e_I r_I o_I y_I o_I N_E
+００５	[００５]	z_B e_I r_I o_I z_I e_I r_I o_I g_I o_I o_E
+００６	[００６]	z_B e_I r_I o_I z_I e_I r_I o_I r_I o_I k_I u_E
+００７	[００７]	z_B e_I r_I o_I z_I e_I r_I o_I n_I a_I n_I a_E
+００８	[００８]	z_B e_I r_I o_I z_I e_I r_I o_I h_I a_I ch_I i_E
+００９	[００９]	z_B e_I r_I o_I z_I e_I r_I o_I ky_I u:_E
+０１０	[０１０]	z_B e_I r_I o_I i_I ch_I i_I z_I e_I r_I o_E
+０１１	[０１１]	z_B e_I r_I o_I i_I ch_I i_I i_I ch_I i_E
+０１２	[０１２]	z_B e_I r_I o_I i_I ch_I i_I n_I i_I i_E
+０１３	[０１３]	z_B e_I r_I o_I i_I ch_I i_I s_I a_I N_E
+０１４	[０１４]	z_B e_I r_I o_I i_I ch_I i_I y_I o_I N_E
+０１５	[０１５]	z_B e_I r_I o_I i_I ch_I i_I g_I o_I o_E
+０１６	[０１６]	z_B e_I r_I o_I i_I ch_I i_I r_I o_I k_I u_E
+０１７	[０１７]	z_B e_I r_I o_I i_I ch_I i_I n_I a_I n_I a_E
+０１８	[０１８]	z_B e_I r_I o_I i_I ch_I i_I h_I a_I ch_I i_E
+０１９	[０１９]	z_B e_I r_I o_I i_I ch_I i_I ky_I u:_E
+０２０	[０２０]	z_B e_I r_I o_I n_I i_I i_I z_I e_I r_I o_E
+０２１	[０２１]	z_B e_I r_I o_I n_I i_I i_I i_I ch_I i_E
+０２２	[０２２]	z_B e_I r_I o_I n_I i_I i_I n_I i_I i_E
+０２３	[０２３]	z_B e_I r_I o_I n_I i_I i_I s_I a_I N_E
+０２４	[０２４]	z_B e_I r_I o_I n_I i_I i_I y_I o_I N_E
+０２５	[０２５]	z_B e_I r_I o_I n_I i_I i_I g_I o_I o_E
+０２６	[０２６]	z_B e_I r_I o_I n_I i_I i_I r_I o_I k_I u_E
+０２７	[０２７]	z_B e_I r_I o_I n_I i_I i_I n_I a_I n_I a_E
+０２８	[０２８]	z_B e_I r_I o_I n_I i_I i_I h_I a_I ch_I i_E
+０２９	[０２９]	z_B e_I r_I o_I n_I i_I i_I ky_I u:_E
+０３０	[０３０]	z_B e_I r_I o_I s_I a_I N_I z_I e_I r_I o_E
+０３１	[０３１]	z_B e_I r_I o_I s_I a_I N_I i_I ch_I i_E
+０３２	[０３２]	z_B e_I r_I o_I s_I a_I N_I n_I i_I i_E
+０３３	[０３３]	z_B e_I r_I o_I s_I a_I N_I s_I a_I N_E
+０３４	[０３４]	z_B e_I r_I o_I s_I a_I N_I y_I o_I N_E
+０３５	[０３５]	z_B e_I r_I o_I s_I a_I N_I g_I o_I o_E
+０３６	[０３６]	z_B e_I r_I o_I s_I a_I N_I r_I o_I k_I u_E
+０３７	[０３７]	z_B e_I r_I o_I s_I a_I N_I n_I a_I n_I a_E
+０３８	[０３８]	z_B e_I r_I o_I s_I a_I N_I h_I a_I ch_I i_E
+０３９	[０３９]	z_B e_I r_I o_I s_I a_I N_I ky_I u:_E
+０４０	[０４０]	z_B e_I r_I o_I y_I o_I N_I z_I e_I r_I o_E
+０４１	[０４１]	z_B e_I r_I o_I y_I o_I N_I i_I ch_I i_E
+０４２	[０４２]	z_B e_I r_I o_I y_I o_I N_I n_I i_I i_E
+０４３	[０４３]	z_B e_I r_I o_I y_I o_I N_I s_I a_I N_E
+０４４	[０４４]	z_B e_I r_I o_I y_I o_I N_I y_I o_I N_E
+０４５	[０４５]	z_B e_I r_I o_I y_I o_I N_I g_I o_I o_E
+０４６	[０４６]	z_B e_I r_I o_I y_I o_I N_I r_I o_I k_I u_E
+０４７	[０４７]	z_B e_I r_I o_I y_I o_I N_I n_I a_I n_I a_E
+０４８	[０４８]	z_B e_I r_I o_I y_I o_I N_I h_I a_I ch_I i_E
+０４９	[０４９]	z_B e_I r_I o_I y_I o_I N_I ky_I u:_E
+０５０	[０５０]	z_B e_I r_I o_I g_I o_I o_I z_I e_I r_I o_E
+０５１	[０５１]	z_B e_I r_I o_I g_I o_I o_I i_I ch_I i_E
+０５２	[０５２]	z_B e_I r_I o_I g_I o_I o_I n_I i_I i_E
+０５３	[０５３]	z_B e_I r_I o_I g_I o_I o_I s_I a_I N_E
+０５４	[０５４]	z_B e_I r_I o_I g_I o_I o_I y_I o_I N_E
+０５５	[０５５]	z_B e_I r_I o_I g_I o_I o_I g_I o_I o_E
+０５６	[０５６]	z_B e_I r_I o_I g_I o_I o_I r_I o_I k_I u_E
+０５７	[０５７]	z_B e_I r_I o_I g_I o_I o_I n_I a_I n_I a_E
+０５８	[０５８]	z_B e_I r_I o_I g_I o_I o_I h_I a_I ch_I i_E
+０５９	[０５９]	z_B e_I r_I o_I g_I o_I o_I ky_I u:_E
+０６０	[０６０]	z_B e_I r_I o_I r_I o_I k_I u_I z_I e_I r_I o_E
+０６１	[０６１]	z_B e_I r_I o_I r_I o_I k_I u_I i_I ch_I i_E
+０６２	[０６２]	z_B e_I r_I o_I r_I o_I k_I u_I n_I i_I i_E
+０６３	[０６３]	z_B e_I r_I o_I r_I o_I k_I u_I s_I a_I N_E
+０６４	[０６４]	z_B e_I r_I o_I r_I o_I k_I u_I y_I o_I N_E
+０６５	[０６５]	z_B e_I r_I o_I r_I o_I k_I u_I g_I o_I o_E
+０６６	[０６６]	z_B e_I r_I o_I r_I o_I k_I u_I r_I o_I k_I u_E
+０６７	[０６７]	z_B e_I r_I o_I r_I o_I k_I u_I n_I a_I n_I a_E
+０６８	[０６８]	z_B e_I r_I o_I r_I o_I k_I u_I h_I a_I ch_I i_E
+０６９	[０６９]	z_B e_I r_I o_I r_I o_I k_I u_I ky_I u:_E
+０７０	[０７０]	z_B e_I r_I o_I n_I a_I n_I a_I z_I e_I r_I o_E
+０７１	[０７１]	z_B e_I r_I o_I n_I a_I n_I a_I i_I ch_I i_E
+０７２	[０７２]	z_B e_I r_I o_I n_I a_I n_I a_I n_I i_I i_E
+０７３	[０７３]	z_B e_I r_I o_I n_I a_I n_I a_I s_I a_I N_E
+０７４	[０７４]	z_B e_I r_I o_I n_I a_I n_I a_I y_I o_I N_E
+０７５	[０７５]	z_B e_I r_I o_I n_I a_I n_I a_I g_I o_I o_E
+０７６	[０７６]	z_B e_I r_I o_I n_I a_I n_I a_I r_I o_I k_I u_E
+０７７	[０７７]	z_B e_I r_I o_I n_I a_I n_I a_I n_I a_I n_I a_E
+０７８	[０７８]	z_B e_I r_I o_I n_I a_I n_I a_I h_I a_I ch_I i_E
+０７９	[０７９]	z_B e_I r_I o_I n_I a_I n_I a_I ky_I u:_E
+０８０	[０８０]	z_B e_I r_I o_I h_I a_I ch_I i_I z_I e_I r_I o_E
+０８１	[０８１]	z_B e_I r_I o_I h_I a_I ch_I i_I i_I ch_I i_E
+０８２	[０８２]	z_B e_I r_I o_I h_I a_I ch_I i_I n_I i_I i_E
+０８３	[０８３]	z_B e_I r_I o_I h_I a_I ch_I i_I s_I a_I N_E
+０８４	[０８４]	z_B e_I r_I o_I h_I a_I ch_I i_I y_I o_I N_E
+０８５	[０８５]	z_B e_I r_I o_I h_I a_I ch_I i_I g_I o_I o_E
+０８６	[０８６]	z_B e_I r_I o_I h_I a_I ch_I i_I r_I o_I k_I u_E
+０８７	[０８７]	z_B e_I r_I o_I h_I a_I ch_I i_I n_I a_I n_I a_E
+０８８	[０８８]	z_B e_I r_I o_I h_I a_I ch_I i_I h_I a_I ch_I i_E
+０８９	[０８９]	z_B e_I r_I o_I h_I a_I ch_I i_I ky_I u:_E
+０９０	[０９０]	z_B e_I r_I o_I ky_I u:_I z_I e_I r_I o_E
+０９１	[０９１]	z_B e_I r_I o_I ky_I u:_I i_I ch_I i_E
+０９２	[０９２]	z_B e_I r_I o_I ky_I u:_I n_I i_I i_E
+０９３	[０９３]	z_B e_I r_I o_I ky_I u:_I s_I a_I N_E
+０９４	[０９４]	z_B e_I r_I o_I ky_I u:_I y_I o_I N_E
+０９５	[０９５]	z_B e_I r_I o_I ky_I u:_I g_I o_I o_E
+０９６	[０９６]	z_B e_I r_I o_I ky_I u:_I r_I o_I k_I u_E
+０９７	[０９７]	z_B e_I r_I o_I ky_I u:_I n_I a_I n_I a_E
+０９８	[０９８]	z_B e_I r_I o_I ky_I u:_I h_I a_I ch_I i_E
+０９９	[０９９]	z_B e_I r_I o_I ky_I u:_I ky_I u:_E
+１００	[１００]	i_B ch_I i_I z_I e_I r_I o_I z_I e_I r_I o_E
+１０１	[１０１]	i_B ch_I i_I z_I e_I r_I o_I i_I ch_I i_E
+１０２	[１０２]	i_B ch_I i_I z_I e_I r_I o_I n_I i_I i_E
+１０３	[１０３]	i_B ch_I i_I z_I e_I r_I o_I s_I a_I N_E
+１０４	[１０４]	i_B ch_I i_I z_I e_I r_I o_I y_I o_I N_E
+１０５	[１０５]	i_B ch_I i_I z_I e_I r_I o_I g_I o_I o_E
+１０６	[１０６]	i_B ch_I i_I z_I e_I r_I o_I r_I o_I k_I u_E
+１０７	[１０７]	i_B ch_I i_I z_I e_I r_I o_I n_I a_I n_I a_E
+１０８	[１０８]	i_B ch_I i_I z_I e_I r_I o_I h_I a_I ch_I i_E
+１０９	[１０９]	i_B ch_I i_I z_I e_I r_I o_I ky_I u:_E
+１１０	[１１０]	i_B ch_I i_I i_I ch_I i_I z_I e_I r_I o_E
+１１１	[１１１]	i_B ch_I i_I i_I ch_I i_I i_I ch_I i_E
+１１２	[１１２]	i_B ch_I i_I i_I ch_I i_I n_I i_I i_E
+１１３	[１１３]	i_B ch_I i_I i_I ch_I i_I s_I a_I N_E
+１１４	[１１４]	i_B ch_I i_I i_I ch_I i_I y_I o_I N_E
+１１５	[１１５]	i_B ch_I i_I i_I ch_I i_I g_I o_I o_E
+１１６	[１１６]	i_B ch_I i_I i_I ch_I i_I r_I o_I k_I u_E
+１１７	[１１７]	i_B ch_I i_I i_I ch_I i_I n_I a_I n_I a_E
+１１８	[１１８]	i_B ch_I i_I i_I ch_I i_I h_I a_I ch_I i_E
+１１９	[１１９]	i_B ch_I i_I i_I ch_I i_I ky_I u:_E
+１２０	[１２０]	i_B ch_I i_I n_I i_I i_I z_I e_I r_I o_E
+１２１	[１２１]	i_B ch_I i_I n_I i_I i_I i_I ch_I i_E
+１２２	[１２２]	i_B ch_I i_I n_I i_I i_I n_I i_I i_E
+１２３	[１２３]	i_B ch_I i_I n_I i_I i_I s_I a_I N_E
+１２４	[１２４]	i_B ch_I i_I n_I i_I i_I y_I o_I N_E
+１２５	[１２５]	i_B ch_I i_I n_I i_I i_I g_I o_I o_E
+１２６	[１２６]	i_B ch_I i_I n_I i_I i_I r_I o_I k_I u_E
+１２７	[１２７]	i_B ch_I i_I n_I i_I i_I n_I a_I n_I a_E
+１２８	[１２８]	i_B ch_I i_I n_I i_I i_I h_I a_I ch_I i_E
+１２９	[１２９]	i_B ch_I i_I n_I i_I i_I ky_I u:_E
+１３０	[１３０]	i_B ch_I i_I s_I a_I N_I z_I e_I r_I o_E
+１３１	[１３１]	i_B ch_I i_I s_I a_I N_I i_I ch_I i_E
+１３２	[１３２]	i_B ch_I i_I s_I a_I N_I n_I i_I i_E
+１３３	[１３３]	i_B ch_I i_I s_I a_I N_I s_I a_I N_E
+１３４	[１３４]	i_B ch_I i_I s_I a_I N_I y_I o_I N_E
+１３５	[１３５]	i_B ch_I i_I s_I a_I N_I g_I o_I o_E
+１３６	[１３６]	i_B ch_I i_I s_I a_I N_I r_I o_I k_I u_E
+１３７	[１３７]	i_B ch_I i_I s_I a_I N_I n_I a_I n_I a_E
+１３８	[１３８]	i_B ch_I i_I s_I a_I N_I h_I a_I ch_I i_E
+１３９	[１３９]	i_B ch_I i_I s_I a_I N_I ky_I u:_E
+１４０	[１４０]	i_B ch_I i_I y_I o_I N_I z_I e_I r_I o_E
+１４１	[１４１]	i_B ch_I i_I y_I o_I N_I i_I ch_I i_E
+１４２	[１４２]	i_B ch_I i_I y_I o_I N_I n_I i_I i_E
+１４３	[１４３]	i_B ch_I i_I y_I o_I N_I s_I a_I N_E
+１４４	[１４４]	i_B ch_I i_I y_I o_I N_I y_I o_I N_E
+１４５	[１４５]	i_B ch_I i_I y_I o_I N_I g_I o_I o_E
+１４６	[１４６]	i_B ch_I i_I y_I o_I N_I r_I o_I k_I u_E
+１４７	[１４７]	i_B ch_I i_I y_I o_I N_I n_I a_I n_I a_E
+１４８	[１４８]	i_B ch_I i_I y_I o_I N_I h_I a_I ch_I i_E
+１４９	[１４９]	i_B ch_I i_I y_I o_I N_I ky_I u:_E
+１５０	[１５０]	i_B ch_I i_I g_I o_I o_I z_I e_I r_I o_E
+１５１	[１５１]	i_B ch_I i_I g_I o_I o_I i_I ch_I i_E
+１５２	[１５２]	i_B ch_I i_I g_I o_I o_I n_I i_I i_E
+１５３	[１５３]	i_B ch_I i_I g_I o_I o_I s_I a_I N_E
+１５４	[１５４]	i_B ch_I i_I g_I o_I o_I y_I o_I N_E
+１５５	[１５５]	i_B ch_I i_I g_I o_I o_I g_I o_I o_E
+１５６	[１５６]	i_B ch_I i_I g_I o_I o_I r_I o_I k_I u_E
+１５７	[１５７]	i_B ch_I i_I g_I o_I o_I n_I a_I n_I a_E
+１５８	[１５８]	i_B ch_I i_I g_I o_I o_I h_I a_I ch_I i_E
+１５９	[１５９]	i_B ch_I i_I g_I o_I o_I ky_I u:_E
+１６０	[１６０]	i_B ch_I i_I r_I o_I k_I u_I z_I e_I r_I o_E
+１６１	[１６１]	i_B ch_I i_I r_I o_I k_I u_I i_I ch_I i_E
+１６２	[１６２]	i_B ch_I i_I r_I o_I k_I u_I n_I i_I i_E
+１６３	[１６３]	i_B ch_I i_I r_I o_I k_I u_I s_I a_I N_E
+１６４	[１６４]	i_B ch_I i_I r_I o_I k_I u_I y_I o_I N_E
+１６５	[１６５]	i_B ch_I i_I r_I o_I k_I u_I g_I o_I o_E
+１６６	[１６６]	i_B ch_I i_I r_I o_I k_I u_I r_I o_I k_I u_E
+１６７	[１６７]	i_B ch_I i_I r_I o_I k_I u_I n_I a_I n_I a_E
+１６８	[１６８]	i_B ch_I i_I r_I o_I k_I u_I h_I a_I ch_I i_E
+１６９	[１６９]	i_B ch_I i_I r_I o_I k_I u_I ky_I u:_E
+１７０	[１７０]	i_B ch_I i_I n_I a_I n_I a_I z_I e_I r_I o_E
+１７１	[１７１]	i_B ch_I i_I n_I a_I n_I a_I i_I ch_I i_E
+１７２	[１７２]	i_B ch_I i_I n_I a_I n_I a_I n_I i_I i_E
+１７３	[１７３]	i_B ch_I i_I n_I a_I n_I a_I s_I a_I N_E
+１７４	[１７４]	i_B ch_I i_I n_I a_I n_I a_I y_I o_I N_E
+１７５	[１７５]	i_B ch_I i_I n_I a_I n_I a_I g_I o_I o_E
+１７６	[１７６]	i_B ch_I i_I n_I a_I n_I a_I r_I o_I k_I u_E
+１７７	[１７７]	i_B ch_I i_I n_I a_I n_I a_I n_I a_I n_I a_E
+１７８	[１７８]	i_B ch_I i_I n_I a_I n_I a_I h_I a_I ch_I i_E
+１７９	[１７９]	i_B ch_I i_I n_I a_I n_I a_I ky_I u:_E
+１８０	[１８０]	i_B ch_I i_I h_I a_I ch_I i_I z_I e_I r_I o_E
+１８１	[１８１]	i_B ch_I i_I h_I a_I ch_I i_I i_I ch_I i_E
+１８２	[１８２]	i_B ch_I i_I h_I a_I ch_I i_I n_I i_I i_E
+１８３	[１８３]	i_B ch_I i_I h_I a_I ch_I i_I s_I a_I N_E
+１８４	[１８４]	i_B ch_I i_I h_I a_I ch_I i_I y_I o_I N_E
+１８５	[１８５]	i_B ch_I i_I h_I a_I ch_I i_I g_I o_I o_E
+１８６	[１８６]	i_B ch_I i_I h_I a_I ch_I i_I r_I o_I k_I u_E
+１８７	[１８７]	i_B ch_I i_I h_I a_I ch_I i_I n_I a_I n_I a_E
+１８８	[１８８]	i_B ch_I i_I h_I a_I ch_I i_I h_I a_I ch_I i_E
+１８９	[１８９]	i_B ch_I i_I h_I a_I ch_I i_I ky_I u:_E
+１９０	[１９０]	i_B ch_I i_I ky_I u:_I z_I e_I r_I o_E
+１９１	[１９１]	i_B ch_I i_I ky_I u:_I i_I ch_I i_E
+１９２	[１９２]	i_B ch_I i_I ky_I u:_I n_I i_I i_E
+１９３	[１９３]	i_B ch_I i_I ky_I u:_I s_I a_I N_E
+１９４	[１９４]	i_B ch_I i_I ky_I u:_I y_I o_I N_E
+１９５	[１９５]	i_B ch_I i_I ky_I u:_I g_I o_I o_E
+１９６	[１９６]	i_B ch_I i_I ky_I u:_I r_I o_I k_I u_E
+１９７	[１９７]	i_B ch_I i_I ky_I u:_I n_I a_I n_I a_E
+１９８	[１９８]	i_B ch_I i_I ky_I u:_I h_I a_I ch_I i_E
+１９９	[１９９]	i_B ch_I i_I ky_I u:_I ky_I u:_E
+２００	[２００]	n_B i_I i_I z_I e_I r_I o_I z_I e_I r_I o_E
+２０１	[２０１]	n_B i_I i_I z_I e_I r_I o_I i_I ch_I i_E
+２０２	[２０２]	n_B i_I i_I z_I e_I r_I o_I n_I i_I i_E
+２０３	[２０３]	n_B i_I i_I z_I e_I r_I o_I s_I a_I N_E
+２０４	[２０４]	n_B i_I i_I z_I e_I r_I o_I y_I o_I N_E
+２０５	[２０５]	n_B i_I i_I z_I e_I r_I o_I g_I o_I o_E
+２０６	[２０６]	n_B i_I i_I z_I e_I r_I o_I r_I o_I k_I u_E
+２０７	[２０７]	n_B i_I i_I z_I e_I r_I o_I n_I a_I n_I a_E
+２０８	[２０８]	n_B i_I i_I z_I e_I r_I o_I h_I a_I ch_I i_E
+２０９	[２０９]	n_B i_I i_I z_I e_I r_I o_I ky_I u:_E
+２１０	[２１０]	n_B i_I i_I i_I ch_I i_I z_I e_I r_I o_E
+２１１	[２１１]	n_B i_I i_I i_I ch_I i_I i_I ch_I i_E
+２１２	[２１２]	n_B i_I i_I i_I ch_I i_I n_I i_I i_E
+２１３	[２１３]	n_B i_I i_I i_I ch_I i_I s_I a_I N_E
+２１４	[２１４]	n_B i_I i_I i_I ch_I i_I y_I o_I N_E
+２１５	[２１５]	n_B i_I i_I i_I ch_I i_I g_I o_I o_E
+２１６	[２１６]	n_B i_I i_I i_I ch_I i_I r_I o_I k_I u_E
+２１７	[２１７]	n_B i_I i_I i_I ch_I i_I n_I a_I n_I a_E
+２１８	[２１８]	n_B i_I i_I i_I ch_I i_I h_I a_I ch_I i_E
+２１９	[２１９]	n_B i_I i_I i_I ch_I i_I ky_I u:_E
+２２０	[２２０]	n_B i_I i_I n_I i_I i_I z_I e_I r_I o_E
+２２１	[２２１]	n_B i_I i_I n_I i_I i_I i_I ch_I i_E
+２２２	[２２２]	n_B i_I i_I n_I i_I i_I n_I i_I i_E
+２２３	[２２３]	n_B i_I i_I n_I i_I i_I s_I a_I N_E
+２２４	[２２４]	n_B i_I i_I n_I i_I i_I y_I o_I N_E
+２２５	[２２５]	n_B i_I i_I n_I i_I i_I g_I o_I o_E
+２２６	[２２６]	n_B i_I i_I n_I i_I i_I r_I o_I k_I u_E
+２２７	[２２７]	n_B i_I i_I n_I i_I i_I n_I a_I n_I a_E
+２２８	[２２８]	n_B i_I i_I n_I i_I i_I h_I a_I ch_I i_E
+２２９	[２２９]	n_B i_I i_I n_I i_I i_I ky_I u:_E
+２３０	[２３０]	n_B i_I i_I s_I a_I N_I z_I e_I r_I o_E
+２３１	[２３１]	n_B i_I i_I s_I a_I N_I i_I ch_I i_E
+２３２	[２３２]	n_B i_I i_I s_I a_I N_I n_I i_I i_E
+２３３	[２３３]	n_B i_I i_I s_I a_I N_I s_I a_I N_E
+２３４	[２３４]	n_B i_I i_I s_I a_I N_I y_I o_I N_E
+２３５	[２３５]	n_B i_I i_I s_I a_I N_I g_I o_I o_E
+２３６	[２３６]	n_B i_I i_I s_I a_I N_I r_I o_I k_I u_E
+２３７	[２３７]	n_B i_I i_I s_I a_I N_I n_I a_I n_I a_E
+２３８	[２３８]	n_B i_I i_I s_I a_I N_I h_I a_I ch_I i_E
+２３９	[２３９]	n_B i_I i_I s_I a_I N_I ky_I u:_E
+２４０	[２４０]	n_B i_I i_I y_I o_I N_I z_I e_I r_I o_E
+２４１	[２４１]	n_B i_I i_I y_I o_I N_I i_I ch_I i_E
+２４２	[２４２]	n_B i_I i_I y_I o_I N_I n_I i_I i_E
+２４３	[２４３]	n_B i_I i_I y_I o_I N_I s_I a_I N_E
+２４４	[２４４]	n_B i_I i_I y_I o_I N_I y_I o_I N_E
+２４５	[２４５]	n_B i_I i_I y_I o_I N_I g_I o_I o_E
+２４６	[２４６]	n_B i_I i_I y_I o_I N_I r_I o_I k_I u_E
+２４７	[２４７]	n_B i_I i_I y_I o_I N_I n_I a_I n_I a_E
+２４８	[２４８]	n_B i_I i_I y_I o_I N_I h_I a_I ch_I i_E
+２４９	[２４９]	n_B i_I i_I y_I o_I N_I ky_I u:_E
+２５０	[２５０]	n_B i_I i_I g_I o_I o_I z_I e_I r_I o_E
+２５１	[２５１]	n_B i_I i_I g_I o_I o_I i_I ch_I i_E
+２５２	[２５２]	n_B i_I i_I g_I o_I o_I n_I i_I i_E
+２５３	[２５３]	n_B i_I i_I g_I o_I o_I s_I a_I N_E
+２５４	[２５４]	n_B i_I i_I g_I o_I o_I y_I o_I N_E
+２５５	[２５５]	n_B i_I i_I g_I o_I o_I g_I o_I o_E
+２５６	[２５６]	n_B i_I i_I g_I o_I o_I r_I o_I k_I u_E
+２５７	[２５７]	n_B i_I i_I g_I o_I o_I n_I a_I n_I a_E
+２５８	[２５８]	n_B i_I i_I g_I o_I o_I h_I a_I ch_I i_E
+２５９	[２５９]	n_B i_I i_I g_I o_I o_I ky_I u:_E
+２６０	[２６０]	n_B i_I i_I r_I o_I k_I u_I z_I e_I r_I o_E
+２６１	[２６１]	n_B i_I i_I r_I o_I k_I u_I i_I ch_I i_E
+２６２	[２６２]	n_B i_I i_I r_I o_I k_I u_I n_I i_I i_E
+２６３	[２６３]	n_B i_I i_I r_I o_I k_I u_I s_I a_I N_E
+２６４	[２６４]	n_B i_I i_I r_I o_I k_I u_I y_I o_I N_E
+２６５	[２６５]	n_B i_I i_I r_I o_I k_I u_I g_I o_I o_E
+２６６	[２６６]	n_B i_I i_I r_I o_I k_I u_I r_I o_I k_I u_E
+２６７	[２６７]	n_B i_I i_I r_I o_I k_I u_I n_I a_I n_I a_E
+２６８	[２６８]	n_B i_I i_I r_I o_I k_I u_I h_I a_I ch_I i_E
+２６９	[２６９]	n_B i_I i_I r_I o_I k_I u_I ky_I u:_E
+２７０	[２７０]	n_B i_I i_I n_I a_I n_I a_I z_I e_I r_I o_E
+２７１	[２７１]	n_B i_I i_I n_I a_I n_I a_I i_I ch_I i_E
+２７２	[２７２]	n_B i_I i_I n_I a_I n_I a_I n_I i_I i_E
+２７３	[２７３]	n_B i_I i_I n_I a_I n_I a_I s_I a_I N_E
+２７４	[２７４]	n_B i_I i_I n_I a_I n_I a_I y_I o_I N_E
+２７５	[２７５]	n_B i_I i_I n_I a_I n_I a_I g_I o_I o_E
+２７６	[２７６]	n_B i_I i_I n_I a_I n_I a_I r_I o_I k_I u_E
+２７７	[２７７]	n_B i_I i_I n_I a_I n_I a_I n_I a_I n_I a_E
+２７８	[２７８]	n_B i_I i_I n_I a_I n_I a_I h_I a_I ch_I i_E
+２７９	[２７９]	n_B i_I i_I n_I a_I n_I a_I ky_I u:_E
+２８０	[２８０]	n_B i_I i_I h_I a_I ch_I i_I z_I e_I r_I o_E
+２８１	[２８１]	n_B i_I i_I h_I a_I ch_I i_I i_I ch_I i_E
+２８２	[２８２]	n_B i_I i_I h_I a_I ch_I i_I n_I i_I i_E
+２８３	[２８３]	n_B i_I i_I h_I a_I ch_I i_I s_I a_I N_E
+２８４	[２８４]	n_B i_I i_I h_I a_I ch_I i_I y_I o_I N_E
+２８５	[２８５]	n_B i_I i_I h_I a_I ch_I i_I g_I o_I o_E
+２８６	[２８６]	n_B i_I i_I h_I a_I ch_I i_I r_I o_I k_I u_E
+２８７	[２８７]	n_B i_I i_I h_I a_I ch_I i_I n_I a_I n_I a_E
+２８８	[２８８]	n_B i_I i_I h_I a_I ch_I i_I h_I a_I ch_I i_E
+２８９	[２８９]	n_B i_I i_I h_I a_I ch_I i_I ky_I u:_E
+２９０	[２９０]	n_B i_I i_I ky_I u:_I z_I e_I r_I o_E
+２９１	[２９１]	n_B i_I i_I ky_I u:_I i_I ch_I i_E
+２９２	[２９２]	n_B i_I i_I ky_I u:_I n_I i_I i_E
+２９３	[２９３]	n_B i_I i_I ky_I u:_I s_I a_I N_E
+２９４	[２９４]	n_B i_I i_I ky_I u:_I y_I o_I N_E
+２９５	[２９５]	n_B i_I i_I ky_I u:_I g_I o_I o_E
+２９６	[２９６]	n_B i_I i_I ky_I u:_I r_I o_I k_I u_E
+２９７	[２９７]	n_B i_I i_I ky_I u:_I n_I a_I n_I a_E
+２９８	[２９８]	n_B i_I i_I ky_I u:_I h_I a_I ch_I i_E
+２９９	[２９９]	n_B i_I i_I ky_I u:_I ky_I u:_E
+３００	[３００]	s_B a_I N_I z_I e_I r_I o_I z_I e_I r_I o_E
+３０１	[３０１]	s_B a_I N_I z_I e_I r_I o_I i_I ch_I i_E
+３０２	[３０２]	s_B a_I N_I z_I e_I r_I o_I n_I i_I i_E
+３０３	[３０３]	s_B a_I N_I z_I e_I r_I o_I s_I a_I N_E
+３０４	[３０４]	s_B a_I N_I z_I e_I r_I o_I y_I o_I N_E
+３０５	[３０５]	s_B a_I N_I z_I e_I r_I o_I g_I o_I o_E
+３０６	[３０６]	s_B a_I N_I z_I e_I r_I o_I r_I o_I k_I u_E
+３０７	[３０７]	s_B a_I N_I z_I e_I r_I o_I n_I a_I n_I a_E
+３０８	[３０８]	s_B a_I N_I z_I e_I r_I o_I h_I a_I ch_I i_E
+３０９	[３０９]	s_B a_I N_I z_I e_I r_I o_I ky_I u:_E
+３１０	[３１０]	s_B a_I N_I i_I ch_I i_I z_I e_I r_I o_E
+３１１	[３１１]	s_B a_I N_I i_I ch_I i_I i_I ch_I i_E
+３１２	[３１２]	s_B a_I N_I i_I ch_I i_I n_I i_I i_E
+３１３	[３１３]	s_B a_I N_I i_I ch_I i_I s_I a_I N_E
+３１４	[３１４]	s_B a_I N_I i_I ch_I i_I y_I o_I N_E
+３１５	[３１５]	s_B a_I N_I i_I ch_I i_I g_I o_I o_E
+３１６	[３１６]	s_B a_I N_I i_I ch_I i_I r_I o_I k_I u_E
+３１７	[３１７]	s_B a_I N_I i_I ch_I i_I n_I a_I n_I a_E
+３１８	[３１８]	s_B a_I N_I i_I ch_I i_I h_I a_I ch_I i_E
+３１９	[３１９]	s_B a_I N_I i_I ch_I i_I ky_I u:_E
+３２０	[３２０]	s_B a_I N_I n_I i_I i_I z_I e_I r_I o_E
+３２１	[３２１]	s_B a_I N_I n_I i_I i_I i_I ch_I i_E
+３２２	[３２２]	s_B a_I N_I n_I i_I i_I n_I i_I i_E
+３２３	[３２３]	s_B a_I N_I n_I i_I i_I s_I a_I N_E
+３２４	[３２４]	s_B a_I N_I n_I i_I i_I y_I o_I N_E
+３２５	[３２５]	s_B a_I N_I n_I i_I i_I g_I o_I o_E
+３２６	[３２６]	s_B a_I N_I n_I i_I i_I r_I o_I k_I u_E
+３２７	[３２７]	s_B a_I N_I n_I i_I i_I n_I a_I n_I a_E
+３２８	[３２８]	s_B a_I N_I n_I i_I i_I h_I a_I ch_I i_E
+３２９	[３２９]	s_B a_I N_I n_I i_I i_I ky_I u:_E
+３３０	[３３０]	s_B a_I N_I s_I a_I N_I z_I e_I r_I o_E
+３３１	[３３１]	s_B a_I N_I s_I a_I N_I i_I ch_I i_E
+３３２	[３３２]	s_B a_I N_I s_I a_I N_I n_I i_I i_E
+３３３	[３３３]	s_B a_I N_I s_I a_I N_I s_I a_I N_E
+３３４	[３３４]	s_B a_I N_I s_I a_I N_I y_I o_I N_E
+３３５	[３３５]	s_B a_I N_I s_I a_I N_I g_I o_I o_E
+３３６	[３３６]	s_B a_I N_I s_I a_I N_I r_I o_I k_I u_E
+３３７	[３３７]	s_B a_I N_I s_I a_I N_I n_I a_I n_I a_E
+３３８	[３３８]	s_B a_I N_I s_I a_I N_I h_I a_I ch_I i_E
+３３９	[３３９]	s_B a_I N_I s_I a_I N_I ky_I u:_E
+３４０	[３４０]	s_B a_I N_I y_I o_I N_I z_I e_I r_I o_E
+３４１	[３４１]	s_B a_I N_I y_I o_I N_I i_I ch_I i_E
+３４２	[３４２]	s_B a_I N_I y_I o_I N_I n_I i_I i_E
+３４３	[３４３]	s_B a_I N_I y_I o_I N_I s_I a_I N_E
+３４４	[３４４]	s_B a_I N_I y_I o_I N_I y_I o_I N_E
+３４５	[３４５]	s_B a_I N_I y_I o_I N_I g_I o_I o_E
+３４６	[３４６]	s_B a_I N_I y_I o_I N_I r_I o_I k_I u_E
+３４７	[３４７]	s_B a_I N_I y_I o_I N_I n_I a_I n_I a_E
+３４８	[３４８]	s_B a_I N_I y_I o_I N_I h_I a_I ch_I i_E
+３４９	[３４９]	s_B a_I N_I y_I o_I N_I ky_I u:_E
+３５０	[３５０]	s_B a_I N_I g_I o_I o_I z_I e_I r_I o_E
+３５１	[３５１]	s_B a_I N_I g_I o_I o_I i_I ch_I i_E
+３５２	[３５２]	s_B a_I N_I g_I o_I o_I n_I i_I i_E
+３５３	[３５３]	s_B a_I N_I g_I o_I o_I s_I a_I N_E
+３５４	[３５４]	s_B a_I N_I g_I o_I o_I y_I o_I N_E
+３５５	[３５５]	s_B a_I N_I g_I o_I o_I g_I o_I o_E
+３５６	[３５６]	s_B a_I N_I g_I o_I o_I r_I o_I k_I u_E
+３５７	[３５７]	s_B a_I N_I g_I o_I o_I n_I a_I n_I a_E
+３５８	[３５８]	s_B a_I N_I g_I o_I o_I h_I a_I ch_I i_E
+３５９	[３５９]	s_B a_I N_I g_I o_I o_I ky_I u:_E
+３６０	[３６０]	s_B a_I N_I r_I o_I k_I u_I z_I e_I r_I o_E
+３６１	[３６１]	s_B a_I N_I r_I o_I k_I u_I i_I ch_I i_E
+３６２	[３６２]	s_B a_I N_I r_I o_I k_I u_I n_I i_I i_E
+３６３	[３６３]	s_B a_I N_I r_I o_I k_I u_I s_I a_I N_E
+３６４	[３６４]	s_B a_I N_I r_I o_I k_I u_I y_I o_I N_E
+３６５	[３６５]	s_B a_I N_I r_I o_I k_I u_I g_I o_I o_E
+３６６	[３６６]	s_B a_I N_I r_I o_I k_I u_I r_I o_I k_I u_E
+３６７	[３６７]	s_B a_I N_I r_I o_I k_I u_I n_I a_I n_I a_E
+３６８	[３６８]	s_B a_I N_I r_I o_I k_I u_I h_I a_I ch_I i_E
+３６９	[３６９]	s_B a_I N_I r_I o_I k_I u_I ky_I u:_E
+３７０	[３７０]	s_B a_I N_I n_I a_I n_I a_I z_I e_I r_I o_E
+３７１	[３７１]	s_B a_I N_I n_I a_I n_I a_I i_I ch_I i_E
+３７２	[３７２]	s_B a_I N_I n_I a_I n_I a_I n_I i_I i_E
+３７３	[３７３]	s_B a_I N_I n_I a_I n_I a_I s_I a_I N_E
+３７４	[３７４]	s_B a_I N_I n_I a_I n_I a_I y_I o_I N_E
+３７５	[３７５]	s_B a_I N_I n_I a_I n_I a_I g_I o_I o_E
+３７６	[３７６]	s_B a_I N_I n_I a_I n_I a_I r_I o_I k_I u_E
+３７７	[３７７]	s_B a_I N_I n_I a_I n_I a_I n_I a_I n_I a_E
+３７８	[３７８]	s_B a_I N_I n_I a_I n_I a_I h_I a_I ch_I i_E
+３７９	[３７９]	s_B a_I N_I n_I a_I n_I a_I ky_I u:_E
+３８０	[３８０]	s_B a_I N_I h_I a_I ch_I i_I z_I e_I r_I o_E
+３８１	[３８１]	s_B a_I N_I h_I a_I ch_I i_I i_I ch_I i_E
+３８２	[３８２]	s_B a_I N_I h_I a_I ch_I i_I n_I i_I i_E
+３８３	[３８３]	s_B a_I N_I h_I a_I ch_I i_I s_I a_I N_E
+３８４	[３８４]	s_B a_I N_I h_I a_I ch_I i_I y_I o_I N_E
+３８５	[３８５]	s_B a_I N_I h_I a_I ch_I i_I g_I o_I o_E
+３８６	[３８６]	s_B a_I N_I h_I a_I ch_I i_I r_I o_I k_I u_E
+３８７	[３８７]	s_B a_I N_I h_I a_I ch_I i_I n_I a_I n_I a_E
+３８８	[３８８]	s_B a_I N_I h_I a_I ch_I i_I h_I a_I ch_I i_E
+３８９	[３８９]	s_B a_I N_I h_I a_I ch_I i_I ky_I u:_E
+３９０	[３９０]	s_B a_I N_I ky_I u:_I z_I e_I r_I o_E
+３９１	[３９１]	s_B a_I N_I ky_I u:_I i_I ch_I i_E
+３９２	[３９２]	s_B a_I N_I ky_I u:_I n_I i_I i_E
+３９３	[３９３]	s_B a_I N_I ky_I u:_I s_I a_I N_E
+３９４	[３９４]	s_B a_I N_I ky_I u:_I y_I o_I N_E
+３９５	[３９５]	s_B a_I N_I ky_I u:_I g_I o_I o_E
+３９６	[３９６]	s_B a_I N_I ky_I u:_I r_I o_I k_I u_E
+３９７	[３９７]	s_B a_I N_I ky_I u:_I n_I a_I n_I a_E
+３９８	[３９８]	s_B a_I N_I ky_I u:_I h_I a_I ch_I i_E
+３９９	[３９９]	s_B a_I N_I ky_I u:_I ky_I u:_E
+４００	[４００]	y_B o_I N_I z_I e_I r_I o_I z_I e_I r_I o_E
+４０１	[４０１]	y_B o_I N_I z_I e_I r_I o_I i_I ch_I i_E
+４０２	[４０２]	y_B o_I N_I z_I e_I r_I o_I n_I i_I i_E
+４０３	[４０３]	y_B o_I N_I z_I e_I r_I o_I s_I a_I N_E
+４０４	[４０４]	y_B o_I N_I z_I e_I r_I o_I y_I o_I N_E
+４０５	[４０５]	y_B o_I N_I z_I e_I r_I o_I g_I o_I o_E
+４０６	[４０６]	y_B o_I N_I z_I e_I r_I o_I r_I o_I k_I u_E
+４０７	[４０７]	y_B o_I N_I z_I e_I r_I o_I n_I a_I n_I a_E
+４０８	[４０８]	y_B o_I N_I z_I e_I r_I o_I h_I a_I ch_I i_E
+４０９	[４０９]	y_B o_I N_I z_I e_I r_I o_I ky_I u:_E
+４１０	[４１０]	y_B o_I N_I i_I ch_I i_I z_I e_I r_I o_E
+４１１	[４１１]	y_B o_I N_I i_I ch_I i_I i_I ch_I i_E
+４１２	[４１２]	y_B o_I N_I i_I ch_I i_I n_I i_I i_E
+４１３	[４１３]	y_B o_I N_I i_I ch_I i_I s_I a_I N_E
+４１４	[４１４]	y_B o_I N_I i_I ch_I i_I y_I o_I N_E
+４１５	[４１５]	y_B o_I N_I i_I ch_I i_I g_I o_I o_E
+４１６	[４１６]	y_B o_I N_I i_I ch_I i_I r_I o_I k_I u_E
+４１７	[４１７]	y_B o_I N_I i_I ch_I i_I n_I a_I n_I a_E
+４１８	[４１８]	y_B o_I N_I i_I ch_I i_I h_I a_I ch_I i_E
+４１９	[４１９]	y_B o_I N_I i_I ch_I i_I ky_I u:_E
+４２０	[４２０]	y_B o_I N_I n_I i_I i_I z_I e_I r_I o_E
+４２１	[４２１]	y_B o_I N_I n_I i_I i_I i_I ch_I i_E
+４２２	[４２２]	y_B o_I N_I n_I i_I i_I n_I i_I i_E
+４２３	[４２３]	y_B o_I N_I n_I i_I i_I s_I a_I N_E
+４２４	[４２４]	y_B o_I N_I n_I i_I i_I y_I o_I N_E
+４２５	[４２５]	y_B o_I N_I n_I i_I i_I g_I o_I o_E
+４２６	[４２６]	y_B o_I N_I n_I i_I i_I r_I o_I k_I u_E
+４２７	[４２７]	y_B o_I N_I n_I i_I i_I n_I a_I n_I a_E
+４２８	[４２８]	y_B o_I N_I n_I i_I i_I h_I a_I ch_I i_E
+４２９	[４２９]	y_B o_I N_I n_I i_I i_I ky_I u:_E
+４３０	[４３０]	y_B o_I N_I s_I a_I N_I z_I e_I r_I o_E
+４３１	[４３１]	y_B o_I N_I s_I a_I N_I i_I ch_I i_E
+４３２	[４３２]	y_B o_I N_I s_I a_I N_I n_I i_I i_E
+４３３	[４３３]	y_B o_I N_I s_I a_I N_I s_I a_I N_E
+４３４	[４３４]	y_B o_I N_I s_I a_I N_I y_I o_I N_E
+４３５	[４３５]	y_B o_I N_I s_I a_I N_I g_I o_I o_E
+４３６	[４３６]	y_B o_I N_I s_I a_I N_I r_I o_I k_I u_E
+４３７	[４３７]	y_B o_I N_I s_I a_I N_I n_I a_I n_I a_E
+４３８	[４３８]	y_B o_I N_I s_I a_I N_I h_I a_I ch_I i_E
+４３９	[４３９]	y_B o_I N_I s_I a_I N_I ky_I u:_E
+４４０	[４４０]	y_B o_I N_I y_I o_I N_I z_I e_I r_I o_E
+４４１	[４４１]	y_B o_I N_I y_I o_I N_I i_I ch_I i_E
+４４２	[４４２]	y_B o_I N_I y_I o_I N_I n_I i_I i_E
+４４３	[４４３]	y_B o_I N_I y_I o_I N_I s_I a_I N_E
+４４４	[４４４]	y_B o_I N_I y_I o_I N_I y_I o_I N_E
+４４５	[４４５]	y_B o_I N_I y_I o_I N_I g_I o_I o_E
+４４６	[４４６]	y_B o_I N_I y_I o_I N_I r_I o_I k_I u_E
+４４７	[４４７]	y_B o_I N_I y_I o_I N_I n_I a_I n_I a_E
+４４８	[４４８]	y_B o_I N_I y_I o_I N_I h_I a_I ch_I i_E
+４４９	[４４９]	y_B o_I N_I y_I o_I N_I ky_I u:_E
+４５０	[４５０]	y_B o_I N_I g_I o_I o_I z_I e_I r_I o_E
+４５１	[４５１]	y_B o_I N_I g_I o_I o_I i_I ch_I i_E
+４５２	[４５２]	y_B o_I N_I g_I o_I o_I n_I i_I i_E
+４５３	[４５３]	y_B o_I N_I g_I o_I o_I s_I a_I N_E
+４５４	[４５４]	y_B o_I N_I g_I o_I o_I y_I o_I N_E
+４５５	[４５５]	y_B o_I N_I g_I o_I o_I g_I o_I o_E
+４５６	[４５６]	y_B o_I N_I g_I o_I o_I r_I o_I k_I u_E
+４５７	[４５７]	y_B o_I N_I g_I o_I o_I n_I a_I n_I a_E
+４５８	[４５８]	y_B o_I N_I g_I o_I o_I h_I a_I ch_I i_E
+４５９	[４５９]	y_B o_I N_I g_I o_I o_I ky_I u:_E
+４６０	[４６０]	y_B o_I N_I r_I o_I k_I u_I z_I e_I r_I o_E
+４６１	[４６１]	y_B o_I N_I r_I o_I k_I u_I i_I ch_I i_E
+４６２	[４６２]	y_B o_I N_I r_I o_I k_I u_I n_I i_I i_E
+４６３	[４６３]	y_B o_I N_I r_I o_I k_I u_I s_I a_I N_E
+４６４	[４６４]	y_B o_I N_I r_I o_I k_I u_I y_I o_I N_E
+４６５	[４６５]	y_B o_I N_I r_I o_I k_I u_I g_I o_I o_E
+４６６	[４６６]	y_B o_I N_I r_I o_I k_I u_I r_I o_I k_I u_E
+４６７	[４６７]	y_B o_I N_I r_I o_I k_I u_I n_I a_I n_I a_E
+４６８	[４６８]	y_B o_I N_I r_I o_I k_I u_I h_I a_I ch_I i_E
+４６９	[４６９]	y_B o_I N_I r_I o_I k_I u_I ky_I u:_E
+４７０	[４７０]	y_B o_I N_I n_I a_I n_I a_I z_I e_I r_I o_E
+４７１	[４７１]	y_B o_I N_I n_I a_I n_I a_I i_I ch_I i_E
+４７２	[４７２]	y_B o_I N_I n_I a_I n_I a_I n_I i_I i_E
+４７３	[４７３]	y_B o_I N_I n_I a_I n_I a_I s_I a_I N_E
+４７４	[４７４]	y_B o_I N_I n_I a_I n_I a_I y_I o_I N_E
+４７５	[４７５]	y_B o_I N_I n_I a_I n_I a_I g_I o_I o_E
+４７６	[４７６]	y_B o_I N_I n_I a_I n_I a_I r_I o_I k_I u_E
+４７７	[４７７]	y_B o_I N_I n_I a_I n_I a_I n_I a_I n_I a_E
+４７８	[４７８]	y_B o_I N_I n_I a_I n_I a_I h_I a_I ch_I i_E
+４７９	[４７９]	y_B o_I N_I n_I a_I n_I a_I ky_I u:_E
+４８０	[４８０]	y_B o_I N_I h_I a_I ch_I i_I z_I e_I r_I o_E
+４８１	[４８１]	y_B o_I N_I h_I a_I ch_I i_I i_I ch_I i_E
+４８２	[４８２]	y_B o_I N_I h_I a_I ch_I i_I n_I i_I i_E
+４８３	[４８３]	y_B o_I N_I h_I a_I ch_I i_I s_I a_I N_E
+４８４	[４８４]	y_B o_I N_I h_I a_I ch_I i_I y_I o_I N_E
+４８５	[４８５]	y_B o_I N_I h_I a_I ch_I i_I g_I o_I o_E
+４８６	[４８６]	y_B o_I N_I h_I a_I ch_I i_I r_I o_I k_I u_E
+４８７	[４８７]	y_B o_I N_I h_I a_I ch_I i_I n_I a_I n_I a_E
+４８８	[４８８]	y_B o_I N_I h_I a_I ch_I i_I h_I a_I ch_I i_E
+４８９	[４８９]	y_B o_I N_I h_I a_I ch_I i_I ky_I u:_E
+４９０	[４９０]	y_B o_I N_I ky_I u:_I z_I e_I r_I o_E
+４９１	[４９１]	y_B o_I N_I ky_I u:_I i_I ch_I i_E
+４９２	[４９２]	y_B o_I N_I ky_I u:_I n_I i_I i_E
+４９３	[４９３]	y_B o_I N_I ky_I u:_I s_I a_I N_E
+４９４	[４９４]	y_B o_I N_I ky_I u:_I y_I o_I N_E
+４９５	[４９５]	y_B o_I N_I ky_I u:_I g_I o_I o_E
+４９６	[４９６]	y_B o_I N_I ky_I u:_I r_I o_I k_I u_E
+４９７	[４９７]	y_B o_I N_I ky_I u:_I n_I a_I n_I a_E
+４９８	[４９８]	y_B o_I N_I ky_I u:_I h_I a_I ch_I i_E
+４９９	[４９９]	y_B o_I N_I ky_I u:_I ky_I u:_E
+５００	[５００]	g_B o_I o_I z_I e_I r_I o_I z_I e_I r_I o_E
+５０１	[５０１]	g_B o_I o_I z_I e_I r_I o_I i_I ch_I i_E
+５０２	[５０２]	g_B o_I o_I z_I e_I r_I o_I n_I i_I i_E
+５０３	[５０３]	g_B o_I o_I z_I e_I r_I o_I s_I a_I N_E
+５０４	[５０４]	g_B o_I o_I z_I e_I r_I o_I y_I o_I N_E
+５０５	[５０５]	g_B o_I o_I z_I e_I r_I o_I g_I o_I o_E
+５０６	[５０６]	g_B o_I o_I z_I e_I r_I o_I r_I o_I k_I u_E
+５０７	[５０７]	g_B o_I o_I z_I e_I r_I o_I n_I a_I n_I a_E
+５０８	[５０８]	g_B o_I o_I z_I e_I r_I o_I h_I a_I ch_I i_E
+５０９	[５０９]	g_B o_I o_I z_I e_I r_I o_I ky_I u:_E
+５１０	[５１０]	g_B o_I o_I i_I ch_I i_I z_I e_I r_I o_E
+５１１	[５１１]	g_B o_I o_I i_I ch_I i_I i_I ch_I i_E
+５１２	[５１２]	g_B o_I o_I i_I ch_I i_I n_I i_I i_E
+５１３	[５１３]	g_B o_I o_I i_I ch_I i_I s_I a_I N_E
+５１４	[５１４]	g_B o_I o_I i_I ch_I i_I y_I o_I N_E
+５１５	[５１５]	g_B o_I o_I i_I ch_I i_I g_I o_I o_E
+５１６	[５１６]	g_B o_I o_I i_I ch_I i_I r_I o_I k_I u_E
+５１７	[５１７]	g_B o_I o_I i_I ch_I i_I n_I a_I n_I a_E
+５１８	[５１８]	g_B o_I o_I i_I ch_I i_I h_I a_I ch_I i_E
+５１９	[５１９]	g_B o_I o_I i_I ch_I i_I ky_I u:_E
+５２０	[５２０]	g_B o_I o_I n_I i_I i_I z_I e_I r_I o_E
+５２１	[５２１]	g_B o_I o_I n_I i_I i_I i_I ch_I i_E
+５２２	[５２２]	g_B o_I o_I n_I i_I i_I n_I i_I i_E
+５２３	[５２３]	g_B o_I o_I n_I i_I i_I s_I a_I N_E
+５２４	[５２４]	g_B o_I o_I n_I i_I i_I y_I o_I N_E
+５２５	[５２５]	g_B o_I o_I n_I i_I i_I g_I o_I o_E
+５２６	[５２６]	g_B o_I o_I n_I i_I i_I r_I o_I k_I u_E
+５２７	[５２７]	g_B o_I o_I n_I i_I i_I n_I a_I n_I a_E
+５２８	[５２８]	g_B o_I o_I n_I i_I i_I h_I a_I ch_I i_E
+５２９	[５２９]	g_B o_I o_I n_I i_I i_I ky_I u:_E
+５３０	[５３０]	g_B o_I o_I s_I a_I N_I z_I e_I r_I o_E
+５３１	[５３１]	g_B o_I o_I s_I a_I N_I i_I ch_I i_E
+５３２	[５３２]	g_B o_I o_I s_I a_I N_I n_I i_I i_E
+５３３	[５３３]	g_B o_I o_I s_I a_I N_I s_I a_I N_E
+５３４	[５３４]	g_B o_I o_I s_I a_I N_I y_I o_I N_E
+５３５	[５３５]	g_B o_I o_I s_I a_I N_I g_I o_I o_E
+５３６	[５３６]	g_B o_I o_I s_I a_I N_I r_I o_I k_I u_E
+５３７	[５３７]	g_B o_I o_I s_I a_I N_I n_I a_I n_I a_E
+５３８	[５３８]	g_B o_I o_I s_I a_I N_I h_I a_I ch_I i_E
+５３９	[５３９]	g_B o_I o_I s_I a_I N_I ky_I u:_E
+５４０	[５４０]	g_B o_I o_I y_I o_I N_I z_I e_I r_I o_E
+５４１	[５４１]	g_B o_I o_I y_I o_I N_I i_I ch_I i_E
+５４２	[５４２]	g_B o_I o_I y_I o_I N_I n_I i_I i_E
+５４３	[５４３]	g_B o_I o_I y_I o_I N_I s_I a_I N_E
+５４４	[５４４]	g_B o_I o_I y_I o_I N_I y_I o_I N_E
+５４５	[５４５]	g_B o_I o_I y_I o_I N_I g_I o_I o_E
+５４６	[５４６]	g_B o_I o_I y_I o_I N_I r_I o_I k_I u_E
+５４７	[５４７]	g_B o_I o_I y_I o_I N_I n_I a_I n_I a_E
+５４８	[５４８]	g_B o_I o_I y_I o_I N_I h_I a_I ch_I i_E
+５４９	[５４９]	g_B o_I o_I y_I o_I N_I ky_I u:_E
+５５０	[５５０]	g_B o_I o_I g_I o_I o_I z_I e_I r_I o_E
+５５１	[５５１]	g_B o_I o_I g_I o_I o_I i_I ch_I i_E
+５５２	[５５２]	g_B o_I o_I g_I o_I o_I n_I i_I i_E
+５５３	[５５３]	g_B o_I o_I g_I o_I o_I s_I a_I N_E
+５５４	[５５４]	g_B o_I o_I g_I o_I o_I y_I o_I N_E
+５５５	[５５５]	g_B o_I o_I g_I o_I o_I g_I o_I o_E
+５５６	[５５６]	g_B o_I o_I g_I o_I o_I r_I o_I k_I u_E
+５５７	[５５７]	g_B o_I o_I g_I o_I o_I n_I a_I n_I a_E
+５５８	[５５８]	g_B o_I o_I g_I o_I o_I h_I a_I ch_I i_E
+５５９	[５５９]	g_B o_I o_I g_I o_I o_I ky_I u:_E
+５６０	[５６０]	g_B o_I o_I r_I o_I k_I u_I z_I e_I r_I o_E
+５６１	[５６１]	g_B o_I o_I r_I o_I k_I u_I i_I ch_I i_E
+５６２	[５６２]	g_B o_I o_I r_I o_I k_I u_I n_I i_I i_E
+５６３	[５６３]	g_B o_I o_I r_I o_I k_I u_I s_I a_I N_E
+５６４	[５６４]	g_B o_I o_I r_I o_I k_I u_I y_I o_I N_E
+５６５	[５６５]	g_B o_I o_I r_I o_I k_I u_I g_I o_I o_E
+５６６	[５６６]	g_B o_I o_I r_I o_I k_I u_I r_I o_I k_I u_E
+５６７	[５６７]	g_B o_I o_I r_I o_I k_I u_I n_I a_I n_I a_E
+５６８	[５６８]	g_B o_I o_I r_I o_I k_I u_I h_I a_I ch_I i_E
+５６９	[５６９]	g_B o_I o_I r_I o_I k_I u_I ky_I u:_E
+５７０	[５７０]	g_B o_I o_I n_I a_I n_I a_I z_I e_I r_I o_E
+５７１	[５７１]	g_B o_I o_I n_I a_I n_I a_I i_I ch_I i_E
+５７２	[５７２]	g_B o_I o_I n_I a_I n_I a_I n_I i_I i_E
+５７３	[５７３]	g_B o_I o_I n_I a_I n_I a_I s_I a_I N_E
+５７４	[５７４]	g_B o_I o_I n_I a_I n_I a_I y_I o_I N_E
+５７５	[５７５]	g_B o_I o_I n_I a_I n_I a_I g_I o_I o_E
+５７６	[５７６]	g_B o_I o_I n_I a_I n_I a_I r_I o_I k_I u_E
+５７７	[５７７]	g_B o_I o_I n_I a_I n_I a_I n_I a_I n_I a_E
+５７８	[５７８]	g_B o_I o_I n_I a_I n_I a_I h_I a_I ch_I i_E
+５７９	[５７９]	g_B o_I o_I n_I a_I n_I a_I ky_I u:_E
+５８０	[５８０]	g_B o_I o_I h_I a_I ch_I i_I z_I e_I r_I o_E
+５８１	[５８１]	g_B o_I o_I h_I a_I ch_I i_I i_I ch_I i_E
+５８２	[５８２]	g_B o_I o_I h_I a_I ch_I i_I n_I i_I i_E
+５８３	[５８３]	g_B o_I o_I h_I a_I ch_I i_I s_I a_I N_E
+５８４	[５８４]	g_B o_I o_I h_I a_I ch_I i_I y_I o_I N_E
+５８５	[５８５]	g_B o_I o_I h_I a_I ch_I i_I g_I o_I o_E
+５８６	[５８６]	g_B o_I o_I h_I a_I ch_I i_I r_I o_I k_I u_E
+５８７	[５８７]	g_B o_I o_I h_I a_I ch_I i_I n_I a_I n_I a_E
+５８８	[５８８]	g_B o_I o_I h_I a_I ch_I i_I h_I a_I ch_I i_E
+５８９	[５８９]	g_B o_I o_I h_I a_I ch_I i_I ky_I u:_E
+５９０	[５９０]	g_B o_I o_I ky_I u:_I z_I e_I r_I o_E
+５９１	[５９１]	g_B o_I o_I ky_I u:_I i_I ch_I i_E
+５９２	[５９２]	g_B o_I o_I ky_I u:_I n_I i_I i_E
+５９３	[５９３]	g_B o_I o_I ky_I u:_I s_I a_I N_E
+５９４	[５９４]	g_B o_I o_I ky_I u:_I y_I o_I N_E
+５９５	[５９５]	g_B o_I o_I ky_I u:_I g_I o_I o_E
+５９６	[５９６]	g_B o_I o_I ky_I u:_I r_I o_I k_I u_E
+５９７	[５９７]	g_B o_I o_I ky_I u:_I n_I a_I n_I a_E
+５９８	[５９８]	g_B o_I o_I ky_I u:_I h_I a_I ch_I i_E
+５９９	[５９９]	g_B o_I o_I ky_I u:_I ky_I u:_E
+６００	[６００]	r_B o_I k_I u_I z_I e_I r_I o_I z_I e_I r_I o_E
+６０１	[６０１]	r_B o_I k_I u_I z_I e_I r_I o_I i_I ch_I i_E
+６０２	[６０２]	r_B o_I k_I u_I z_I e_I r_I o_I n_I i_I i_E
+６０３	[６０３]	r_B o_I k_I u_I z_I e_I r_I o_I s_I a_I N_E
+６０４	[６０４]	r_B o_I k_I u_I z_I e_I r_I o_I y_I o_I N_E
+６０５	[６０５]	r_B o_I k_I u_I z_I e_I r_I o_I g_I o_I o_E
+６０６	[６０６]	r_B o_I k_I u_I z_I e_I r_I o_I r_I o_I k_I u_E
+６０７	[６０７]	r_B o_I k_I u_I z_I e_I r_I o_I n_I a_I n_I a_E
+６０８	[６０８]	r_B o_I k_I u_I z_I e_I r_I o_I h_I a_I ch_I i_E
+６０９	[６０９]	r_B o_I k_I u_I z_I e_I r_I o_I ky_I u:_E
+６１０	[６１０]	r_B o_I k_I u_I i_I ch_I i_I z_I e_I r_I o_E
+６１１	[６１１]	r_B o_I k_I u_I i_I ch_I i_I i_I ch_I i_E
+６１２	[６１２]	r_B o_I k_I u_I i_I ch_I i_I n_I i_I i_E
+６１３	[６１３]	r_B o_I k_I u_I i_I ch_I i_I s_I a_I N_E
+６１４	[６１４]	r_B o_I k_I u_I i_I ch_I i_I y_I o_I N_E
+６１５	[６１５]	r_B o_I k_I u_I i_I ch_I i_I g_I o_I o_E
+６１６	[６１６]	r_B o_I k_I u_I i_I ch_I i_I r_I o_I k_I u_E
+６１７	[６１７]	r_B o_I k_I u_I i_I ch_I i_I n_I a_I n_I a_E
+６１８	[６１８]	r_B o_I k_I u_I i_I ch_I i_I h_I a_I ch_I i_E
+６１９	[６１９]	r_B o_I k_I u_I i_I ch_I i_I ky_I u:_E
+６２０	[６２０]	r_B o_I k_I u_I n_I i_I i_I z_I e_I r_I o_E
+６２１	[６２１]	r_B o_I k_I u_I n_I i_I i_I i_I ch_I i_E
+６２２	[６２２]	r_B o_I k_I u_I n_I i_I i_I n_I i_I i_E
+６２３	[６２３]	r_B o_I k_I u_I n_I i_I i_I s_I a_I N_E
+６２４	[６２４]	r_B o_I k_I u_I n_I i_I i_I y_I o_I N_E
+６２５	[６２５]	r_B o_I k_I u_I n_I i_I i_I g_I o_I o_E
+６２６	[６２６]	r_B o_I k_I u_I n_I i_I i_I r_I o_I k_I u_E
+６２７	[６２７]	r_B o_I k_I u_I n_I i_I i_I n_I a_I n_I a_E
+６２８	[６２８]	r_B o_I k_I u_I n_I i_I i_I h_I a_I ch_I i_E
+６２９	[６２９]	r_B o_I k_I u_I n_I i_I i_I ky_I u:_E
+６３０	[６３０]	r_B o_I k_I u_I s_I a_I N_I z_I e_I r_I o_E
+６３１	[６３１]	r_B o_I k_I u_I s_I a_I N_I i_I ch_I i_E
+６３２	[６３２]	r_B o_I k_I u_I s_I a_I N_I n_I i_I i_E
+６３３	[６３３]	r_B o_I k_I u_I s_I a_I N_I s_I a_I N_E
+６３４	[６３４]	r_B o_I k_I u_I s_I a_I N_I y_I o_I N_E
+６３５	[６３５]	r_B o_I k_I u_I s_I a_I N_I g_I o_I o_E
+６３６	[６３６]	r_B o_I k_I u_I s_I a_I N_I r_I o_I k_I u_E
+６３７	[６３７]	r_B o_I k_I u_I s_I a_I N_I n_I a_I n_I a_E
+６３８	[６３８]	r_B o_I k_I u_I s_I a_I N_I h_I a_I ch_I i_E
+６３９	[６３９]	r_B o_I k_I u_I s_I a_I N_I ky_I u:_E
+６４０	[６４０]	r_B o_I k_I u_I y_I o_I N_I z_I e_I r_I o_E
+６４１	[６４１]	r_B o_I k_I u_I y_I o_I N_I i_I ch_I i_E
+６４２	[６４２]	r_B o_I k_I u_I y_I o_I N_I n_I i_I i_E
+６４３	[６４３]	r_B o_I k_I u_I y_I o_I N_I s_I a_I N_E
+６４４	[６４４]	r_B o_I k_I u_I y_I o_I N_I y_I o_I N_E
+６４５	[６４５]	r_B o_I k_I u_I y_I o_I N_I g_I o_I o_E
+６４６	[６４６]	r_B o_I k_I u_I y_I o_I N_I r_I o_I k_I u_E
+６４７	[６４７]	r_B o_I k_I u_I y_I o_I N_I n_I a_I n_I a_E
+６４８	[６４８]	r_B o_I k_I u_I y_I o_I N_I h_I a_I ch_I i_E
+６４９	[６４９]	r_B o_I k_I u_I y_I o_I N_I ky_I u:_E
+６５０	[６５０]	r_B o_I k_I u_I g_I o_I o_I z_I e_I r_I o_E
+６５１	[６５１]	r_B o_I k_I u_I g_I o_I o_I i_I ch_I i_E
+６５２	[６５２]	r_B o_I k_I u_I g_I o_I o_I n_I i_I i_E
+６５３	[６５３]	r_B o_I k_I u_I g_I o_I o_I s_I a_I N_E
+６５４	[６５４]	r_B o_I k_I u_I g_I o_I o_I y_I o_I N_E
+６５５	[６５５]	r_B o_I k_I u_I g_I o_I o_I g_I o_I o_E
+６５６	[６５６]	r_B o_I k_I u_I g_I o_I o_I r_I o_I k_I u_E
+６５７	[６５７]	r_B o_I k_I u_I g_I o_I o_I n_I a_I n_I a_E
+６５８	[６５８]	r_B o_I k_I u_I g_I o_I o_I h_I a_I ch_I i_E
+６５９	[６５９]	r_B o_I k_I u_I g_I o_I o_I ky_I u:_E
+６６０	[６６０]	r_B o_I k_I u_I r_I o_I k_I u_I z_I e_I r_I o_E
+６６１	[６６１]	r_B o_I k_I u_I r_I o_I k_I u_I i_I ch_I i_E
+６６２	[６６２]	r_B o_I k_I u_I r_I o_I k_I u_I n_I i_I i_E
+６６３	[６６３]	r_B o_I k_I u_I r_I o_I k_I u_I s_I a_I N_E
+６６４	[６６４]	r_B o_I k_I u_I r_I o_I k_I u_I y_I o_I N_E
+６６５	[６６５]	r_B o_I k_I u_I r_I o_I k_I u_I g_I o_I o_E
+６６６	[６６６]	r_B o_I k_I u_I r_I o_I k_I u_I r_I o_I k_I u_E
+６６７	[６６７]	r_B o_I k_I u_I r_I o_I k_I u_I n_I a_I n_I a_E
+６６８	[６６８]	r_B o_I k_I u_I r_I o_I k_I u_I h_I a_I ch_I i_E
+６６９	[６６９]	r_B o_I k_I u_I r_I o_I k_I u_I ky_I u:_E
+６７０	[６７０]	r_B o_I k_I u_I n_I a_I n_I a_I z_I e_I r_I o_E
+６７１	[６７１]	r_B o_I k_I u_I n_I a_I n_I a_I i_I ch_I i_E
+６７２	[６７２]	r_B o_I k_I u_I n_I a_I n_I a_I n_I i_I i_E
+６７３	[６７３]	r_B o_I k_I u_I n_I a_I n_I a_I s_I a_I N_E
+６７４	[６７４]	r_B o_I k_I u_I n_I a_I n_I a_I y_I o_I N_E
+６７５	[６７５]	r_B o_I k_I u_I n_I a_I n_I a_I g_I o_I o_E
+６７６	[６７６]	r_B o_I k_I u_I n_I a_I n_I a_I r_I o_I k_I u_E
+６７７	[６７７]	r_B o_I k_I u_I n_I a_I n_I a_I n_I a_I n_I a_E
+６７８	[６７８]	r_B o_I k_I u_I n_I a_I n_I a_I h_I a_I ch_I i_E
+６７９	[６７９]	r_B o_I k_I u_I n_I a_I n_I a_I ky_I u:_E
+６８０	[６８０]	r_B o_I k_I u_I h_I a_I ch_I i_I z_I e_I r_I o_E
+６８１	[６８１]	r_B o_I k_I u_I h_I a_I ch_I i_I i_I ch_I i_E
+６８２	[６８２]	r_B o_I k_I u_I h_I a_I ch_I i_I n_I i_I i_E
+６８３	[６８３]	r_B o_I k_I u_I h_I a_I ch_I i_I s_I a_I N_E
+６８４	[６８４]	r_B o_I k_I u_I h_I a_I ch_I i_I y_I o_I N_E
+６８５	[６８５]	r_B o_I k_I u_I h_I a_I ch_I i_I g_I o_I o_E
+６８６	[６８６]	r_B o_I k_I u_I h_I a_I ch_I i_I r_I o_I k_I u_E
+６８７	[６８７]	r_B o_I k_I u_I h_I a_I ch_I i_I n_I a_I n_I a_E
+６８８	[６８８]	r_B o_I k_I u_I h_I a_I ch_I i_I h_I a_I ch_I i_E
+６８９	[６８９]	r_B o_I k_I u_I h_I a_I ch_I i_I ky_I u:_E
+６９０	[６９０]	r_B o_I k_I u_I ky_I u:_I z_I e_I r_I o_E
+６９１	[６９１]	r_B o_I k_I u_I ky_I u:_I i_I ch_I i_E
+６９２	[６９２]	r_B o_I k_I u_I ky_I u:_I n_I i_I i_E
+６９３	[６９３]	r_B o_I k_I u_I ky_I u:_I s_I a_I N_E
+６９４	[６９４]	r_B o_I k_I u_I ky_I u:_I y_I o_I N_E
+６９５	[６９５]	r_B o_I k_I u_I ky_I u:_I g_I o_I o_E
+６９６	[６９６]	r_B o_I k_I u_I ky_I u:_I r_I o_I k_I u_E
+６９７	[６９７]	r_B o_I k_I u_I ky_I u:_I n_I a_I n_I a_E
+６９８	[６９８]	r_B o_I k_I u_I ky_I u:_I h_I a_I ch_I i_E
+６９９	[６９９]	r_B o_I k_I u_I ky_I u:_I ky_I u:_E
+７００	[７００]	n_B a_I n_I a_I z_I e_I r_I o_I z_I e_I r_I o_E
+７０１	[７０１]	n_B a_I n_I a_I z_I e_I r_I o_I i_I ch_I i_E
+７０２	[７０２]	n_B a_I n_I a_I z_I e_I r_I o_I n_I i_I i_E
+７０３	[７０３]	n_B a_I n_I a_I z_I e_I r_I o_I s_I a_I N_E
+７０４	[７０４]	n_B a_I n_I a_I z_I e_I r_I o_I y_I o_I N_E
+７０５	[７０５]	n_B a_I n_I a_I z_I e_I r_I o_I g_I o_I o_E
+７０６	[７０６]	n_B a_I n_I a_I z_I e_I r_I o_I r_I o_I k_I u_E
+７０７	[７０７]	n_B a_I n_I a_I z_I e_I r_I o_I n_I a_I n_I a_E
+７０８	[７０８]	n_B a_I n_I a_I z_I e_I r_I o_I h_I a_I ch_I i_E
+７０９	[７０９]	n_B a_I n_I a_I z_I e_I r_I o_I ky_I u:_E
+７１０	[７１０]	n_B a_I n_I a_I i_I ch_I i_I z_I e_I r_I o_E
+７１１	[７１１]	n_B a_I n_I a_I i_I ch_I i_I i_I ch_I i_E
+７１２	[７１２]	n_B a_I n_I a_I i_I ch_I i_I n_I i_I i_E
+７１３	[７１３]	n_B a_I n_I a_I i_I ch_I i_I s_I a_I N_E
+７１４	[７１４]	n_B a_I n_I a_I i_I ch_I i_I y_I o_I N_E
+７１５	[７１５]	n_B a_I n_I a_I i_I ch_I i_I g_I o_I o_E
+７１６	[７１６]	n_B a_I n_I a_I i_I ch_I i_I r_I o_I k_I u_E
+７１７	[７１７]	n_B a_I n_I a_I i_I ch_I i_I n_I a_I n_I a_E
+７１８	[７１８]	n_B a_I n_I a_I i_I ch_I i_I h_I a_I ch_I i_E
+７１９	[７１９]	n_B a_I n_I a_I i_I ch_I i_I ky_I u:_E
+７２０	[７２０]	n_B a_I n_I a_I n_I i_I i_I z_I e_I r_I o_E
+７２１	[７２１]	n_B a_I n_I a_I n_I i_I i_I i_I ch_I i_E
+７２２	[７２２]	n_B a_I n_I a_I n_I i_I i_I n_I i_I i_E
+７２３	[７２３]	n_B a_I n_I a_I n_I i_I i_I s_I a_I N_E
+７２４	[７２４]	n_B a_I n_I a_I n_I i_I i_I y_I o_I N_E
+７２５	[７２５]	n_B a_I n_I a_I n_I i_I i_I g_I o_I o_E
+７２６	[７２６]	n_B a_I n_I a_I n_I i_I i_I r_I o_I k_I u_E
+７２７	[７２７]	n_B a_I n_I a_I n_I i_I i_I n_I a_I n_I a_E
+７２８	[７２８]	n_B a_I n_I a_I n_I i_I i_I h_I a_I ch_I i_E
+７２９	[７２９]	n_B a_I n_I a_I n_I i_I i_I ky_I u:_E
+７３０	[７３０]	n_B a_I n_I a_I s_I a_I N_I z_I e_I r_I o_E
+７３１	[７３１]	n_B a_I n_I a_I s_I a_I N_I i_I ch_I i_E
+７３２	[７３２]	n_B a_I n_I a_I s_I a_I N_I n_I i_I i_E
+７３３	[７３３]	n_B a_I n_I a_I s_I a_I N_I s_I a_I N_E
+７３４	[７３４]	n_B a_I n_I a_I s_I a_I N_I y_I o_I N_E
+７３５	[７３５]	n_B a_I n_I a_I s_I a_I N_I g_I o_I o_E
+７３６	[７３６]	n_B a_I n_I a_I s_I a_I N_I r_I o_I k_I u_E
+７３７	[７３７]	n_B a_I n_I a_I s_I a_I N_I n_I a_I n_I a_E
+７３８	[７３８]	n_B a_I n_I a_I s_I a_I N_I h_I a_I ch_I i_E
+７３９	[７３９]	n_B a_I n_I a_I s_I a_I N_I ky_I u:_E
+７４０	[７４０]	n_B a_I n_I a_I y_I o_I N_I z_I e_I r_I o_E
+７４１	[７４１]	n_B a_I n_I a_I y_I o_I N_I i_I ch_I i_E
+７４２	[７４２]	n_B a_I n_I a_I y_I o_I N_I n_I i_I i_E
+７４３	[７４３]	n_B a_I n_I a_I y_I o_I N_I s_I a_I N_E
+７４４	[７４４]	n_B a_I n_I a_I y_I o_I N_I y_I o_I N_E
+７４５	[７４５]	n_B a_I n_I a_I y_I o_I N_I g_I o_I o_E
+７４６	[７４６]	n_B a_I n_I a_I y_I o_I N_I r_I o_I k_I u_E
+７４７	[７４７]	n_B a_I n_I a_I y_I o_I N_I n_I a_I n_I a_E
+７４８	[７４８]	n_B a_I n_I a_I y_I o_I N_I h_I a_I ch_I i_E
+７４９	[７４９]	n_B a_I n_I a_I y_I o_I N_I ky_I u:_E
+７５０	[７５０]	n_B a_I n_I a_I g_I o_I o_I z_I e_I r_I o_E
+７５１	[７５１]	n_B a_I n_I a_I g_I o_I o_I i_I ch_I i_E
+７５２	[７５２]	n_B a_I n_I a_I g_I o_I o_I n_I i_I i_E
+７５３	[７５３]	n_B a_I n_I a_I g_I o_I o_I s_I a_I N_E
+７５４	[７５４]	n_B a_I n_I a_I g_I o_I o_I y_I o_I N_E
+７５５	[７５５]	n_B a_I n_I a_I g_I o_I o_I g_I o_I o_E
+７５６	[７５６]	n_B a_I n_I a_I g_I o_I o_I r_I o_I k_I u_E
+７５７	[７５７]	n_B a_I n_I a_I g_I o_I o_I n_I a_I n_I a_E
+７５８	[７５８]	n_B a_I n_I a_I g_I o_I o_I h_I a_I ch_I i_E
+７５９	[７５９]	n_B a_I n_I a_I g_I o_I o_I ky_I u:_E
+７６０	[７６０]	n_B a_I n_I a_I r_I o_I k_I u_I z_I e_I r_I o_E
+７６１	[７６１]	n_B a_I n_I a_I r_I o_I k_I u_I i_I ch_I i_E
+７６２	[７６２]	n_B a_I n_I a_I r_I o_I k_I u_I n_I i_I i_E
+７６３	[７６３]	n_B a_I n_I a_I r_I o_I k_I u_I s_I a_I N_E
+７６４	[７６４]	n_B a_I n_I a_I r_I o_I k_I u_I y_I o_I N_E
+７６５	[７６５]	n_B a_I n_I a_I r_I o_I k_I u_I g_I o_I o_E
+７６６	[７６６]	n_B a_I n_I a_I r_I o_I k_I u_I r_I o_I k_I u_E
+７６７	[７６７]	n_B a_I n_I a_I r_I o_I k_I u_I n_I a_I n_I a_E
+７６８	[７６８]	n_B a_I n_I a_I r_I o_I k_I u_I h_I a_I ch_I i_E
+７６９	[７６９]	n_B a_I n_I a_I r_I o_I k_I u_I ky_I u:_E
+７７０	[７７０]	n_B a_I n_I a_I n_I a_I n_I a_I z_I e_I r_I o_E
+７７１	[７７１]	n_B a_I n_I a_I n_I a_I n_I a_I i_I ch_I i_E
+７７２	[７７２]	n_B a_I n_I a_I n_I a_I n_I a_I n_I i_I i_E
+７７３	[７７３]	n_B a_I n_I a_I n_I a_I n_I a_I s_I a_I N_E
+７７４	[７７４]	n_B a_I n_I a_I n_I a_I n_I a_I y_I o_I N_E
+７７５	[７７５]	n_B a_I n_I a_I n_I a_I n_I a_I g_I o_I o_E
+７７６	[７７６]	n_B a_I n_I a_I n_I a_I n_I a_I r_I o_I k_I u_E
+７７７	[７７７]	n_B a_I n_I a_I n_I a_I n_I a_I n_I a_I n_I a_E
+７７８	[７７８]	n_B a_I n_I a_I n_I a_I n_I a_I h_I a_I ch_I i_E
+７７９	[７７９]	n_B a_I n_I a_I n_I a_I n_I a_I ky_I u:_E
+７８０	[７８０]	n_B a_I n_I a_I h_I a_I ch_I i_I z_I e_I r_I o_E
+７８１	[７８１]	n_B a_I n_I a_I h_I a_I ch_I i_I i_I ch_I i_E
+７８２	[７８２]	n_B a_I n_I a_I h_I a_I ch_I i_I n_I i_I i_E
+７８３	[７８３]	n_B a_I n_I a_I h_I a_I ch_I i_I s_I a_I N_E
+７８４	[７８４]	n_B a_I n_I a_I h_I a_I ch_I i_I y_I o_I N_E
+７８５	[７８５]	n_B a_I n_I a_I h_I a_I ch_I i_I g_I o_I o_E
+７８６	[７８６]	n_B a_I n_I a_I h_I a_I ch_I i_I r_I o_I k_I u_E
+７８７	[７８７]	n_B a_I n_I a_I h_I a_I ch_I i_I n_I a_I n_I a_E
+７８８	[７８８]	n_B a_I n_I a_I h_I a_I ch_I i_I h_I a_I ch_I i_E
+７８９	[７８９]	n_B a_I n_I a_I h_I a_I ch_I i_I ky_I u:_E
+７９０	[７９０]	n_B a_I n_I a_I ky_I u:_I z_I e_I r_I o_E
+７９１	[７９１]	n_B a_I n_I a_I ky_I u:_I i_I ch_I i_E
+７９２	[７９２]	n_B a_I n_I a_I ky_I u:_I n_I i_I i_E
+７９３	[７９３]	n_B a_I n_I a_I ky_I u:_I s_I a_I N_E
+７９４	[７９４]	n_B a_I n_I a_I ky_I u:_I y_I o_I N_E
+７９５	[７９５]	n_B a_I n_I a_I ky_I u:_I g_I o_I o_E
+７９６	[７９６]	n_B a_I n_I a_I ky_I u:_I r_I o_I k_I u_E
+７９７	[７９７]	n_B a_I n_I a_I ky_I u:_I n_I a_I n_I a_E
+７９８	[７９８]	n_B a_I n_I a_I ky_I u:_I h_I a_I ch_I i_E
+７９９	[７９９]	n_B a_I n_I a_I ky_I u:_I ky_I u:_E
+８００	[８００]	h_B a_I ch_I i_I z_I e_I r_I o_I z_I e_I r_I o_E
+８０１	[８０１]	h_B a_I ch_I i_I z_I e_I r_I o_I i_I ch_I i_E
+８０２	[８０２]	h_B a_I ch_I i_I z_I e_I r_I o_I n_I i_I i_E
+８０３	[８０３]	h_B a_I ch_I i_I z_I e_I r_I o_I s_I a_I N_E
+８０４	[８０４]	h_B a_I ch_I i_I z_I e_I r_I o_I y_I o_I N_E
+８０５	[８０５]	h_B a_I ch_I i_I z_I e_I r_I o_I g_I o_I o_E
+８０６	[８０６]	h_B a_I ch_I i_I z_I e_I r_I o_I r_I o_I k_I u_E
+８０７	[８０７]	h_B a_I ch_I i_I z_I e_I r_I o_I n_I a_I n_I a_E
+８０８	[８０８]	h_B a_I ch_I i_I z_I e_I r_I o_I h_I a_I ch_I i_E
+８０９	[８０９]	h_B a_I ch_I i_I z_I e_I r_I o_I ky_I u:_E
+８１０	[８１０]	h_B a_I ch_I i_I i_I ch_I i_I z_I e_I r_I o_E
+８１１	[８１１]	h_B a_I ch_I i_I i_I ch_I i_I i_I ch_I i_E
+８１２	[８１２]	h_B a_I ch_I i_I i_I ch_I i_I n_I i_I i_E
+８１３	[８１３]	h_B a_I ch_I i_I i_I ch_I i_I s_I a_I N_E
+８１４	[８１４]	h_B a_I ch_I i_I i_I ch_I i_I y_I o_I N_E
+８１５	[８１５]	h_B a_I ch_I i_I i_I ch_I i_I g_I o_I o_E
+８１６	[８１６]	h_B a_I ch_I i_I i_I ch_I i_I r_I o_I k_I u_E
+８１７	[８１７]	h_B a_I ch_I i_I i_I ch_I i_I n_I a_I n_I a_E
+８１８	[８１８]	h_B a_I ch_I i_I i_I ch_I i_I h_I a_I ch_I i_E
+８１９	[８１９]	h_B a_I ch_I i_I i_I ch_I i_I ky_I u:_E
+８２０	[８２０]	h_B a_I ch_I i_I n_I i_I i_I z_I e_I r_I o_E
+８２１	[８２１]	h_B a_I ch_I i_I n_I i_I i_I i_I ch_I i_E
+８２２	[８２２]	h_B a_I ch_I i_I n_I i_I i_I n_I i_I i_E
+８２３	[８２３]	h_B a_I ch_I i_I n_I i_I i_I s_I a_I N_E
+８２４	[８２４]	h_B a_I ch_I i_I n_I i_I i_I y_I o_I N_E
+８２５	[８２５]	h_B a_I ch_I i_I n_I i_I i_I g_I o_I o_E
+８２６	[８２６]	h_B a_I ch_I i_I n_I i_I i_I r_I o_I k_I u_E
+８２７	[８２７]	h_B a_I ch_I i_I n_I i_I i_I n_I a_I n_I a_E
+８２８	[８２８]	h_B a_I ch_I i_I n_I i_I i_I h_I a_I ch_I i_E
+８２９	[８２９]	h_B a_I ch_I i_I n_I i_I i_I ky_I u:_E
+８３０	[８３０]	h_B a_I ch_I i_I s_I a_I N_I z_I e_I r_I o_E
+８３１	[８３１]	h_B a_I ch_I i_I s_I a_I N_I i_I ch_I i_E
+８３２	[８３２]	h_B a_I ch_I i_I s_I a_I N_I n_I i_I i_E
+８３３	[８３３]	h_B a_I ch_I i_I s_I a_I N_I s_I a_I N_E
+８３４	[８３４]	h_B a_I ch_I i_I s_I a_I N_I y_I o_I N_E
+８３５	[８３５]	h_B a_I ch_I i_I s_I a_I N_I g_I o_I o_E
+８３６	[８３６]	h_B a_I ch_I i_I s_I a_I N_I r_I o_I k_I u_E
+８３７	[８３７]	h_B a_I ch_I i_I s_I a_I N_I n_I a_I n_I a_E
+８３８	[８３８]	h_B a_I ch_I i_I s_I a_I N_I h_I a_I ch_I i_E
+８３９	[８３９]	h_B a_I ch_I i_I s_I a_I N_I ky_I u:_E
+８４０	[８４０]	h_B a_I ch_I i_I y_I o_I N_I z_I e_I r_I o_E
+８４１	[８４１]	h_B a_I ch_I i_I y_I o_I N_I i_I ch_I i_E
+８４２	[８４２]	h_B a_I ch_I i_I y_I o_I N_I n_I i_I i_E
+８４３	[８４３]	h_B a_I ch_I i_I y_I o_I N_I s_I a_I N_E
+８４４	[８４４]	h_B a_I ch_I i_I y_I o_I N_I y_I o_I N_E
+８４５	[８４５]	h_B a_I ch_I i_I y_I o_I N_I g_I o_I o_E
+８４６	[８４６]	h_B a_I ch_I i_I y_I o_I N_I r_I o_I k_I u_E
+８４７	[８４７]	h_B a_I ch_I i_I y_I o_I N_I n_I a_I n_I a_E
+８４８	[８４８]	h_B a_I ch_I i_I y_I o_I N_I h_I a_I ch_I i_E
+８４９	[８４９]	h_B a_I ch_I i_I y_I o_I N_I ky_I u:_E
+８５０	[８５０]	h_B a_I ch_I i_I g_I o_I o_I z_I e_I r_I o_E
+８５１	[８５１]	h_B a_I ch_I i_I g_I o_I o_I i_I ch_I i_E
+８５２	[８５２]	h_B a_I ch_I i_I g_I o_I o_I n_I i_I i_E
+８５３	[８５３]	h_B a_I ch_I i_I g_I o_I o_I s_I a_I N_E
+８５４	[８５４]	h_B a_I ch_I i_I g_I o_I o_I y_I o_I N_E
+８５５	[８５５]	h_B a_I ch_I i_I g_I o_I o_I g_I o_I o_E
+８５６	[８５６]	h_B a_I ch_I i_I g_I o_I o_I r_I o_I k_I u_E
+８５７	[８５７]	h_B a_I ch_I i_I g_I o_I o_I n_I a_I n_I a_E
+８５８	[８５８]	h_B a_I ch_I i_I g_I o_I o_I h_I a_I ch_I i_E
+８５９	[８５９]	h_B a_I ch_I i_I g_I o_I o_I ky_I u:_E
+８６０	[８６０]	h_B a_I ch_I i_I r_I o_I k_I u_I z_I e_I r_I o_E
+８６１	[８６１]	h_B a_I ch_I i_I r_I o_I k_I u_I i_I ch_I i_E
+８６２	[８６２]	h_B a_I ch_I i_I r_I o_I k_I u_I n_I i_I i_E
+８６３	[８６３]	h_B a_I ch_I i_I r_I o_I k_I u_I s_I a_I N_E
+８６４	[８６４]	h_B a_I ch_I i_I r_I o_I k_I u_I y_I o_I N_E
+８６５	[８６５]	h_B a_I ch_I i_I r_I o_I k_I u_I g_I o_I o_E
+８６６	[８６６]	h_B a_I ch_I i_I r_I o_I k_I u_I r_I o_I k_I u_E
+８６７	[８６７]	h_B a_I ch_I i_I r_I o_I k_I u_I n_I a_I n_I a_E
+８６８	[８６８]	h_B a_I ch_I i_I r_I o_I k_I u_I h_I a_I ch_I i_E
+８６９	[８６９]	h_B a_I ch_I i_I r_I o_I k_I u_I ky_I u:_E
+８７０	[８７０]	h_B a_I ch_I i_I n_I a_I n_I a_I z_I e_I r_I o_E
+８７１	[８７１]	h_B a_I ch_I i_I n_I a_I n_I a_I i_I ch_I i_E
+８７２	[８７２]	h_B a_I ch_I i_I n_I a_I n_I a_I n_I i_I i_E
+８７３	[８７３]	h_B a_I ch_I i_I n_I a_I n_I a_I s_I a_I N_E
+８７４	[８７４]	h_B a_I ch_I i_I n_I a_I n_I a_I y_I o_I N_E
+８７５	[８７５]	h_B a_I ch_I i_I n_I a_I n_I a_I g_I o_I o_E
+８７６	[８７６]	h_B a_I ch_I i_I n_I a_I n_I a_I r_I o_I k_I u_E
+８７７	[８７７]	h_B a_I ch_I i_I n_I a_I n_I a_I n_I a_I n_I a_E
+８７８	[８７８]	h_B a_I ch_I i_I n_I a_I n_I a_I h_I a_I ch_I i_E
+８７９	[８７９]	h_B a_I ch_I i_I n_I a_I n_I a_I ky_I u:_E
+８８０	[８８０]	h_B a_I ch_I i_I h_I a_I ch_I i_I z_I e_I r_I o_E
+８８１	[８８１]	h_B a_I ch_I i_I h_I a_I ch_I i_I i_I ch_I i_E
+８８２	[８８２]	h_B a_I ch_I i_I h_I a_I ch_I i_I n_I i_I i_E
+８８３	[８８３]	h_B a_I ch_I i_I h_I a_I ch_I i_I s_I a_I N_E
+８８４	[８８４]	h_B a_I ch_I i_I h_I a_I ch_I i_I y_I o_I N_E
+８８５	[８８５]	h_B a_I ch_I i_I h_I a_I ch_I i_I g_I o_I o_E
+８８６	[８８６]	h_B a_I ch_I i_I h_I a_I ch_I i_I r_I o_I k_I u_E
+８８７	[８８７]	h_B a_I ch_I i_I h_I a_I ch_I i_I n_I a_I n_I a_E
+８８８	[８８８]	h_B a_I ch_I i_I h_I a_I ch_I i_I h_I a_I ch_I i_E
+８８９	[８８９]	h_B a_I ch_I i_I h_I a_I ch_I i_I ky_I u:_E
+８９０	[８９０]	h_B a_I ch_I i_I ky_I u:_I z_I e_I r_I o_E
+８９１	[８９１]	h_B a_I ch_I i_I ky_I u:_I i_I ch_I i_E
+８９２	[８９２]	h_B a_I ch_I i_I ky_I u:_I n_I i_I i_E
+８９３	[８９３]	h_B a_I ch_I i_I ky_I u:_I s_I a_I N_E
+８９４	[８９４]	h_B a_I ch_I i_I ky_I u:_I y_I o_I N_E
+８９５	[８９５]	h_B a_I ch_I i_I ky_I u:_I g_I o_I o_E
+８９６	[８９６]	h_B a_I ch_I i_I ky_I u:_I r_I o_I k_I u_E
+８９７	[８９７]	h_B a_I ch_I i_I ky_I u:_I n_I a_I n_I a_E
+８９８	[８９８]	h_B a_I ch_I i_I ky_I u:_I h_I a_I ch_I i_E
+８９９	[８９９]	h_B a_I ch_I i_I ky_I u:_I ky_I u:_E
+９００	[９００]	ky_B u:_I z_I e_I r_I o_I z_I e_I r_I o_E
+９０１	[９０１]	ky_B u:_I z_I e_I r_I o_I i_I ch_I i_E
+９０２	[９０２]	ky_B u:_I z_I e_I r_I o_I n_I i_I i_E
+９０３	[９０３]	ky_B u:_I z_I e_I r_I o_I s_I a_I N_E
+９０４	[９０４]	ky_B u:_I z_I e_I r_I o_I y_I o_I N_E
+９０５	[９０５]	ky_B u:_I z_I e_I r_I o_I g_I o_I o_E
+９０６	[９０６]	ky_B u:_I z_I e_I r_I o_I r_I o_I k_I u_E
+９０７	[９０７]	ky_B u:_I z_I e_I r_I o_I n_I a_I n_I a_E
+９０８	[９０８]	ky_B u:_I z_I e_I r_I o_I h_I a_I ch_I i_E
+９０９	[９０９]	ky_B u:_I z_I e_I r_I o_I ky_I u:_E
+９１０	[９１０]	ky_B u:_I i_I ch_I i_I z_I e_I r_I o_E
+９１１	[９１１]	ky_B u:_I i_I ch_I i_I i_I ch_I i_E
+９１２	[９１２]	ky_B u:_I i_I ch_I i_I n_I i_I i_E
+９１３	[９１３]	ky_B u:_I i_I ch_I i_I s_I a_I N_E
+９１４	[９１４]	ky_B u:_I i_I ch_I i_I y_I o_I N_E
+９１５	[９１５]	ky_B u:_I i_I ch_I i_I g_I o_I o_E
+９１６	[９１６]	ky_B u:_I i_I ch_I i_I r_I o_I k_I u_E
+９１７	[９１７]	ky_B u:_I i_I ch_I i_I n_I a_I n_I a_E
+９１８	[９１８]	ky_B u:_I i_I ch_I i_I h_I a_I ch_I i_E
+９１９	[９１９]	ky_B u:_I i_I ch_I i_I ky_I u:_E
+９２０	[９２０]	ky_B u:_I n_I i_I i_I z_I e_I r_I o_E
+９２１	[９２１]	ky_B u:_I n_I i_I i_I i_I ch_I i_E
+９２２	[９２２]	ky_B u:_I n_I i_I i_I n_I i_I i_E
+９２３	[９２３]	ky_B u:_I n_I i_I i_I s_I a_I N_E
+９２４	[９２４]	ky_B u:_I n_I i_I i_I y_I o_I N_E
+９２５	[９２５]	ky_B u:_I n_I i_I i_I g_I o_I o_E
+９２６	[９２６]	ky_B u:_I n_I i_I i_I r_I o_I k_I u_E
+９２７	[９２７]	ky_B u:_I n_I i_I i_I n_I a_I n_I a_E
+９２８	[９２８]	ky_B u:_I n_I i_I i_I h_I a_I ch_I i_E
+９２９	[９２９]	ky_B u:_I n_I i_I i_I ky_I u:_E
+９３０	[９３０]	ky_B u:_I s_I a_I N_I z_I e_I r_I o_E
+９３１	[９３１]	ky_B u:_I s_I a_I N_I i_I ch_I i_E
+９３２	[９３２]	ky_B u:_I s_I a_I N_I n_I i_I i_E
+９３３	[９３３]	ky_B u:_I s_I a_I N_I s_I a_I N_E
+９３４	[９３４]	ky_B u:_I s_I a_I N_I y_I o_I N_E
+９３５	[９３５]	ky_B u:_I s_I a_I N_I g_I o_I o_E
+９３６	[９３６]	ky_B u:_I s_I a_I N_I r_I o_I k_I u_E
+９３７	[９３７]	ky_B u:_I s_I a_I N_I n_I a_I n_I a_E
+９３８	[９３８]	ky_B u:_I s_I a_I N_I h_I a_I ch_I i_E
+９３９	[９３９]	ky_B u:_I s_I a_I N_I ky_I u:_E
+９４０	[９４０]	ky_B u:_I y_I o_I N_I z_I e_I r_I o_E
+９４１	[９４１]	ky_B u:_I y_I o_I N_I i_I ch_I i_E
+９４２	[９４２]	ky_B u:_I y_I o_I N_I n_I i_I i_E
+９４３	[９４３]	ky_B u:_I y_I o_I N_I s_I a_I N_E
+９４４	[９４４]	ky_B u:_I y_I o_I N_I y_I o_I N_E
+９４５	[９４５]	ky_B u:_I y_I o_I N_I g_I o_I o_E
+９４６	[９４６]	ky_B u:_I y_I o_I N_I r_I o_I k_I u_E
+９４７	[９４７]	ky_B u:_I y_I o_I N_I n_I a_I n_I a_E
+９４８	[９４８]	ky_B u:_I y_I o_I N_I h_I a_I ch_I i_E
+９４９	[９４９]	ky_B u:_I y_I o_I N_I ky_I u:_E
+９５０	[９５０]	ky_B u:_I g_I o_I o_I z_I e_I r_I o_E
+９５１	[９５１]	ky_B u:_I g_I o_I o_I i_I ch_I i_E
+９５２	[９５２]	ky_B u:_I g_I o_I o_I n_I i_I i_E
+９５３	[９５３]	ky_B u:_I g_I o_I o_I s_I a_I N_E
+９５４	[９５４]	ky_B u:_I g_I o_I o_I y_I o_I N_E
+９５５	[９５５]	ky_B u:_I g_I o_I o_I g_I o_I o_E
+９５６	[９５６]	ky_B u:_I g_I o_I o_I r_I o_I k_I u_E
+９５７	[９５７]	ky_B u:_I g_I o_I o_I n_I a_I n_I a_E
+９５８	[９５８]	ky_B u:_I g_I o_I o_I h_I a_I ch_I i_E
+９５９	[９５９]	ky_B u:_I g_I o_I o_I ky_I u:_E
+９６０	[９６０]	ky_B u:_I r_I o_I k_I u_I z_I e_I r_I o_E
+９６１	[９６１]	ky_B u:_I r_I o_I k_I u_I i_I ch_I i_E
+９６２	[９６２]	ky_B u:_I r_I o_I k_I u_I n_I i_I i_E
+９６３	[９６３]	ky_B u:_I r_I o_I k_I u_I s_I a_I N_E
+９６４	[９６４]	ky_B u:_I r_I o_I k_I u_I y_I o_I N_E
+９６５	[９６５]	ky_B u:_I r_I o_I k_I u_I g_I o_I o_E
+９６６	[９６６]	ky_B u:_I r_I o_I k_I u_I r_I o_I k_I u_E
+９６７	[９６７]	ky_B u:_I r_I o_I k_I u_I n_I a_I n_I a_E
+９６８	[９６８]	ky_B u:_I r_I o_I k_I u_I h_I a_I ch_I i_E
+９６９	[９６９]	ky_B u:_I r_I o_I k_I u_I ky_I u:_E
+９７０	[９７０]	ky_B u:_I n_I a_I n_I a_I z_I e_I r_I o_E
+９７１	[９７１]	ky_B u:_I n_I a_I n_I a_I i_I ch_I i_E
+９７２	[９７２]	ky_B u:_I n_I a_I n_I a_I n_I i_I i_E
+９７３	[９７３]	ky_B u:_I n_I a_I n_I a_I s_I a_I N_E
+９７４	[９７４]	ky_B u:_I n_I a_I n_I a_I y_I o_I N_E
+９７５	[９７５]	ky_B u:_I n_I a_I n_I a_I g_I o_I o_E
+９７６	[９７６]	ky_B u:_I n_I a_I n_I a_I r_I o_I k_I u_E
+９７７	[９７７]	ky_B u:_I n_I a_I n_I a_I n_I a_I n_I a_E
+９７８	[９７８]	ky_B u:_I n_I a_I n_I a_I h_I a_I ch_I i_E
+９７９	[９７９]	ky_B u:_I n_I a_I n_I a_I ky_I u:_E
+９８０	[９８０]	ky_B u:_I h_I a_I ch_I i_I z_I e_I r_I o_E
+９８１	[９８１]	ky_B u:_I h_I a_I ch_I i_I i_I ch_I i_E
+９８２	[９８２]	ky_B u:_I h_I a_I ch_I i_I n_I i_I i_E
+９８３	[９８３]	ky_B u:_I h_I a_I ch_I i_I s_I a_I N_E
+９８４	[９８４]	ky_B u:_I h_I a_I ch_I i_I y_I o_I N_E
+９８５	[９８５]	ky_B u:_I h_I a_I ch_I i_I g_I o_I o_E
+９８６	[９８６]	ky_B u:_I h_I a_I ch_I i_I r_I o_I k_I u_E
+９８７	[９８７]	ky_B u:_I h_I a_I ch_I i_I n_I a_I n_I a_E
+９８８	[９８８]	ky_B u:_I h_I a_I ch_I i_I h_I a_I ch_I i_E
+９８９	[９８９]	ky_B u:_I h_I a_I ch_I i_I ky_I u:_E
+９９０	[９９０]	ky_B u:_I ky_I u:_I z_I e_I r_I o_E
+９９１	[９９１]	ky_B u:_I ky_I u:_I i_I ch_I i_E
+９９２	[９９２]	ky_B u:_I ky_I u:_I n_I i_I i_E
+９９３	[９９３]	ky_B u:_I ky_I u:_I s_I a_I N_E
+９９４	[９９４]	ky_B u:_I ky_I u:_I y_I o_I N_E
+９９５	[９９５]	ky_B u:_I ky_I u:_I g_I o_I o_E
+９９６	[９９６]	ky_B u:_I ky_I u:_I r_I o_I k_I u_E
+９９７	[９９７]	ky_B u:_I ky_I u:_I n_I a_I n_I a_E
+９９８	[９９８]	ky_B u:_I ky_I u:_I h_I a_I ch_I i_E
+９９９	[９９９]	ky_B u:_I ky_I u:_I ky_I u:_E

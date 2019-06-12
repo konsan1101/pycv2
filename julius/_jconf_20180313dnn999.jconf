@@ -1,0 +1,34 @@
+#20180313dnn
+
+## 単語・辞書
+-d model/lang_m/bccwj.60k.bingram	# 言語モデル
+-v model/lang_m/bccwj.60k.pdp999.htkdic	# 発音辞書
+-h model/dnn/binhmm.SID
+-hlist model/dnn/logicalTri.bin
+
+# 言語モデル重み・単語挿入ペナルティ
+-lmp  14 0
+-lmp2 14 0
+
+## 文頭単語の名前 (単語辞書では無音の読みを付与する)
+#-silhead '#0'
+
+## 文末単語の名前 (同上)
+#-siltail '#1'
+
+# 探索パラメータ
+-b 1500		# 第1パスのビーム幅（ノード数） triphone,PTM,engine=v2.1
+-b2 100		# 第2パスの仮説数ビームの幅（仮説数）
+-s 500		# 第2パスの最大スタック数 (仮説数)
+-m 10000	# 第2パスの仮説オーバフローのしきい値
+-n 10		# 第2パスで見つける文の数（文数）
+-output 1	# 第2パスで見つかった文のうち出力する数 （文数）
+
+## ショートポーズ音響モデルの名前
+#-spmodel "sp_S"
+#-spsegment
+
+# 音声入力ソース
+-zmeanframe		# フレーム単位のDC成分除去を行う (HTKと同処理)
+-rejectshort 500	# 検出した入力が閾値以下なら無視
+

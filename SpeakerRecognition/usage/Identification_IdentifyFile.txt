@@ -1,0 +1,5 @@
+Usage: python IdentifyFile.py <subscription_key> <identification_file_path> <profile_ids>...
+	<subscription_key> is the subscription key for the service
+	<identification_file_path> is the audio file path for identification
+	<force_short_audio> True/False waives the recommended minimum audio limit needed for enrollment
+	<profile_ids> the profile IDs for the profiles to identify the audio from.

@@ -1,0 +1,2 @@
+Usage: python PrintAllProfiles.py <subscription_key>
+	<subscription_key> is the subscription key for the service

@@ -1,0 +1,4 @@
+Usage: python VerifyFile.py <subscription_key> <verification_file_path> <profile_id>...
+	<subscription_key> is the subscription key for the service
+	<verification_file_path> is the audio file path for verification
+	<profile_id> the ID for a profile to verify as the user using the submitted audio sample

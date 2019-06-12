@@ -1,0 +1,3 @@
+Usage: python ResetEnrollments.py <subscription_key> <profile_id> 
+	<subscription_key> is the subscription key for the service
+	<profile_id> the ID for a profile to reset its enrollments
